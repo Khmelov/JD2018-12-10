@@ -6,7 +6,7 @@ import java.util.List;
 
 class Dispatcher {
 
-    static final int K_SPEED=1000;
+    static final int K_SPEED=1;
     static int counterBuyer=0;
     static boolean pensioneer;
     private static HashMap<String, Integer> priceList= new HashMap<>();
