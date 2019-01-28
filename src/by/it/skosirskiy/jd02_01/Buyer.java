@@ -3,33 +3,40 @@ package by.it.skosirskiy.jd02_01;
 
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
-
+    private static boolean pensioner;
     Buyer(int number){super("Buyer №"+number);}
     @Override
     public void run() {
         enterToMarket();
+        isPensioner();
         takeBacket();
         putGoodsToBacket();
         chooseGoods();
         goOut();
+        System.out.println("time and count: "+Dispatcher.counterBuyer);
+        System.out.flush();
         Dispatcher.counterBuyer--;
+    }
+
+    private void isPensioner() {
+        if (Util.getRandom(3) == 0) {
+            pensioner = true;
+        } else {
+            pensioner = false;
+        }
     }
 
     @Override
     public void enterToMarket() {
         System.out.println(this+" enter to Market");
-        System.out.flush();
-
     }
 
     @Override
     public void chooseGoods() {
         int timeout = Util.getRandom(500, 2000);
         System.out.println(this+" chose goods "+timeout+" milliseconds");
-        System.out.flush();
         Util.sleep(timeout);
         System.out.println(this+" chose goods");
-        System.out.flush();
     }
 
     @Override
@@ -41,7 +48,6 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     public void takeBacket() {
         sleepBuy();
         System.out.println(this+" take backet");
-        System.out.flush();
     }
 
     @Override
@@ -49,14 +55,13 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
         for (int i = 0; i < Util.getRandom(1,4); i++) {
             sleepBuy();
-            System.out.println(this+" take "+Dispatcher.getRandomBuy()+" in backet,"+" buer is pensionner: "+Dispatcher.pensioneer);
-            System.out.flush();
+            System.out.println(this+" take "+Goods.getRandomBuy()+" in backet,"+" buer is pensionner: "+ pensioner);
         }
     }
 
     private void sleepBuy( ) {
         double k=1;
-        if(Dispatcher.pensioneer){k =1.5;}
+        if(pensioner){k =1.5;}
         int timeout = (int) (Util.getRandom(100, 200)*k);
         Util.sleep(timeout);
     }

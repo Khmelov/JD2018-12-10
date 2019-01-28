@@ -3,16 +3,6 @@ package by.it.skosirskiy.jd02_01;
 
 
 public class Util {
-    static boolean buyersInMarket(int time){
-        int n=Dispatcher.counterBuyer;
-
-        if (time<30){
-            if (n<=(time+10)) return true;
-            else return false;
-        }
-        else if(n<=(40 + 30 - time)) {return true;}
-            else return false;
-    }
 
     static int getRandom(int min, int max){
         return min+(int)(Math.random()*(max-min+1));
