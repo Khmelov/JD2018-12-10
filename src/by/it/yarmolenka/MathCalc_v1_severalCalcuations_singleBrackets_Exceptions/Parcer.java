@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Parcer {
-    Var calc(String expression) throws CalcException {
+public class Parcer {
+    public Var calc(String expression) throws CalcException {
         if (expression.matches(Patterns.VARIABLE)) {
             return Var.getVariable(expression);
         }
@@ -24,7 +24,7 @@ class Parcer {
         while (m.find()) list.add(m.group());
         String[] split = expression.trim().split(Patterns.OPERATION);
         if (list.get(0).equals("=")) {
-            if (!split[0].matches(Patterns.VARIABLE))
+            if (!split[0].trim().matches(Patterns.VARIABLE))
                 throw new CalcException("Обозначайте переменную латинскими маленькими буквами");
             Var res;
             if (split.length == 2)
@@ -43,8 +43,7 @@ class Parcer {
                 Var res = Mul.mulVarVar(one, two);
                 split[i + 1] = res.toString();
                 split[i] = null;
-                list.remove(i);
-                list.add(i, null);
+                list.set(i, null);
                 continue;
             }
             if (list.get(i).equals("/")) {
@@ -53,8 +52,7 @@ class Parcer {
                 Var res = Div.divVarVar(one, two);
                 split[i + 1] = res.toString();
                 split[i] = null;
-                list.remove(i);
-                list.add(i, null);
+                list.set(i, null);
             }
         }
 
@@ -73,8 +71,7 @@ class Parcer {
                 Var res = Add.addVarVar(one, two);
                 split[k] = res.toString();
                 split[i] = null;
-                list.remove(i);
-                list.add(i, null);
+                list.set(i, null);
                 continue;
             }
             if (list.get(i).equals("-")) {
@@ -90,12 +87,12 @@ class Parcer {
                 Var res = Sub.subVarVar(one, two);
                 split[k] = res.toString();
                 split[i] = null;
-                list.remove(i);
-                list.add(i, null);
+                list.set(i, null);
             }
 
         }
-
-        return Var.createVar(split[split.length - 1]);
+        Var res = Var.createVar(split[split.length - 1]);
+        Log.addToLog(expression + " = " + res);
+        return res;
     }
 }

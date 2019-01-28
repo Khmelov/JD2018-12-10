@@ -9,6 +9,7 @@ class Printer {
     }
 
     void showError(CalcException e) {
-        System.out.println(e.getMessage());
+        System.err.println(e.getMessage());
+        Log.addToLog(e.getMessage());
     }
 }

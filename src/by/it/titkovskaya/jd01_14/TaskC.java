@@ -22,13 +22,13 @@ public class TaskC {
         File dirs = new File(pathDirs);
         File result = new File(TaskA.getPath(TaskC.class, "resultTaskC.txt"));
         try (PrintWriter out = new PrintWriter(new FileWriter(result))) {
-            showContentAndPrintToFile(dirs, out, result);
+            showContentAndPrintToFile(dirs, out);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void showContentAndPrintToFile(File dirs, PrintWriter out, File result) {
+    private static void showContentAndPrintToFile(File dirs, PrintWriter out) {
         File[] listDirs = dirs.listFiles();
         if (listDirs != null) {
             for (File catalog : listDirs) {
@@ -38,7 +38,7 @@ public class TaskC {
                 } else if (catalog.isDirectory()) {
                     System.out.println("dir:" + catalog.getName());
                     out.println("dir:" + catalog.getName());
-                    showContentAndPrintToFile(catalog, out, result);
+                    showContentAndPrintToFile(catalog, out);
                 }
             }
         }

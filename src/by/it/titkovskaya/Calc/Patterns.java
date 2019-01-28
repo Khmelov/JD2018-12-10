@@ -6,5 +6,6 @@ class Patterns {
     static final String VECTOR = "\\{(" + SCALAR + ",?\\s?)+}";
     static final String MATRIX = "\\{(" + VECTOR + ",?\\s?)+}";
     static final String OPERATION = "[=+*/-]";
+    static final String CALCULATION = "[+*/-]";
 
 }

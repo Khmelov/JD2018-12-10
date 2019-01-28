@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class Matrix extends Var {
     private double[][] value;
 
-    private Matrix(double[][] array) {
+    Matrix(double[][] array) {
         this.value = new double[array.length][array[0].length];
         for (int i = 0; i < array.length; i++)
             System.arraycopy(array[i], 0, this.value[i], 0, array[i].length);

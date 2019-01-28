@@ -2,15 +2,17 @@ package by.it.yarmolenka.MathCalc_v1_severalCalcuations_singleBrackets_Exception
 
 import by.it.yarmolenka.MathCalc_v1_severalCalcuations_singleBrackets_Exceptions.Variables.Var;
 
+import java.io.*;
 import java.util.Scanner;
 
 public class ConsoleRunner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String expression;
-        Scanner scan = new Scanner(System.in);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Parcer parcer = new Parcer();
         Printer printer = new Printer();
-        while (!(expression = scan.nextLine()).equals("end")) {
+        Var.loadVarsFromFile();
+        while (!(expression = reader.readLine()).equals("end")) {
             try {
                 Var result = parcer.calc(expression);
                 printer.print(result);
@@ -18,5 +20,6 @@ public class ConsoleRunner {
                 printer.showError(e);
             }
         }
+        Var.saveVarsToFile();
     }
 }

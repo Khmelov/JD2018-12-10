@@ -13,7 +13,7 @@ class Threads_02_Runnable {
 
 
         public void run() {
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < 100; i++) {
                 System.out.println(name+" is run. loop:"+i);
                 try {
                     //методы sleep и yield из предыдущего примера у запускаемого
@@ -47,7 +47,7 @@ class Threads_02_Runnable {
         System.out.println("one:" + th1.getState() + " two:" + th2.getState());
 
         //приостановка главного потока, пока не завершатся два созданных
-        th2.sleep(3000); //порядок приостановки неважен
+        Thread.sleep(3000); //порядок приостановки неважен
 
 //        th1.join(); //потому что, см. ниже
         System.out.println("one:" + th1.getState() + " two:" + th2.getState());

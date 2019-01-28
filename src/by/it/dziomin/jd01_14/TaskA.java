@@ -22,9 +22,8 @@ public class TaskA {
         printToConsole(text, avg);
 
         printToFile(text, path, false);
-        printToFile(avg, path, true);
+        printToFile(avg, path);
     }
-
 
 
     static String getPass(Class<?> clas, String fileName) {
@@ -69,7 +68,7 @@ public class TaskA {
 
     private static double calculateAvg(List<Integer> arrayList) {
         double sum = 0;
-        for (Integer num :arrayList){
+        for (Integer num : arrayList) {
             sum += num;
         }
         return sum / arrayList.size();
@@ -88,8 +87,8 @@ public class TaskA {
         }
     }
 
-    private static void printToFile(double avg, String path, boolean append) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, append))) {
+    private static void printToFile(double avg, String path) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
             writer.write("\navg=" + avg);
         } catch (IOException e) {
             System.err.println("Ошибка печати результата в файл: " + e.getMessage());

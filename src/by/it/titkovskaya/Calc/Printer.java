@@ -9,4 +9,9 @@ class Printer {
     void showError(CalcException e) {
         Log.toLog(e.getMessage());
     }
+
+    void showCalculationInfo(String expression, Var result) {
+        if (result != null)
+            Log.toLog(expression.replace("=", "")+"="+result);
+    }
 }

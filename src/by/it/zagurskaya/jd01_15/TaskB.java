@@ -32,6 +32,7 @@ public class TaskB {
                 + File.separator + "src" + File.separator + path;
         return path + filename;
     }
+    //sssssssssssssssss
 
     private static StringBuilder readTextFile(String path, StringBuilder textFromFile) {
 
@@ -46,6 +47,10 @@ public class TaskB {
         }
         return textFromFile;
     }
+    /*xzcvzxcvzxc
+    zxcvzxcvzxcv
+     */
+
     private static void printToFile(String path, StringBuilder results) {
         try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
             for (int i = 0; i <results.length() ; i++) {
@@ -56,6 +61,9 @@ public class TaskB {
             e.printStackTrace();
         }
     }
+    /*xzcvzxcvzxc
+    zxcvzxcvzxcv
+     */
 
     private static StringBuilder deleteComentsFromText(StringBuilder text) {
         char searchChar1 = '/';
@@ -79,7 +87,7 @@ public class TaskB {
                     j++;
                 }
                 int lastCharIndex = j;
-                text.delete(firstCharIndex, lastCharIndex + 1);
+                text.delete(firstCharIndex, lastCharIndex);
                 j=0;
             } else {
                 i++;

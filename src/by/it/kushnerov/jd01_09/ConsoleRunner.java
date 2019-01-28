@@ -1,5 +1,7 @@
 package by.it.kushnerov.jd01_09;
 
+import by.it.kushnerov.calc.CalcExeption;
+
 import java.util.Scanner;
 
 public class ConsoleRunner {
@@ -10,7 +12,12 @@ public class ConsoleRunner {
         Printer printer = new Printer();
         while (!(expression = scanner.nextLine()).equals("END")) {
             Var result = parcer.calc(expression);
-            printer.print(result);
+//            try{
+//                result = parcer.calc(expression);
+//                printer.print(result);
+//            } catch (CalcExeption e){
+//                System.err.println(e);
+//            }
         }
     }
 }

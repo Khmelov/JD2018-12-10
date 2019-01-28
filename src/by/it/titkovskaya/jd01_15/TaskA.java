@@ -11,7 +11,7 @@ TaskA
  */
 public class TaskA {
 
-    private static String getPath(Class<?> clazz, String filename) {
+    static String getPath(Class<?> clazz, String filename) {
         String path = clazz.getName();
         path = path.replace(clazz.getSimpleName(), "");
         path = path.replace(".", File.separator);

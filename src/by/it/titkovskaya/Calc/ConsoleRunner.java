@@ -1,16 +1,18 @@
 package by.it.titkovskaya.Calc;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class ConsoleRunner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String expression;
-        Scanner scanner = new Scanner(System.in);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Parser parser = new Parser();
         Printer printer = new Printer();
 
         Var.loadVarFromFile();
-        while (!(expression = scanner.nextLine()).equalsIgnoreCase("END")) {
+        while (!(expression = reader.readLine()).equalsIgnoreCase("END")) {
             if (expression.equalsIgnoreCase("printvar")) {
                 Var.showVar();
             } else if (expression.equalsIgnoreCase("sortvar")) {
@@ -18,6 +20,8 @@ public class ConsoleRunner {
             } else try {
                 Var result = parser.calc(expression);
                 printer.print(result);
+                if (Parser.printToLog)
+                    printer.showCalculationInfo(expression, result);
             } catch (CalcException e) {
                 printer.showError(e);
             }
