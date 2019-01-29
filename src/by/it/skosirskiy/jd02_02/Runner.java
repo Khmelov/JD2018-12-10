@@ -8,9 +8,15 @@ import java.util.List;
 public class Runner {
     static List<Thread> threads = new ArrayList<>();
     public static void main(String[] args) {
-        openMarket();
-        marketWorkingTime();
-        System.out.println("Market closed");
+
+
+            openMarket();
+            marketWorkingTime();
+            System.out.println("Market closed");
+
+            System.out.flush();
+
+
     }
 
     private static void marketWorkingTime() {
@@ -23,46 +29,57 @@ public class Runner {
         }
 
         for (int time = 1 ;; time++) {
+            Util.sleep(3500);
             if (time % 60 <= 30) {
-                if ((Dispatcher.counterBuyerInShop <= time + 10)&& Dispatcher.marketOpened()) {
+                if ((Dispatcher.getCounterBuyerInShop() <= time + 10)&& Dispatcher.marketOpened()) {
                     int count = Util.getRandom(5);
+
                     for (int i = 0; i < count; i++) {
+                        if(!Dispatcher.marketOpened()){
+                            break;
+                        }
                         Buyer buyer = new Buyer(++number);
                         threads.add(buyer);
-                        buyer.start();
-                    }
+                            buyer.start();}
+
                 }
                 else Util.sleep(1000);
                 }
             else {
-                    if ((Dispatcher.counterBuyerInShop >= 40 + (30 - time))&& Dispatcher.marketOpened()) {
+                    if ((Dispatcher.getCounterBuyerInShop() >= 40 + (30 - time))&& Dispatcher.marketOpened()) {
                         Util.sleep(1000);
                     } else {
                         int count = Util.getRandom(2);
+
+
                         for (int i = 0; i < count; i++) {
+                            if(!Dispatcher.marketOpened()){
+                                break;
+                            }
                             Buyer buyer = new Buyer(++number);
-                            threads.add(buyer);
-                            buyer.start();
+                                threads.add(buyer);
+                                buyer.start();
                         }
                     }
                 }
-            if(Dispatcher.planComplete()) {for (Thread thread : threads) {
+            if(Dispatcher.planComplete()) {
+                for (Thread thread : threads) {
                 try {
-                    thread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                        thread.join();
+                    Util.sleep(100);
+                    }
+                catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-            } break;}
+                break;}
             }
-
-//        while (Dispatcher.marketOpened()) {
-//            System.out.println(Dispatcher.counterBuyer+" "+Dispatcher.counterBuyerInShop);
-//            Util.sleep(100);
-//        }
         }
 
     private static void openMarket() {
+
         System.out.println("Market opened");
+        System.out.flush();
         Goods.getPriceList();
     }
 }
