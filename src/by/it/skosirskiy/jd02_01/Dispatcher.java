@@ -7,6 +7,6 @@ import java.util.List;
 class Dispatcher {
 
     static final int K_SPEED = 100;
-    static int counterBuyer = 0;
+     static int counterBuyer = 0;
 }
 

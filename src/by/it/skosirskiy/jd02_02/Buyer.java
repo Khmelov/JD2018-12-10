@@ -1,10 +1,13 @@
-package by.it.skosirskiy.jd02_01;
-
+package by.it.skosirskiy.jd02_02;
 
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
+    Object getMonitor(){
+        return (Object) this;
+    }
     private static boolean pensioner;
-    Buyer(int number){super("Buyer №"+number);}
+    Buyer(int number){super("Buyer №"+number);
+        Dispatcher.newBuyer();}
     @Override
     public void run() {
         enterToMarket();
@@ -12,9 +15,11 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         takeBacket();
         putGoodsToBacket();
         chooseGoods();
+        goToQueue();
         goOut();
-        System.out.println("time and count: "+Dispatcher.counterBuyer);
+        System.out.println("time and count: "+ Dispatcher.counterBuyer);
         System.out.flush();
+        Dispatcher.buyerComplete();
 
         Dispatcher.counterBuyer--;
     }
@@ -29,6 +34,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     @Override
     public void enterToMarket() {
+        Dispatcher.counterBuyer++;
         System.out.println(this+" enter to Market");
         Util.sleep(2000);
     }
@@ -40,6 +46,20 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         Util.sleep(timeout);
         System.out.println(this+" chose goods");
     }
+
+    @Override
+    public void goToQueue() {
+        System.out.println(this+" go to Queue");
+        DequeBuyer.add(this);
+        synchronized (this){
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     @Override
     public void goOut() {
@@ -57,7 +77,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
         for (int i = 0; i < Util.getRandom(1,4); i++) {
             sleepBuy();
-            System.out.println(this+" take "+Goods.getRandomBuy()+" in backet,"+" buer is pensionner: "+ pensioner);
+            System.out.println(this+" take "+ Goods.getRandomBuy()+" in backet,"+" buer is pensionner: "+ pensioner);
         }
     }
 
