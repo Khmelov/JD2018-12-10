@@ -13,7 +13,6 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         putGoodsToBacket();
         chooseGoods();
         goOut();
-        System.out.println("time and count: "+Dispatcher.counterBuyer);
         System.out.flush();
 
         Dispatcher.counterBuyer--;
