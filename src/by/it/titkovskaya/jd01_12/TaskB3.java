@@ -36,7 +36,7 @@ public class TaskB3 {
         Long tD = System.nanoTime() - t;
         System.out.println(" Время работы для  ArrayList=" + tA / 1000 + " мкс.");
         System.out.println(" Время работы для LinkedList=" + tL / 1000 + " мкс.");
-        System.out.println(" Время работы для  Queue=" + tQ / 1000 + " мкс.");
+        System.out.println(" Время работы для  DequeBuyer=" + tQ / 1000 + " мкс.");
         System.out.println(" Время работы для Dequeue=" + tD / 1000 + " мкс.");
     }
 

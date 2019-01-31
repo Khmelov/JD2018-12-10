@@ -7,6 +7,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     Buyer(int number) {
         super("buyer №" + number);
         Dispatcher.totalBuyersCount++;
+        Dispatcher.buyersCount++;
         if (Utils.getRandom(1, 4) == 1) {
             this.retired = true;
             Dispatcher.totalRetiredCount++;
@@ -24,12 +25,12 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             putGoodsToBasket();
         }
         goOut();
+        Dispatcher.buyersCount--;
     }
 
     @Override
     public void enterToMarket() {
         System.out.println(this.getName() + " entered the market");
-        Dispatcher.buyersCount++;
         System.out.flush();
     }
 
@@ -44,7 +45,6 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void goOut() {
         System.out.println(this.getName() + " exited the market");
-        Dispatcher.buyersCount--;
         System.out.flush();
     }
 

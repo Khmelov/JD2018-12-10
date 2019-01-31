@@ -2,7 +2,7 @@ package by.it.titkovskaya.jd02_01;
 
 import java.util.HashMap;
 
-public class Goods {
+class Goods {
 
     static HashMap<String,Double> goodsList = new HashMap<>();
 

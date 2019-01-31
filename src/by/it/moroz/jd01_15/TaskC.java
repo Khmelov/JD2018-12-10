@@ -1,6 +1,8 @@
 package by.it.moroz.jd01_15;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class TaskC {
@@ -16,12 +18,18 @@ public class TaskC {
                 System.out.println(start.getParentFile().toPath());
             }
             if (command.equals("dir")) {
-
+                Path path = Paths.get(startPos);
             }
             if (command.matches("cd [A-Za-z\\p{Punct}]+")) {
                 String[] com = command.split(" ");
                 System.out.println(com[1]);
-                
+                File pos = new File(startPos + File.separator + com[1]);
+                File allPos = new File(com[1]);
+                if (pos.exists()){
+                    System.out.println(pos.getPath());
+                } else if (allPos.exists()){
+                    System.out.println(allPos.getPath());
+                } else System.out.println("Системе не удается найти указанный путь");
             }
 
         }

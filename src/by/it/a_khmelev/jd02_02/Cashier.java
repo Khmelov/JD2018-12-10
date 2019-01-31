@@ -16,7 +16,7 @@ class Cashier implements Runnable {
             if (buyer != null) {
                 System.out.println(this + " service " + buyer);
                 synchronized (buyer.getMonitor()) {
-                    buyer.notify();
+                    buyer.getMonitor().notify();
                 }
             } else {
                 Util.sleep(1);

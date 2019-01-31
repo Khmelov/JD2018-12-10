@@ -28,7 +28,7 @@ public class TaskB3 {
         System.out.println("Время обработки через LinkedList " + time2 + " нс");
         System.out.println("Оставшийся элемент - " + process2);
         long time3 = check4-check3;
-        System.out.println("Время обработки через Queue " + time3 + " нс");
+        System.out.println("Время обработки через DequeBuyer " + time3 + " нс");
     }
 
     private static String process(ArrayList<String> peoples) {

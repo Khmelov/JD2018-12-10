@@ -1,6 +1,6 @@
 package by.it.titkovskaya.jd02_01;
 
-public class Util {
+class Util {
 
     static int getRandom(int min, int max){
         return min+(int)(Math.random()*(max-min+1));
