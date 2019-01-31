@@ -6,22 +6,24 @@ import java.util.List;
 
 public class Runner {
     static List<Thread> threads = new ArrayList<>();
-
+    private static Manager manager;
+    public static List<Cashier> cashiers = new ArrayList<>();
     public static void main(String[] args) {
+        manager = new Manager();
+        threads.add(manager);
+        manager.start();
         openMarket();
         marketWorkingTime();
+
         System.out.println("Market closed");
         System.out.flush();
+
     }
 
     private static void marketWorkingTime() {
         int number = 0;
 
-        for (int i = 1; i <= 2; i++) {
-            Thread cashier = new Thread(new Cashier(i));
-            threads.add(cashier);
-            cashier.start();
-        }
+
 
         for (int time = 1; ; time++) {
             Util.sleep(3500);

@@ -18,7 +18,7 @@ class DequeBuyer {
         return q.pollFirst();
     }
 
-    static synchronized int sizeDeque() {
+    static synchronized int getSize() {
         return q.size();
     }
 }
