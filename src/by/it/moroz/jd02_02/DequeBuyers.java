@@ -3,17 +3,22 @@ package by.it.moroz.jd02_02;
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class DequeBuyers {
+class DequeBuyers {
 
-   // public class Queue
+    static Deque<Buyer> buyerDeque = new LinkedList<>();
 
-    private static Deque<Buyer> q = new LinkedList<>();
+    static Deque<Buyer> pensionerDeque = new LinkedList<>();
 
-    static synchronized void add (Buyer buyer){
-            q.addLast(buyer);
+    static synchronized void add (Deque<Buyer> buyers, Buyer buyer){
+            buyers.addLast(buyer);
     }
 
-    static synchronized Buyer poll(){
-            return q.pollFirst();
+    static synchronized Buyer poll(Deque<Buyer> buyers){
+            return buyers.pollFirst();
     }
+
+    static  synchronized int getCountAllBuyer (){
+        return buyerDeque.size()+pensionerDeque.size();
+    }
+
 }

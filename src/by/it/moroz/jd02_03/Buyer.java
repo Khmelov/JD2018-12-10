@@ -1,10 +1,14 @@
-package by.it.moroz.jd02_02;
+package by.it.moroz.jd02_03;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Semaphore;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
+
+    private Semaphore semaphore = new Semaphore(20); //семафор для входа покупателей в торговый зал
+    private Semaphore semaphoreBasket = new Semaphore(50); //семафор на количество корзин в магазине
+
+    private Printer printer = new Printer();
 
     Object getMonitor() {
         return this;
@@ -15,32 +19,37 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         Util.newBuyer();
     }
 
-    static List<Thread> threads = new ArrayList<>();
-
     private boolean pensioner;
-    private Basket basket = new Basket();
 
     void setPensioner(boolean value) {
         this.pensioner = value;
     }
 
+    private Basket basket = new Basket();
+
     @Override
     public void run() {
-        threads.add(this);
-        enterToMarket();
-        takeBasket();
-        int count = Util.getRandom(1, 4);
-        for (int i = 0; i < count; i++) {
-            String good = GoodsInMarket.choseRandomGood(GoodsInMarket.goods);
-            chooseGoods(good);
-            putGoodsToBasket(good);
+        enterToMarket(); //входит в магазин
+        takeBasket(); //берет корзину
+        try {
+            semaphore.acquire(); //получает разрешение на вход в зал
+            int count = Util.getRandom(1, 4);
+            for (int i = 0; i < count; i++) {
+                String good = GoodsInMarket.choseRandomGood(GoodsInMarket.goods); //рандомный товар
+                chooseGoods(good); //выбирает товары
+                putGoodsToBasket(good); //кладет выбранные товары в корзину
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            semaphore.release();
         }
-        goToQueue();
-        goOut();
+        goToQueue(); //идет в очередь
+        goOut(); //выходит из магазина
         System.out.flush();
         Util.buyerComplete();
     }
-
+    //метод для вывода чека кассиром для каждого покупателя
     void takeCheck(String whichCashier) {
         int sum = 0;
         System.out.println(whichCashier+"*****************************");
@@ -61,8 +70,13 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         if (pensioner)
             Util.sleep(30);
         else Util.sleep(15);
-        synchronized (Util.PRINTER) {
+        try {
+            printer.semaphore.acquire();
             System.out.println(this + " enter to Market");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            printer.semaphore.release();
         }
     }
 
@@ -73,15 +87,25 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             Util.sleep((int) (time * 1.5));
         else
             Util.sleep(time);
-        synchronized (Util.PRINTER) {
+        try {
+            printer.semaphore.acquire();
             System.out.println(this + " chose " + good);
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            printer.semaphore.release();
         }
     }
 
     @Override
     public void goToQueue() {
-        synchronized (Util.PRINTER) {
+        try {
+            printer.semaphore.acquire();
             System.out.println(this + " go to queue");
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            printer.semaphore.release();
         }
         if (pensioner)
             DequeBuyers.add(DequeBuyers.pensionerDeque, this);
@@ -101,8 +125,13 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         if (pensioner)
             Util.sleep(30);
         else Util.sleep(15);
-        synchronized (Util.PRINTER) {
+        try{
+            printer.semaphore.acquire();
             System.out.println(this + " go out from Market");
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            printer.semaphore.release();
         }
     }
 
@@ -118,8 +147,20 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             Util.sleep((int) (time * 1.5));
         else
             Util.sleep(time);
-        synchronized (Util.PRINTER) {
+            try {
+                semaphoreBasket.acquire();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }finally {
+                semaphoreBasket.release();
+            }
+        try {
+            printer.semaphore.acquire();
             System.out.println(this + " took the basket");
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            printer.semaphore.release();
         }
     }
 
@@ -130,8 +171,13 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             Util.sleep(time);
         else
             Util.sleep((int) (time * 1.5));
-        synchronized (Util.PRINTER) {
+        try {
+            printer.semaphore.acquire();
             System.out.println(this + " put " + good + " to basket");
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            printer.semaphore.release();
         }
         basket.putGoodInBasket(basket.basket, good, GoodsInMarket.getPrice(GoodsInMarket.goods, good));
     }

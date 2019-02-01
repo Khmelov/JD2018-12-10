@@ -1,9 +1,11 @@
-package by.it.moroz.jd02_02;
+package by.it.moroz.jd02_03;
 
 class Cashier implements Runnable {
 
     private String name;
     private int numCashier;
+
+    private Printer printer = new Printer();
 
     Cashier(int number) {
         Util.newCashier();
@@ -13,8 +15,13 @@ class Cashier implements Runnable {
 
     @Override
     public void run() {
-        synchronized (Util.PRINTER) {
+        try {
+            printer.semaphore.acquire();
             System.out.println(this + " opened");
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            printer.semaphore.release();
         }
         while (!Util.planComplete()) {
             Buyer pensioner = DequeBuyers.poll(DequeBuyers.pensionerDeque);
@@ -27,8 +34,13 @@ class Cashier implements Runnable {
                 else Util.sleep(1);
             }
         }
-        synchronized (Util.PRINTER) {
+        try {
+            printer.semaphore.acquire();
             System.out.println(this + " closed");
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            printer.semaphore.release();
         }
     }
 
@@ -36,11 +48,16 @@ class Cashier implements Runnable {
         int time = Util.getRandom(2000, 5000);
         Util.sleep(time);
         String whichCashier = whichCashier();
-        synchronized (Util.PRINTER) {
+        try {
+            printer.semaphore.acquire();
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
                     "Buyers in queue: "+ DequeBuyers.getCountAllBuyer());
             System.out.println(whichCashier + this + " service " + buyer);
             buyer.takeCheck(whichCashier);
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            printer.semaphore.release();
         }
         synchronized (buyer.getMonitor()) {
             buyer.notify();
