@@ -61,7 +61,7 @@ class Cashier extends Thread {
         return stop;
     }
     public void goToWork() {
-        System.out.println(this+"start working");
+//        System.out.println(this+"start working");
         this.stop = false;
         synchronized (this) {
             notify();
@@ -69,7 +69,7 @@ class Cashier extends Thread {
     }
 
     public void close() {
-        System.out.println(this + "closed");
+//        System.out.println(this + "closed");
         this.stop = false;
         synchronized (this) {
             notify();

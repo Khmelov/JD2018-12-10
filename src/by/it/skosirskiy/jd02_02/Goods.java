@@ -11,6 +11,7 @@ class Goods {
     private static List<String> keys;
 
 
+
     static void getPriceList() {
         priceList.put("milk", 100);
         priceList.put("butter", 300);
