@@ -23,7 +23,6 @@ public class Runner {
                     for (int i = 0; i < count; i++) {
                         Buyer buyer = new Buyer(++number);
                         buyers.add(buyer);
-                        Dispatcher.counterBuyer++;
                         buyer.start();
                     }
                 }
@@ -36,10 +35,8 @@ public class Runner {
                         for (int i = 0; i < count; i++) {
                             Buyer buyer = new Buyer(++number);
                             buyers.add(buyer);
-                            Dispatcher.counterBuyer++;
                             buyer.start();
                         }
-
                     }
                 }
                 while (Dispatcher.counterBuyer > 0) {
