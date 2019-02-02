@@ -2,10 +2,10 @@ package by.it.skosirskiy.Calc;
 
 public class Printer {
 
-    void print(Var var){
+    void print(String str){
 
-        if (var!=null)
-            System.out.println(var);
+        if (str!=null)
+            System.out.println(str);
 
     }
 

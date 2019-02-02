@@ -11,7 +11,7 @@ import java.io.*;
             "log.txt";
 
 
-    static void saveLogOperations(String str, Var var) {
+    static void saveLogOperations(String nameVariable, String value) {
         try (
                 BufferedWriter file =
                         new BufferedWriter(
@@ -19,7 +19,7 @@ import java.io.*;
                         )
         ) {
             countLineLog++;
-            file.write(str+" "+var+"\n");
+            file.write(nameVariable+" "+value+"\n");
             file.flush();
             if(countLineLog>50){deleteLineLog();}
         } catch (IOException e) {

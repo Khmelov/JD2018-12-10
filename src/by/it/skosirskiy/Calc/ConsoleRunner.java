@@ -11,12 +11,12 @@ public class ConsoleRunner {
 
         Parcer parser= new Parcer();
         Printer printer = new Printer();
-        Var.loadVarFromFile();
-        Log.getCountLineLog();
+        //Var.loadVarFromFile();
+     //   Log.getCountLineLog();
         while (!(line = scan.nextLine()).equals("end")){
 
             try {
-                Var result = parser.calc(line);
+                String result = parser.calc(line);
                 printer.print(result);
                 Log.saveLogOperations(line,result);
             } catch (CalcException e) {
