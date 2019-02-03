@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 class Dispatcher {
 
     static final int K_SPEED = 10000;
-     static volatile AtomicInteger counterBuyerInShop = new AtomicInteger(0);
+     private static volatile AtomicInteger counterBuyerInShop = new AtomicInteger(0);
     private static volatile AtomicInteger counterBuyerComplete = new AtomicInteger(0);
 
     static void reset(){

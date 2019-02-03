@@ -1,7 +1,6 @@
 package by.it.skosirskiy.jd02_03;
 
 import java.util.HashMap;
-import java.util.Map;
 
 class Cashier implements Runnable {
 
@@ -19,7 +18,7 @@ class Cashier implements Runnable {
             Buyer buyer = DequeBuyer.poll();
             Util.sleep(Util.getRandom(2000,5000));
             if (buyer != null) {
-                HashMap<String, Integer> hm=new HashMap<>(Backet.cheсkHashMap.get(buyer));
+                HashMap<String, Integer> hm=new HashMap<>(Backet.checkHashMap.get(buyer));
                 int sum=0;
                 for (int value : hm.values()) {
                     sum=sum+value;

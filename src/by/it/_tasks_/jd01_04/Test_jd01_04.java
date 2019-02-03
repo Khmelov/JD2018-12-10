@@ -120,7 +120,7 @@ public class Test_jd01_04 {
             d[i] = Math.random() * 31 - 15;
         }
         Arrays.sort(d);
-        System.out.println("Test massiv:" + Arrays.toString(d));
+        System.out.println("jd02_02 massiv:" + Arrays.toString(d));
         for (int i = 0; i < d.length; i++) {
 
             int expected = Arrays.binarySearch(d, d[i]);

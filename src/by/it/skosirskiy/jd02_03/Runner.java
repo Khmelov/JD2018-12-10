@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Runner {
-    public volatile static int ss;
+
 
     public static void main(String[] args) {
         //for (int k = 0; k < 1000; k++) {
