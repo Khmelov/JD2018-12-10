@@ -3,31 +3,28 @@ package by.it.skosirskiy.jd02_02;
 class Dispatcher {
 
     static final int K_SPEED = 100;
-
     private static volatile int counterBuyerInShop = 0;
     private static volatile int counterBuyerComplete = 0;
-    private static final int plan = 100;
     private static final Object MON = new Object();
 
+    private static final int plan = 100;
 
-
-    static int getCounterBuyerInShop() {
+    static void newBuyer() {
         synchronized (MON) {
-            return counterBuyerInShop;
+            counterBuyerInShop++;
+        }
+    }
+
+    static void buyerComplete() {
+        synchronized (MON) {
+            counterBuyerInShop--;
+            counterBuyerComplete++;
         }
     }
 
     static boolean planComplete() {
         synchronized (MON) {
             return counterBuyerComplete >= plan;
-        }
-    }
-
-
-    static void buyerComplete() {
-        synchronized (MON) {
-            counterBuyerInShop--;
-            counterBuyerComplete++;
         }
     }
 
@@ -38,10 +35,15 @@ class Dispatcher {
                     < plan;
         }
     }
-    static void newBuyer() {
+    static boolean marketClosed() {
         synchronized (MON) {
-            counterBuyerInShop++;
+            return counterBuyerInShop +
+                    counterBuyerComplete >= plan && counterBuyerInShop == 0;
         }
     }
-}
 
+    public static void reset() {
+        counterBuyerInShop=0;
+        counterBuyerComplete = 0;
+    }
+}

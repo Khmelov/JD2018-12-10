@@ -5,10 +5,15 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 class DequeBuyer {
 
-    private static BlockingDeque<Buyer> q = new LinkedBlockingDeque<>(20);
+    private static BlockingDeque<Buyer> q = new LinkedBlockingDeque<>(30);
 
     static void add(Buyer buyer) {
-            q.addLast(buyer);
+        //ошибка №2 add(this) кидает ошибку когда очередь полна
+        try {
+            q.putLast(buyer);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     static Buyer poll() {

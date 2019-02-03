@@ -4,13 +4,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Runner {
+    public volatile static int ss;
 
     public static void main(String[] args) {
         //for (int k = 0; k < 1000; k++) {
         System.out.println("Market opened");
+        Goods.getPriceList();
         int number = 0;
 
-        ExecutorService cashiers = Executors.newFixedThreadPool(5);
+        ExecutorService cashiers = Executors.newFixedThreadPool(2);
         ExecutorService buyers = Executors.newFixedThreadPool(100);
         for (int i = 1; i <= 2; i++) {
             Cashier cashier = new Cashier(i);

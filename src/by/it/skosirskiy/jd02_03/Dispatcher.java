@@ -4,10 +4,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 class Dispatcher {
 
-    static final int K_SPEED = 100;
-    private static volatile AtomicInteger counterBuyerInShop = new AtomicInteger(0);
+    static final int K_SPEED = 10000;
+     static volatile AtomicInteger counterBuyerInShop = new AtomicInteger(0);
     private static volatile AtomicInteger counterBuyerComplete = new AtomicInteger(0);
 
+    static void reset(){
+        counterBuyerInShop.set(0);
+        counterBuyerComplete.set(0);
+    }
     private static final int plan = 100;
 
     static void newBuyer() {

@@ -1,30 +1,33 @@
-package by.it.skosirskiy.Test;
+package by.it.skosirskiy.jd02_02_old;
 
 class Dispatcher {
 
     static final int K_SPEED = 100;
+
     private static volatile int counterBuyerInShop = 0;
     private static volatile int counterBuyerComplete = 0;
+    private static final int plan = 100;
     private static final Object MON = new Object();
 
-    private static final int plan = 100;
 
-    static void newBuyer() {
-        synchronized (MON) {
-            counterBuyerInShop++;
-        }
-    }
 
-    static void buyerComplete() {
+    static int getCounterBuyerInShop() {
         synchronized (MON) {
-            counterBuyerInShop--;
-            counterBuyerComplete++;
+            return counterBuyerInShop;
         }
     }
 
     static boolean planComplete() {
         synchronized (MON) {
             return counterBuyerComplete >= plan;
+        }
+    }
+
+
+    static void buyerComplete() {
+        synchronized (MON) {
+            counterBuyerInShop--;
+            counterBuyerComplete++;
         }
     }
 
@@ -35,9 +38,10 @@ class Dispatcher {
                     < plan;
         }
     }
-
-    public static void reset() {
-        counterBuyerInShop=0;
-        counterBuyerComplete = 0;
+    static void newBuyer() {
+        synchronized (MON) {
+            counterBuyerInShop++;
+        }
     }
 }
+

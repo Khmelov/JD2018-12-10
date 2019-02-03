@@ -1,8 +1,6 @@
-package by.it.skosirskiy.Test;
+package by.it.skosirskiy.jd02_02;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Test {

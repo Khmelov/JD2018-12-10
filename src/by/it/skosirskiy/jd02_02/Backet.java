@@ -1,4 +1,4 @@
-package by.it.skosirskiy.Test;
+package by.it.skosirskiy.jd02_02;
 
 import java.util.HashMap;
 

@@ -1,11 +1,5 @@
-package by.it.skosirskiy.jd02_02;
+package by.it.skosirskiy.jd02_02_old;
 
-
-
-
-import java.awt.*;
-import java.util.Deque;
-import java.util.LinkedList;
 
 class DequeCashiers {
 

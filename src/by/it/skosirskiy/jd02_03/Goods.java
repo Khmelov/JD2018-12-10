@@ -1,4 +1,6 @@
-package by.it.skosirskiy.jd02_02;
+package by.it.skosirskiy.jd02_03;
+
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,5 +33,6 @@ class Goods {
         Integer valueRandom=priceList.get(key);
         return valueRandom;
     }
+
 }
 

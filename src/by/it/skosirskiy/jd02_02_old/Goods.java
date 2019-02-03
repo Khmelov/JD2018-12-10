@@ -1,4 +1,4 @@
-package by.it.skosirskiy.Test;
+package by.it.skosirskiy.jd02_02_old;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,8 +7,9 @@ import java.util.List;
 class Goods {
 
 
-    private static HashMap<String, Integer> priceList = new HashMap<>();
+    private static HashMap<String, Integer> priceList= new HashMap<>();
     private static List<String> keys;
+
 
 
     static void getPriceList() {
@@ -19,17 +20,13 @@ class Goods {
         priceList.put("juice", 130);
         priceList.put("pork", 500);
         priceList.put("chicken", 350);
-        keys = new ArrayList<>(priceList.keySet());
+        keys= new ArrayList<>(priceList.keySet());
     }
-    static String getRandomGoodsKey() {
+
+     static String getRandomBuy() {
         String keysRandom=keys.get(Util.getRandom(0,keys.size()-1));
-
-        return keysRandom;
-    }
-    static Integer getGoodsValue(String key) {
-
-        Integer valueRandom=priceList.get(key);
-        return valueRandom;
+        Integer valueRandom=priceList.get(keysRandom);
+        return keysRandom+" "+valueRandom+"$";
     }
 }
 

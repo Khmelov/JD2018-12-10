@@ -1,6 +1,5 @@
 package by.it.skosirskiy.jd02_02;
 
-
 public class Util {
 
     static int getRandom(int min, int max){
@@ -18,4 +17,6 @@ public class Util {
             e.printStackTrace();
         }
     }
+
+
 }

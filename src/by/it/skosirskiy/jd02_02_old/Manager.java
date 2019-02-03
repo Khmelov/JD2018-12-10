@@ -1,26 +1,21 @@
-package by.it.skosirskiy.jd02_02;
+package by.it.skosirskiy.jd02_02_old;
 
-public class Manager extends Thread{
-    private final Object lock = new Object();
+public class Manager extends Thread {
     private int workingCashiers=0;
-    @Override
+    Manager() {
+        super();
+    }
+
     public void run() {
-
-
-
-        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i <= 5; i++) {
             Cashier cashier = new Cashier(i);
             Runner.cashiers.add(cashier);
+            System.out.println("new cassir");
             cashier.start();
-
         }
-        while (!Dispatcher.marketClosed()) {
-
+        while (Dispatcher.marketOpened()) {
             int n = neededNumOfCashiers();
-          //  System.out.println("Size "+DequeBuyer.getSize());
-         //   System.out.println("marketClosed "+n);
             if(n==this.workingCashiers) {
-          //      System.out.println("workingCashiers "+workingCashiers);
                 Util.sleep(1000);
                 continue;
             }
@@ -39,7 +34,7 @@ public class Manager extends Thread{
                     if(workingCashiers==n) break;
                     if(!(cashier.getStatus())) {
                         this.workingCashiers--;
-                        cashier.close=true;
+                        cashier.stop=true;
                     }
                 }
             }
@@ -48,9 +43,6 @@ public class Manager extends Thread{
         for (Cashier cashier:Runner.cashiers) {
             cashier.close();
         }
-
-
-
     }
     private static int neededNumOfCashiers(){
         int dequeSize = DequeBuyer.getSize();
@@ -61,5 +53,7 @@ public class Manager extends Thread{
         if(dequeSize>20) return 5;
         return 0;
     }
-
+    public synchronized  int getWorkingCashiers(){
+        return workingCashiers;
+    }
 }

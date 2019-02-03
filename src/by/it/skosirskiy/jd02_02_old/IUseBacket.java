@@ -1,4 +1,4 @@
-package by.it.skosirskiy.jd02_02;
+package by.it.skosirskiy.jd02_02_old;
 
 public interface IUseBacket {
     void takeBacket(); //взял корзину
