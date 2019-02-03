@@ -31,7 +31,7 @@ public class Matrix extends Var {
             kolrows++;
         }
 
-        String[] strMatrix = str.replaceAll("[^,0-9]", "").split(",");
+        String[] strMatrix = str.replaceAll("[^,.0-9]", "").split(",");
 
         int columns = strMatrix.length / kolrows; // shctchik elment v matrice
         this.value = new double[kolrows][columns];

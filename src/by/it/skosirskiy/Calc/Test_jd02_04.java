@@ -52,7 +52,24 @@ public class Test_jd02_04 {
         String actualA = parcer.calc("E={2,3}*(D/2)");
         assertEquals("{10.0, 15.0}",actualA);
     }
-
+    @Test
+    public void testCTask1() throws CalcException {
+        Parcer parcer= new Parcer();
+        String actualA = parcer.calc("{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9,0}}*{{10.0, 10.0, 10.0}, {10.0, 10.0, 10.0}, {10.0, 10.0, 10.0}}");
+        assertEquals("{{60.0, 60.0, 60.0}, {150.0, 150.0, 150.0}, {240.0, 240.0, 240.0}}",actualA);
+    }
+    @Test
+    public void testCTask2() throws CalcException {
+        Parcer parcer= new Parcer();
+        String actualA = parcer.calc("{{10.0, 12.0}, {11.0, 13.0}}+{{21.0, 14.0}, {17.0, 19.0}}");
+        assertEquals("{{31.0, 26.0}, {28.0, 32.0}}",actualA);
+    }
+    @Test
+    public void testCTask3() throws CalcException {
+        Parcer parcer= new Parcer();
+        String actualA = parcer.calc("{{17.0, 12.0}, {21.0, 23.0}}-{{5.0, 8.0}, {7.0, 9.0}}");
+        assertEquals("{{12.0, 4.0}, {14.0, 14.0}}",actualA);
+    }
 
 
 }

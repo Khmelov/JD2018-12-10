@@ -11,8 +11,8 @@ public class ConsoleRunner {
 
         Parcer parser= new Parcer();
         Printer printer = new Printer();
-        //Var.loadVarFromFile();
-     //   Log.getCountLineLog();
+        Var.loadVarFromFile();
+        Log.getCountLineLog();
         while (!(line = scan.nextLine()).equals("end")){
 
             try {

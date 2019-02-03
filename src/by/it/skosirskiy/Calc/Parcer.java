@@ -33,7 +33,6 @@ public class Parcer  extends CalcException{
         Matcher matcherBrackets = patternBrackets.matcher(expression);
         while (matcherBrackets.find()){
 
-
             String buf = matcherBrackets.group();
             buf= buf.replace(")","");
             buf= buf.replace("(","");
