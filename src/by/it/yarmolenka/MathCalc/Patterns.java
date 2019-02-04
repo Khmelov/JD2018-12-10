@@ -10,5 +10,5 @@ public class Patterns {
     public static final String MATRIX = "\\{(" + VECTOR + ",?\\s?)+}";
     public static final String OPERATION = "(?<=([A-Za-z0-9\\}\\)])( )?)([=+*/-])";
     static final String BRACKETS = "\\([A-Za-z0-9 \\.*/+-]+\\)";
-    static final String VARIABLE = "[A-Za-z0-9]+";
+    static final String VARIABLE = "\\w+";
 }
