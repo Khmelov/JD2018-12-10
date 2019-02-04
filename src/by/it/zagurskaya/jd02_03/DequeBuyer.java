@@ -6,14 +6,14 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 class DequeBuyer {
 
-    private static BlockingDeque<Buyer> q = new LinkedBlockingDeque<>(30);
+    private static volatile BlockingDeque<Buyer> q = new LinkedBlockingDeque<>(30);
 
-    static  synchronized void add(Buyer buyer) {
-            q.addLast(buyer);
+    static synchronized void add(Buyer buyer) {
+        q.addLast(buyer);
     }
 
-    static  Buyer poll() {
-            return q.pollFirst();
+    static Buyer poll() {
+        return q.pollFirst();
     }
 
     public static int getDequeBuyerSize() {

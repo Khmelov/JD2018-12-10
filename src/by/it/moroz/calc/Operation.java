@@ -2,12 +2,12 @@ package by.it.moroz.calc;
 
 
 interface Operation {
-    Var add(Var other) throws CalcExeption;
+    Var add(Var other) throws CalcException;
 
-    Var sub(Var other) throws CalcExeption;
+    Var sub(Var other) throws CalcException;
 
-    Var mul(Var other)throws CalcExeption;
+    Var mul(Var other)throws CalcException;
 
-    Var div(Var other) throws CalcExeption;
+    Var div(Var other) throws CalcException;
 
 }

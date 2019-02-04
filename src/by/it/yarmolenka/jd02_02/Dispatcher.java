@@ -7,12 +7,13 @@ class Dispatcher {
     static final int K_SPEED = 50;     //коэффициент ускорения программы (для отладки)
     static volatile int cashiersNumber = 1;     //нумератор кассиров
     private static volatile int countCashiers;     //количество одновременно работающих касс
-    static volatile int buyersCount;     //количество покупателей в магазине
+    private static volatile int buyersCount;     //количество покупателей в магазине
     private static final Object LOCK_BUYERS = new Object();     //монитор для инкремента и декремента количества покупателей
     private static final Object LOCK_OVERALL_PRICE = new Object();     //монитор для суммарного оборота магазина
     static final Object LOCK_QUEUE = new Object();     //монитор для связи покупатель-кассир
     static final Object LOCK_CONSOLE = new Object();     //монитор для корректного вывода в консоль
     private static final Object LOCK_CASHIERS = new Object();     //монитор для инкремента номера создаваемой кассы
+    static final Object LOCK_ARRAY = new Object();     //монитор для предотвращения изменения массива во время итерации
     private static final int plan = 100;     //план работы магазина
     private static volatile double overallPrice;    //общий оборот магазина
     private static Map<Buyer, Double> listOfBuyers = new HashMap<>();     //список всех покупателей побывавших в магазине
@@ -82,5 +83,10 @@ class Dispatcher {
         synchronized (Dispatcher.LOCK_CASHIERS) {
             Dispatcher.countCashiers--;
         }
+    }
+
+    //геттер для количества покупателей в магазине
+    static int getBuyersCount() {
+        return buyersCount;
     }
 }

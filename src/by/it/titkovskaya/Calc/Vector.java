@@ -20,7 +20,8 @@ public class Vector extends Var {
     }
 
     Vector(String strVector) {
-        String[] otherVector = strVector.replaceAll("[^.,0-9]", "").split(",");
+        String[] otherVector = strVector.replace("{", "")
+                                .replace("}", "").split(",\\s*");
         this.value = new double[otherVector.length];
         for (int i = 0; i < otherVector.length; i++) {
             value[i] = Double.parseDouble(otherVector[i]);

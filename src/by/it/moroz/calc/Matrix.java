@@ -10,7 +10,6 @@ public class Matrix extends Var {
         for (int i = 0; i < value.length; i++) {
                 System.arraycopy(value[i], 0, this.value[i], 0, value[i].length);
         }
-        //this.value = value.clone();
     }
 
     public Matrix(Matrix matrix) {
@@ -23,8 +22,6 @@ public class Matrix extends Var {
         String[] row = strMatrix.split("},");
         for (int i = 0; i < row.length; i++) {
             row[i] = row[i].trim();
-            //String[] single_int = row[i].split(",");
-            //System.arraycopy(single_int, 0, str1[i], 0, single_int.length);
         }
         this.value = new double[row.length][];
         for (int i = 0; i < row.length; i++) {
@@ -37,7 +34,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var add(Var other) throws CalcExeption {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] res = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < res.length; i++) {
@@ -46,7 +43,6 @@ public class Matrix extends Var {
                 }
             }
             return new Matrix(res);
-            //return other.add(this);
         } else if (other instanceof Matrix) {
             if (this.value.length == ((Matrix) other).value.length || this.value[0].length == ((Matrix) other).value[0].length) {
                 double[][] res = new double[this.value.length][this.value[0].length];
@@ -62,12 +58,13 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) throws CalcExeption {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             Scalar minus = new Scalar(-1);
             return this.add(other.mul(minus));
         } else if (other instanceof Matrix) {
-            if (this.value.length == ((Matrix) other).value.length && this.value[0].length == ((Matrix) other).value[0].length) {
+            if (this.value.length == ((Matrix) other).value.length
+                    && this.value[0].length == ((Matrix) other).value[0].length) {
                 double[][] res = new double[this.value.length][this.value[0].length];
                 for (int i = 0; i < res.length; i++) {
                     for (int j = 0; j < res.length; j++) {
@@ -81,7 +78,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) throws CalcExeption {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] res = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < res.length; i++) {
@@ -101,7 +98,8 @@ public class Matrix extends Var {
                 return new Vector(res);
             }
         } else if(other instanceof Matrix){
-            if(this.value.length == ((Matrix) other).value.length || this.value[0].length == ((Matrix) other).value[0].length){
+            if(this.value.length == ((Matrix) other).value.length
+                    || this.value[0].length == ((Matrix) other).value[0].length){
                 double[][]res = new double[this.value.length][this.value[0].length];
                 for (int i = 0; i < this.value.length; i++) {
                     for (int j = 0; j < ((Matrix) other).value[0].length; j++) {
@@ -117,7 +115,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var div(Var other) throws CalcExeption {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] res = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < res.length; i++) {

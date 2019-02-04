@@ -1,5 +1,9 @@
 package by.it.titkovskaya.Calc;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,39 +11,113 @@ class Parser {
 
     static boolean printToLog = false;
 
-    Var calc(String expression) throws CalcException {
-        Pattern p = Pattern.compile(Patterns.OPERATION);
+    private HashMap<String, Integer> operationsPriority = new HashMap<String, Integer>() {
+        {
+            this.put("*", 2);
+            this.put("/", 2);
+            this.put("+", 1);
+            this.put("-", 1);
+            this.put("=", 0);
+        }
+    };
+
+    String calc(String expression) throws CalcException {
+
         Pattern calc = Pattern.compile(Patterns.CALCULATION);
         Matcher matchCalc = calc.matcher(expression);
-        printToLog=false;
+        printToLog = false;
         printToLog = matchCalc.find();
-        String[] operands = expression.trim().split(Patterns.OPERATION);
-        Var two = Var.createVar(operands[1]);
-        Matcher matcher = p.matcher(expression);
-        String operation = null;
-        if (matcher.find()) {
-            operation = matcher.group();
+
+        //получим выражение без скобок приоритета
+        expression = getExpressionWithoutPriority(expression);
+        //рассчитаем выражение согласно знакам приоритета
+        return getCalculationResult(expression);
+    }
+
+    private String getExpressionWithoutPriority(String expression) throws CalcException {
+
+        //проверим, есть ли приоритетные операции, выделенные скобками
+        Pattern priorOperation = Pattern.compile(Patterns.PRIOR_OPERATION);
+        Matcher matcherPrior = priorOperation.matcher(expression);
+        if (matcherPrior.find()) {
+            String operationPrior = matcherPrior.group();
+            String operationPriorResult = getCalculationResult(operationPrior.replace("(","")
+                    .replace(")",""));
+            expression=expression.replace(operationPrior,operationPriorResult);
+            expression=getExpressionWithoutPriority(expression);
         }
-        if (operation.equals("=")) {
-            Var.saveVar(operands[0], two);
-            return two;
+        return expression;
+    }
+
+    private String getCalculationResult(String expression) throws CalcException {
+        List<String> operands;
+        List<String> operations;
+        Pattern operation = Pattern.compile(Patterns.OPERATION);
+
+        //находим все операнды
+        String[] allOperands = expression.trim().split(Patterns.OPERATION);
+        operands = new ArrayList<>(Arrays.asList(allOperands));
+
+        //находим все операции
+        operations = new ArrayList<>();
+        Matcher matcher = operation.matcher(expression);
+        while (matcher.find()) {
+            operations.add(matcher.group());
         }
 
-        Var one = Var.createVar(operands[0]);
+        //выполним все операции в соответствии с их приоритом (очередностью выполнения)
+        while (operations.size() > 0) {
+            int indexOfOperation = getIndexOfOperation(operations);
+            String operandOne = operands.remove(indexOfOperation);
+            String operationToDo = operations.remove(indexOfOperation);
+            String operandTwo = operands.remove(indexOfOperation);
+            String result = oneOperation(operandOne, operationToDo, operandTwo);
+            operands.add(indexOfOperation, result);
+        }
+        Var result = Var.createVar(operands.get(0));
+        return result.toString();
+    }
+
+    private int getIndexOfOperation(List<String> operations) throws CalcException {
+        //ищем индекс операции с самым высоким приоритетом
+        int index = -1;
+        int priority = -1;
+        for (int i = 0; i < operations.size(); i++) {
+            String operation = operations.get(i);
+            if (priority < operationsPriority.get(operation)) {
+                index = i;
+                priority = operationsPriority.get(operation);
+            }
+        }
+        if (index > -1)
+            return index;
+        else
+            throw new CalcException("Неожиданное завершение вычислений");
+    }
+
+    private String oneOperation(String operandOne, String operationToDo, String operandTwo) throws CalcException {
+        Var two = Var.createVar(operandTwo);
+        if (operationToDo.equals("=")) {
+            Var.saveVar(operandOne, two);
+            return two.toString();
+        }
+
+        Var one = Var.createVar(operandOne);
         if (one == null || two == null) {
-            System.err.println("Операция " + expression + " невозможна");
+            System.err.println("Операция " + operationToDo + " невозможна");
             return null;
         }
-        switch (operation) {
+        switch (operationToDo) {
             case "+":
-                return one.add(two);
+                return one.add(two).toString();
             case "-":
-                return one.sub(two);
+                return one.sub(two).toString();
             case "*":
-                return one.mul(two);
+                return one.mul(two).toString();
             case "/":
-                return one.div(two);
+                return one.div(two).toString();
         }
-        return null;
+        throw new CalcException("Неожиданное завершение вычислений");
     }
+
 }

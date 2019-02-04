@@ -3,13 +3,14 @@ package by.it.moroz.calc;
 
 class Printer {
 
-     void print(Var result) {
-         if (result!=null)
-         System.out.println(result);
+    void print(String result) {
+        if (result != null)
+            System.out.println(result);
     }
 
-    void showError (CalcExeption e){
-         System.out.println(e.getMessage());
+    void showError(CalcException e) {
+        System.out.println(e.getMessage());
+        Log.toLog(e.getMessage());
     }
 
 

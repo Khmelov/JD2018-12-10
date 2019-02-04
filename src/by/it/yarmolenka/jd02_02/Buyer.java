@@ -47,9 +47,9 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         synchronized (Dispatcher.LOCK_CONSOLE) {
             System.out.println(this + " went to the Queue");
         }
-        BuyerQueue.putToQueue(this);
         synchronized (this) {
             try {
+                BuyerQueue.putToQueue(this);
                 this.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();

@@ -21,8 +21,14 @@ public class Cashier implements Runnable {
         synchronized (Dispatcher.LOCK_CONSOLE) {
             System.out.println(this + " opened");
         }
-        while (!Dispatcher.planIsComplete()) {
+        while (!Dispatcher.planIsComplete() && Dispatcher.getBuyersCount() >=
+                (Dispatcher.getCountCashiers() - 1) * 5) {
             cashiersWork();
+        }
+        if (Dispatcher.getCountCashiers() == 1){
+            synchronized (Dispatcher.LOCK_ARRAY){
+                Dispatcher.LOCK_ARRAY.notify();
+            }
         }
         Dispatcher.cashierCloses();
         synchronized (Dispatcher.LOCK_CONSOLE) {
@@ -86,16 +92,25 @@ public class Cashier implements Runnable {
                 s = "\t\t\t";
                 break;
             case 2:
-                s = "\t\t\t\t\t\t\t\t";
+                s = "\t\t\t\t\t\t";
                 break;
             case 3:
-                s = "\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                s = "\t\t\t\t\t\t\t\t\t";
                 break;
             case 4:
-                s = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                s = "\t\t\t\t\t\t\t\t\t\t\t\t";
                 break;
             case 5:
-                s = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                s = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                break;
+            case 6:
+                s = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                break;
+            case 7:
+                s = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                break;
+            case 8:
+                s = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
                 break;
             default:
                 s = "";
@@ -105,11 +120,14 @@ public class Cashier implements Runnable {
 
     //метод для проверки нужны ли дополнительные кассы и при необходимости их открытия
     private void startMoreCashiers() {
-        if (Dispatcher.getCountCashiers() >= 5) return;
-        while (BuyerQueue.getQueueSize() > Dispatcher.getCountCashiers() * 5) {
-            Thread th = new Thread(new Cashier(Dispatcher.cashiersNumber++));
-            Runner.listOfThreads.add(th);
-            th.start();
+        if (Dispatcher.getCountCashiers() < 5) {
+            while (BuyerQueue.getQueueSize() > Dispatcher.getCountCashiers() * 5) {
+                Thread th = new Thread(new Cashier(Dispatcher.cashiersNumber++));
+                synchronized (Dispatcher.LOCK_ARRAY) {
+                    Runner.listOfThreads.add(th);
+                }
+                th.start();
+            }
         }
     }
 

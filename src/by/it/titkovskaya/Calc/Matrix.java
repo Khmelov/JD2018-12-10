@@ -16,14 +16,14 @@ public class Matrix extends Var {
     }
 
     public Matrix(String strMatrix) {
-        Pattern pattern = Pattern.compile("[{][0-9., ]+[}]");
+        Pattern pattern = Pattern.compile("[{][-0-9., ]+[}]");
         StringBuilder sb = new StringBuilder(strMatrix);
         Matcher matcher = pattern.matcher(sb);
         int rowsQuantity = 0;
         while (matcher.find()) {
             rowsQuantity++;
         }
-        String[] newMatrix = strMatrix.replaceAll("[^.,0-9]", "").split(",");
+        String[] newMatrix = strMatrix.replaceAll("[^.,0-9-]", "").split(",");
         int columnsQuantity = newMatrix.length / rowsQuantity;
         this.value = new double[rowsQuantity][columnsQuantity];
         for (int k = 0; k < newMatrix.length; k++) {

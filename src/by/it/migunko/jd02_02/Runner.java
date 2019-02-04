@@ -2,28 +2,44 @@ package by.it.migunko.jd02_02;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class Runner {
-    static List<Buyer> buyers = new ArrayList<>();
+    static List<Thread> allThreads = new ArrayList<>();
+    static int countCashier=0;
 
     public static void main(String[] args) {
-        //for (int k = 0; k < 1000; k++) {
-        System.out.println("Market opened");
-        int number = 0;
-        for (int time = 1; time <= 120; time++) {
-            int count = Util.getRandom(2);
-            for (int i = 0; i < count; i++) {
+        int number=0;
+        System.out.println("Магазин открыт");
+        for (int i = 1; i <= 2; i++) {
+            Thread thCasier = new Thread(new Cashier(i));
+            thCasier.start();
+            allThreads.add(thCasier);
+            countCashier++;
+        }
+
+        while (!Dispatcher.planComplete()) {
+            int count = Util.rnd(0, 2);
+            for (int i = 0; !Dispatcher.planComplete() && i < count; i++) {
                 Buyer buyer = new Buyer(++number);
-                buyers.add(buyer);
-                Dispatcher.counterBuyer++;
+                Dispatcher.addBuyer();
+                allThreads.add(buyer);
                 buyer.start();
             }
             Util.sleep(1000);
-        }
-        while (Dispatcher.counterBuyer > 0)
-            Util.sleep(1);
-        System.out.println("Market closed");
+            if( (Math.ceil(BuyerQueue.getSizeQueue()/5)>countCashier) && countCashier<5){
+                Thread thCasier = new Thread(new Cashier(++countCashier));
+                thCasier.start();
+                allThreads.add(thCasier);
 
-        // }
+            }
+        }
+
+        for (Thread t : allThreads) {
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Магазин закрыт");
     }
 }

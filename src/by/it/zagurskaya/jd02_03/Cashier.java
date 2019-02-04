@@ -1,67 +1,63 @@
 package by.it.zagurskaya.jd02_03;
 
-import java.util.Deque;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static by.it.zagurskaya.jd02_03.Runner.CASHIERS;
 
 class Cashier implements Runnable {
 
-    private static Deque<Cashier> q = new LinkedBlockingDeque<>();
-    private static Integer index = 0;
+    private static AtomicInteger index = new AtomicInteger(0);
 
-    private static final Object lock = new Object();
+    private static AtomicInteger cashierCount = new AtomicInteger(0);
+
+    private static final Semaphore SEMAPHORE = new Semaphore(1, true);
 
     private Thread thisThread;
 
     private String name;
 
     Cashier() {
-//        synchronized (lock) {
-            name = "Cashier #" + ++index;
-//        }
-        q.addLast(this);
+        name = "Cashier #" + index.incrementAndGet();
+        cashierCount.incrementAndGet();
     }
 
     @Override
     public void run() {
         System.out.println("++++++++++++++++++++++++++ " + this + " opened");
-        while (!Dispatcher.planComplete()) {
+        while (!Dispatcher.planComplete() || DequeBuyer.getDequeBuyerSize() != 0) {
 
-//            synchronized (lock) { //подумать
-                if ((((DequeBuyer.getDequeBuyerSize() - 1) / 5) + 1) > q.size()) {
-                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> " + DequeBuyer.getDequeBuyerSize() + " = " + q.size());
-
-                    ExecutorService cashiers = Executors.newFixedThreadPool(5);
+            try {
+                SEMAPHORE.acquire();
+                if (((((DequeBuyer.getDequeBuyerSize() - 1) / 5) + 1) > cashierCount.get()) && (cashierCount.get() < 5)) {
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> " + DequeBuyer.getDequeBuyerSize() + " = " + cashierCount.get());
                     Cashier cashier = new Cashier();
-                    cashiers.execute(cashier);
-//
-//                    Cashier cashier = new Cashier();
-//                    Thread cashierThread = new Thread(cashier);
-//                    cashier.setThread(cashierThread);
-//                    cashierThread.start();
+                    if (!CASHIERS.isShutdown()) {
+                        CASHIERS.execute(cashier);
+                    }
                 }
-                if ((((DequeBuyer.getDequeBuyerSize() - 1) / 5) + 1) < q.size()) {
-                    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<< " + DequeBuyer.getDequeBuyerSize() + " = " + q.size());
-                    q.remove(this);
+                if ((((DequeBuyer.getDequeBuyerSize() - 1) / 5) + 1) < cashierCount.get()) {
+                    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<< " + DequeBuyer.getDequeBuyerSize() + " = " + cashierCount.get());
+                    cashierCount.decrementAndGet();
+                    SEMAPHORE.release();
                     break;
                 }
-//            }
+                SEMAPHORE.release();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
-            Buyer buyer = DequeBuyer.poll();
-            if (buyer != null) {
-                System.out.println(this + " service " + buyer + ". Bill = " + buyer.getBill());
-                synchronized (buyer.getMonitor()) {
-//                    buyer.getMonitor().notify();
-                    buyer.notifyAll();
+            Buyer serviceBuyer = DequeBuyer.poll();
+            if (serviceBuyer != null) {
+                System.out.println(this + " service " + serviceBuyer + ". Bill = " + serviceBuyer.getBill());
+                synchronized (serviceBuyer.getMonitor()) {
+                    serviceBuyer.notifyAll();
                 }
             } else {
                 Util.sleep(10);
             }
-            Util.sleep(700);
+            Util.sleep(3000);
         }
-        q.remove(this);
-        System.out.println("-------------------------- " + this + " closed");
     }
 
     @Override
@@ -77,7 +73,4 @@ class Cashier implements Runnable {
         this.thisThread = thisThread;
     }
 
-    public static Deque<Cashier> getQ() {
-        return q;
-    }
 }

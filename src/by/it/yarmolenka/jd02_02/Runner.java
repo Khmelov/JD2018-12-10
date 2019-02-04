@@ -54,13 +54,20 @@ public class Runner {
             enteringBuyers(max_entries, i);
             if (!Dispatcher.marketIsOpen() || Dispatcher.planIsComplete()) break;
         }
-        for (Thread thread : listOfThreads) {
+        synchronized (Dispatcher.LOCK_ARRAY) {
             try {
-                thread.join();
+                Dispatcher.LOCK_ARRAY.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+            for (Thread thread : listOfThreads) {
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         synchronized (Dispatcher.LOCK_CONSOLE) {
             System.out.println("Market is closed");
         }
@@ -77,7 +84,7 @@ public class Runner {
     //метод для записи шапки в файл cashierLog.txt
     private static void cashierLogStart() {
         String path = Utils.getCashierLogPath();
-        try (PrintWriter pw = new PrintWriter(new FileWriter(path))){
+        try (PrintWriter pw = new PrintWriter(new FileWriter(path))) {
             pw.printf("%-18s%-18s%-18s%-18s%-18s%-18s%s\n",
                     "Cashier№1", "Cashier№2", "Cashier№3",
                     "Cashier№4", "Cashier№5", "Queue-size", "Summary");
@@ -93,16 +100,16 @@ public class Runner {
         int sec = i % 60;
         int num = -1;
         if (sec < 30) {
-            if (Dispatcher.buyersCount < 10 + sec) {
-                num = (sec + 10 - Dispatcher.buyersCount) > max_entries ? max_entries :
-                        (Utils.getRandom(sec + 10 - Dispatcher.buyersCount, max_entries));
+            if (Dispatcher.getBuyersCount() < 10 + sec) {
+                num = (sec + 10 - Dispatcher.getBuyersCount()) > max_entries ? max_entries :
+                        (Utils.getRandom(sec + 10 - Dispatcher.getBuyersCount(), max_entries));
             }
         } else {
-            if (Dispatcher.buyersCount > 40 + 30 - sec)
+            if (Dispatcher.getBuyersCount() > 40 + 30 - sec)
                 num = 0;
         }
         if (num == -1) num = Utils.getRandom(0, max_entries);
-        numberOfBuyers.offerFirst(Dispatcher.buyersCount);
+        numberOfBuyers.offerFirst(Dispatcher.getBuyersCount());
         enteredBuyers.offerFirst(num);
         for (int j = 0; j < num; j++) {
             if (Dispatcher.marketIsOpen()) {

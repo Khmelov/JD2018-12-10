@@ -20,7 +20,7 @@ public class Vector extends Var {
     }
 
     Vector(String strVector) {
-        String[] d = strVector.replaceAll("\\{", "").replaceAll("\\}", "").split(",");
+        String[] d = strVector.replaceAll("\\{", "").replaceAll("}", "").split(",");
         this.value = new double[d.length];
         for (int i = 0; i < d.length; i++) {
             value[i] = Double.parseDouble(d[i]);
@@ -28,7 +28,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) throws CalcExeption {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] res = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < res.length; i++) {
@@ -48,7 +48,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var sub(Var other) throws CalcExeption {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             Scalar minus = new Scalar(-1);
             /*double[] res = Arrays.copyOf(this.value, this.value.length);
@@ -69,7 +69,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var mul(Var other) throws CalcExeption {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] res = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < res.length; i++) {
@@ -89,7 +89,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other) throws CalcExeption {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] res = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < res.length; i++) {
