@@ -1,17 +1,11 @@
-package by.it.a_khmelev.jd02_05;
+package by.it.skosirskiy.jd02_05;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class NativeToASCII {
     public static void main(String[] args) {
         File dir = new File(System.getProperty("user.dir") +
-                "/src/by/it/a_khmelev/jd02_05_02");
+                "/src/by/it/skosirskiy/jd02_05");
         if (dir.exists() && dir.isDirectory()) {
             File[] files = dir.listFiles();
             for (File file : files) {

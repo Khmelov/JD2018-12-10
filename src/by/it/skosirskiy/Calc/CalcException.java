@@ -4,15 +4,15 @@ public class CalcException extends Exception {
 
 
     public CalcException() {
-        super("ERROR: ");
+        super(ResMan.INSTANCE.get(Message.str4));
     }
 
     public CalcException(String message) {
-        super("ERROR: "+message);
+        super(ResMan.INSTANCE.get(Message.str4)+message);
     }
 
     public CalcException(String message, Throwable cause) {
-        super("ERROR: "+message, cause);
+        super(ResMan.INSTANCE.get(Message.str4)+message, cause);
     }
 
     public CalcException(Throwable cause) {

@@ -1,37 +1,76 @@
 package by.it.skosirskiy.jd02_05;
 
+import by.it.skosirskiy.jd02_05.strings.Message;
+import by.it.skosirskiy.jd02_05.strings.User;
+
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.Scanner;
+
 
 public class Runner {
 
     public static void main(String[] args) {
-        for (Integer j = 0; j < 3; j++) {
-            char i = j.toString().charAt(0);
-            String country = "";
-            String language = "";
-            switch (i){
+        String s="";
+        DateFormat df;
+        ResMan resMan = ResMan.INSTANCE;
+        if (args.length == 0) {
+            resMan.setLocale("En","US");
+            s="en";
+            System.out.println(s);
+        }
+        else  {
+            resMan.setLocale(args[0], args[1]);
+            s=args[0];
 
-                case '1':
-                    country = "US";
-                    language= "EN";
-                    System.out.println("\n"+i+" -- английский");
+        }
+        printConsole(resMan);
+        printDate(s);
+
+
+
+
+
+
+        System.out.println("Введите необходимый язык(\"ru\", \"en\", \"be\").");
+        Scanner scanner= new Scanner(System.in);
+        String line;
+        while (!(line = scanner.nextLine()).equals("end")){
+            switch (line){
+                case "ru":
+                    resMan.setLocale("RU","RU");
+                    s="ru";
                     break;
-                case '2':
-                    country = "BY";
-                    language= "BE";
-                    System.out.println("\n"+i+" -- белорусский");
+                case "en":
+                    resMan.setLocale("EN","US");
+                    s="en";
+                    break;
+                case "be":
+                    resMan.setLocale("BE","BY");
+                    s="be";
                     break;
                 default:
-                    System.out.println("\n"+i+" -- русский");
-
+                    System.out.println("не найдено");
             }
-            Locale current = new Locale(language, country);
-            ResourceBundle rb = ResourceBundle.getBundle("by\\it\\skosirskiy\\jd02_05\\str.properties", current);
-            String s1= rb.getString("str1");
-            System.out.println(s1);
-            String s2= rb.getString("str2");
-            System.out.println(s2);
+            printConsole(resMan);
+            printDate(s);
+
         }
+
     }
+
+    private static void printDate(String dateLanguage) {
+
+        DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, new Locale(dateLanguage));
+        String s = df.format(new Date());
+        System.out.println(s);
+    }
+
+    private static void printConsole(ResMan resMan) {
+        System.out.println(resMan.get(Message.WELCOME));
+        System.out.println(resMan.get(Message.QUESTION));
+        System.out.println(resMan.get(User.NAME));
+    }
+
 }

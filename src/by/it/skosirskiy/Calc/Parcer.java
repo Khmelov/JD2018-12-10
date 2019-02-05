@@ -2,10 +2,7 @@ package by.it.skosirskiy.Calc;
 
 import by.it._examples_.jd01_11.Generics.Demo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,11 +19,20 @@ public class Parcer  extends CalcException{
     };
 
   public   String  calc(String expression) throws CalcException{
-        if (expression.contains("printvar")) {
+      ResMan resMan = ResMan.INSTANCE;
+      ResourceBundle rb;
+      if (expression.contains("printvar")) {
             Var.printvar();}
         else if (expression.contains("sortvar")) {
             Var.sortvar();}
+        else if (expression.contains("ru")) {
+          resMan.setLocale("ru", "RU");}
+        else if (expression.contains("be")) {
+          resMan.setLocale("be", "BY");}
+        else if (expression.contains("en")) {
+          resMan.setLocale("en", "US");}
         else {
+
         List<String> operands;
         List<String> operations;
         Pattern patternBrackets = Pattern.compile(Patterns.BRACKETS);
@@ -85,7 +91,7 @@ public class Parcer  extends CalcException{
         if (res>-1)
             return res;
         else
-            throw new CalcException("Неожиданное завершение вычислений");
+            throw new CalcException(ResMan.INSTANCE.get(Message.str1));
     }
 
     private String oneOperation(String strOne, String operation, String strTwo) throws CalcException {
@@ -99,7 +105,7 @@ public class Parcer  extends CalcException{
 
         Var one = Var.createVar(strOne);
         if (one == null || two == null) {
-            System.err.println("Операция " + operation + " невозможна");
+            System.err.println(ResMan.INSTANCE.get(Message.str1) + operation + ResMan.INSTANCE.get(Message.str3));
             return null;
         }
         switch (operation) {
@@ -113,7 +119,7 @@ public class Parcer  extends CalcException{
                 return one.div(two).toString();
         }
 
-        throw new CalcException("Неожиданное завершение вычислений");
+        throw new CalcException(ResMan.INSTANCE.get(Message.str1));
     }
 
 }

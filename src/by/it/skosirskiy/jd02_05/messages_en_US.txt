@@ -1,0 +1,3 @@
+message.welcome=Welcom
+message.question=How do You do?
+user.name=Skosirskiy Eugene
