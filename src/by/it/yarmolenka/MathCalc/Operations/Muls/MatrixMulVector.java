@@ -1,10 +1,12 @@
 package by.it.yarmolenka.MathCalc.Operations.Muls;
 
 import by.it.yarmolenka.MathCalc.CalcException;
+import by.it.yarmolenka.MathCalc.ResMan;
+import by.it.yarmolenka.MathCalc.Strings.MathError;
 import by.it.yarmolenka.MathCalc.Variables.*;
 
 public class MatrixMulVector {
-    public static Vector matrixVector(Matrix m, Vector v) throws CalcException {
+    public static Vector matrixVector(Matrix m, Vector v, ResMan resMan) throws CalcException {
         if (m.value[0].length == v.value.length){
             double[] res = new double[m.value.length];
             for (int i = 0; i < res.length; i++) {
@@ -14,7 +16,7 @@ public class MatrixMulVector {
             }
             return new Vector(res);
         } else {
-            throw new CalcException("Для умножения матрицы на вектор необходимо чтобы количество столбцов в матрице равнялось размеру вектора");
+            throw new CalcException(resMan.get(MathError.MUL), resMan);
         }
     }
 }

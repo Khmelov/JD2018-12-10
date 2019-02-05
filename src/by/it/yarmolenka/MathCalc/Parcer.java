@@ -1,6 +1,7 @@
 package by.it.yarmolenka.MathCalc;
 
 import by.it.yarmolenka.MathCalc.Operations.*;
+import by.it.yarmolenka.MathCalc.Strings.MathError;
 import by.it.yarmolenka.MathCalc.Variables.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +10,16 @@ import java.util.regex.Pattern;
 
 public class Parcer {
     public Var calc(String expression) throws CalcException {
+        ResMan resMan = ResMan.INSTANCE;
 
+        if (!expression.matches(Patterns.INPUT)) throw new CalcException(resMan.get(MathError.INPUT), resMan);
         if (expression.matches(Patterns.SCALAR)) return new Scalar(expression);
         if (expression.matches(Patterns.VECTOR)) return new Vector(expression);
         if (expression.matches(Patterns.MATRIX)) return new Matrix(expression);
         if (expression.matches(Patterns.VARIABLE)) return Var.getVariable(expression);
 
         expression = calcBrackets(expression);
+
 
         Pattern cal = Pattern.compile(Patterns.OPERATION);
         Matcher m = cal.matcher(expression);
@@ -27,7 +31,7 @@ public class Parcer {
             split[i]=split[i].trim();
 
         if (list.get(0).equals("=")) {
-            return identificationOfVariable(expression, split);
+            return identificationOfVariable(expression, split, resMan);
         }
 
 
@@ -99,9 +103,9 @@ public class Parcer {
         }
     }
 
-    private Var identificationOfVariable(String expression, String[] split) throws CalcException {
+    private Var identificationOfVariable(String expression, String[] split, ResMan resMan) throws CalcException {
         if (!split[0].trim().matches(Patterns.VARIABLE))
-            throw new CalcException("в названии переменной допускаются латинские буквы и цифры");
+            throw new CalcException(resMan.get(MathError.IN_VARIABLE), resMan);
         Var res;
         if (split.length == 2)
             res = Var.createVar(split[1]);

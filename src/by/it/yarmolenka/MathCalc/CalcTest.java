@@ -1,6 +1,11 @@
 package by.it.yarmolenka.MathCalc;
 
-import by.it.yarmolenka.MathCalc.Variables.*;
+import by.it.yarmolenka.jd02_04.MathCalc.CalcException;
+import by.it.yarmolenka.jd02_04.MathCalc.Parcer;
+import by.it.yarmolenka.jd02_04.MathCalc.Variables.Matrix;
+import by.it.yarmolenka.jd02_04.MathCalc.Variables.Scalar;
+import by.it.yarmolenka.jd02_04.MathCalc.Variables.Var;
+import by.it.yarmolenka.jd02_04.MathCalc.Variables.Vector;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

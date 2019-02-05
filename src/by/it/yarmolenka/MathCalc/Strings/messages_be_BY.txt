@@ -1,0 +1,10 @@
+exception.error=ПАМЫЛКА:
+exception.input=няправiльны увод
+exception.inputVariable=У назве пераменнай павiнны быць лацiнскiя лiтары и лiчбы
+exception.unknownVariable=Невядомая пераменная
+exception.add=Складанне немагчыма
+exception.sub=Аднiманне немагчыма
+exception.div=Дзяленне немагчыма
+exception.divByZero=Дзяленне на нуль немагчыма
+exception.mul=Множанне немагчыма
+message.language=Устаноулена беларуская мова

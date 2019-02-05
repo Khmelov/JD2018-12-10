@@ -1,0 +1,10 @@
+exception.error=ОШИБКА:
+exception.input=Неверный ввод
+exception.inputVariable=В названии переменной используйте латинские буквы и цифры
+exception.unknownVariable=Неизвестная переменная
+exception.add=Сложение невозможно
+exception.sub=Вычитание невозможно
+exception.div=Деление невозможно
+exception.divByZero=Деление на ноль невозможно
+exception.mul=Умножение невозможно
+message.language=Установлен русский язык

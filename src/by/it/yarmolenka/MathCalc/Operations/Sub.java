@@ -6,12 +6,15 @@ import by.it.yarmolenka.MathCalc.Operations.Muls.MatrixMulScalar;
 import by.it.yarmolenka.MathCalc.Operations.Muls.ScalarMulScalar;
 import by.it.yarmolenka.MathCalc.Operations.Muls.VectorMulScalar;
 import by.it.yarmolenka.MathCalc.Patterns;
+import by.it.yarmolenka.MathCalc.ResMan;
+import by.it.yarmolenka.MathCalc.Strings.MathError;
 import by.it.yarmolenka.MathCalc.Variables.*;
 
 public class Sub {
 
     public static Var subVarVar(Var var1, Var var2) throws CalcException {
 
+        ResMan resMan = ResMan.INSTANCE;
         Scalar min = new Scalar(-1);
 
         if (var1.toString().matches(Patterns.SCALAR) && var2.toString().matches(Patterns.SCALAR)) {
@@ -45,26 +48,26 @@ public class Sub {
         }
 
         if (var1.toString().matches(Patterns.VECTOR) && var2.toString().matches(Patterns.MATRIX)) {
-            throw new CalcException("вычитание матрицы из ектора невозможно");
+            throw new CalcException(resMan.get(MathError.SUB), resMan);
         }
 
         if (var1.toString().matches(Patterns.MATRIX) && var2.toString().matches(Patterns.VECTOR)) {
-            throw new CalcException("вычитание вектора из матрицы невозможно");
+            throw new CalcException(resMan.get(MathError.SUB), resMan);
         }
 
         if (var1.toString().matches(Patterns.VECTOR) && var2.toString().matches(Patterns.VECTOR)) {
             Vector v1 = new Vector(var1.toString());
             Vector v2 = new Vector(var2.toString());
-            return VectorAddVector.vectorVector(v1, VectorMulScalar.vectorScalar(v2, min));
+            return VectorAddVector.vectorVector(v1, VectorMulScalar.vectorScalar(v2, min), resMan);
         }
 
         if (var1.toString().matches(Patterns.MATRIX) && var2.toString().matches(Patterns.MATRIX)) {
             Matrix m1 = new Matrix(var1.toString());
             Matrix m2 = new Matrix(var2.toString());
-            return MatrixAddMatrix.matrixMatrix(m1, MatrixMulScalar.matrixScalar(m2, min));
+            return MatrixAddMatrix.matrixMatrix(m1, MatrixMulScalar.matrixScalar(m2, min), resMan);
         }
 
-        throw new CalcException("не умею такое вычитатть");
+        throw new CalcException(resMan.get(MathError.SUB), resMan);
     }
 
 }

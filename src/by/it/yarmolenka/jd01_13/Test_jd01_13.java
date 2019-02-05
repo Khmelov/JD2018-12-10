@@ -21,7 +21,7 @@ public class Test_jd01_13 {
             sb.append("run ").append(i).append(": ")
                     .append(run("")
                             .include("java.lang.")
-                            .include("Exception")
+                            .include("MathError")
                             .include("line:")
                             .include(".TaskA")
                             .strOut.toString());
@@ -38,7 +38,7 @@ public class Test_jd01_13 {
                 .include("1.41")
                 .include("2.23")
                 .include("8.0")
-                .exclude("Exception")
+                .exclude("MathError")
         ;
         run("foo\nEND\n")
                 .include("NumberFormatException")

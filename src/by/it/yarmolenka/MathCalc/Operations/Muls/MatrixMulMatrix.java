@@ -1,10 +1,12 @@
 package by.it.yarmolenka.MathCalc.Operations.Muls;
 
 import by.it.yarmolenka.MathCalc.CalcException;
+import by.it.yarmolenka.MathCalc.ResMan;
+import by.it.yarmolenka.MathCalc.Strings.MathError;
 import by.it.yarmolenka.MathCalc.Variables.Matrix;
 
 public class MatrixMulMatrix {
-    public static Matrix matrixMatrix(Matrix mat1, Matrix mat2) throws CalcException {
+    public static Matrix matrixMatrix(Matrix mat1, Matrix mat2, ResMan resMan) throws CalcException {
         if (mat1.value[0].length == mat2.value.length) {
             double[][] res = new double[mat1.value.length][mat2.value[0].length];
             for (int i = 0; i < res.length; i++)
@@ -13,7 +15,7 @@ public class MatrixMulMatrix {
                         res[i][j] += mat1.value[i][k] * mat2.value[k][j];
             return new Matrix(res);
         } else {
-            throw new CalcException("Для умножения матрицы на матрицу необходимо чтобы количество столбцов первой матрицы равнялось количеству строк второй матрицы");
+            throw new CalcException(resMan.get(MathError.MUL), resMan);
         }
     }
 }

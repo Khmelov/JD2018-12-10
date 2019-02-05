@@ -3,10 +3,13 @@ package by.it.yarmolenka.MathCalc.Operations;
 import by.it.yarmolenka.MathCalc.CalcException;
 import by.it.yarmolenka.MathCalc.Operations.Muls.*;
 import by.it.yarmolenka.MathCalc.Patterns;
+import by.it.yarmolenka.MathCalc.ResMan;
+import by.it.yarmolenka.MathCalc.Strings.MathError;
 import by.it.yarmolenka.MathCalc.Variables.*;
 
 public class Mul {
     public static Var mulVarVar(Var var1, Var var2) throws CalcException {
+        ResMan resMan = ResMan.INSTANCE;
 
         if (var1.toString().matches(Patterns.SCALAR) && var2.toString().matches(Patterns.SCALAR)) {
             Scalar sc1 = new Scalar(var1.toString());
@@ -29,28 +32,28 @@ public class Mul {
         }
 
         if (var1.toString().matches(Patterns.VECTOR) && var2.toString().matches(Patterns.MATRIX)) {
-            throw new CalcException("умножение вектора на матрицу невозможно");
+            throw new CalcException(resMan.get(MathError.MUL), resMan);
         }
 
         if (var1.toString().matches(Patterns.MATRIX) && var2.toString().matches(Patterns.VECTOR)) {
             Matrix m = new Matrix(var1.toString());
             Vector v = new Vector(var2.toString());
-            return MatrixMulVector.matrixVector(m, v);
+            return MatrixMulVector.matrixVector(m, v, resMan);
         }
 
         if (var1.toString().matches(Patterns.VECTOR) && var2.toString().matches(Patterns.VECTOR)) {
             Vector vec1 = new Vector(var1.toString());
             Vector vec2 = new Vector(var2.toString());
-            return VectorMulVector.vectorVector(vec1, vec2);
+            return VectorMulVector.vectorVector(vec1, vec2, resMan);
         }
 
         if (var1.toString().matches(Patterns.MATRIX) && var2.toString().matches(Patterns.MATRIX)) {
             Matrix mat1 = new Matrix(var1.toString());
             Matrix mat2 = new Matrix(var2.toString());
-            return MatrixMulMatrix.matrixMatrix(mat1, mat2);
+            return MatrixMulMatrix.matrixMatrix(mat1, mat2, resMan);
         }
 
-        throw new CalcException("не умею такое умножать");
+        throw new CalcException(resMan.get(MathError.MUL), resMan);
     }
 
 }

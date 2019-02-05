@@ -1,6 +1,7 @@
 package by.it.yarmolenka.MathCalc.Variables;
 
 import by.it.yarmolenka.MathCalc.*;
+import by.it.yarmolenka.MathCalc.Strings.MathError;
 
 import java.io.*;
 import java.util.HashMap;
@@ -22,7 +23,8 @@ public abstract class Var {
         if (s.matches(Patterns.MATRIX)) return new Matrix(s);
         if (s.matches(Patterns.VECTOR)) return new Vector(s);
         if (s.matches(Patterns.SCALAR)) return new Scalar(s);
-        throw new CalcException("неизвестная переменная " + s);
+        ResMan resMan = ResMan.INSTANCE;
+        throw new CalcException(resMan.get(MathError.UNKNOWN_VARIABLE), resMan);
     }
 
     public static void addVar(String s, Var two) {
@@ -32,7 +34,10 @@ public abstract class Var {
     public static Var getVariable(String s) throws CalcException {
         if (list.containsKey(s))
         return list.get(s);
-        else throw new CalcException("неизвестная переменная " + s);
+        else {
+            ResMan resMan = ResMan.INSTANCE;
+            throw new CalcException(resMan.get(MathError.UNKNOWN_VARIABLE), resMan);
+        }
     }
 
     public static void saveVarsToFile() {
