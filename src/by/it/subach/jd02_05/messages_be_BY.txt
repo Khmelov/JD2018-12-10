@@ -1,3 +1,0 @@
-message.welcome = Прывiтанне!
-message.question = Як дзялы?
-user.name = Аляксандр Субач

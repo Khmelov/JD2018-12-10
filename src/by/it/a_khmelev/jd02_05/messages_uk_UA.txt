@@ -1,3 +1,0 @@
-message.welcome=Вiтання
-message.question=Як справи?
-user.name=Олександр Хмельов

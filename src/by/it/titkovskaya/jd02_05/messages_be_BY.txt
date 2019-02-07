@@ -1,3 +1,0 @@
-message.welcome=Прывiтанне!
-message.question=Як справы?
-user.name=Iрына Цiткоуская
