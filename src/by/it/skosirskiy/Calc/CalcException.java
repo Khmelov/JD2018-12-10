@@ -20,6 +20,6 @@ public class CalcException extends Exception {
     }
 
     public CalcException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super("ERROR: "+message, cause, enableSuppression, writableStackTrace);
+        super(ResMan.INSTANCE.get(Message.str4)+message, cause, enableSuppression, writableStackTrace);
     }
 }
