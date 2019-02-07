@@ -11,6 +11,9 @@ public class Vector extends Var {
 //        return value;
         return Arrays.copyOf(this.value, this.value.length);
     }
+    public Integer getLenght() {
+        return  this.value.length;
+    }
 
     public Vector(double[] value) {
         this.value = Arrays.copyOf(value, value.length);
@@ -49,7 +52,7 @@ public class Vector extends Var {
                 return new Vector(res);
             }
         } else if ((other instanceof Matrix)) {
-            throw new CalcException("Сложение не возможно");
+            throw new CalcException(LocalMessages.ADDITION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get());//addition impossible
         }
         return super.add(other);
     }
@@ -72,7 +75,7 @@ public class Vector extends Var {
                 return new Vector(res);
             }
         } else if ((other instanceof Matrix)) {
-            throw new CalcException("Вычитание не возможно");
+            throw new CalcException(LocalMessages.SUBTRACTION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get());//subtraction impossible
         }
         return super.sub(other);
     }
@@ -95,7 +98,7 @@ public class Vector extends Var {
                 return new Scalar(vectorMultVector);
             }
         } else if ((other instanceof Matrix)) {
-            throw new CalcException("Умножение не возможно");
+            throw new CalcException(LocalMessages.MULTIPLICATION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get());//multiplication impossible
         }
         return super.mul(other);
     }
@@ -109,9 +112,11 @@ public class Vector extends Var {
             }
             return new Vector(res);
         } else if ((other instanceof Vector)) {
-            throw new CalcException("Деление не возможно");
+//            throw new CalcException("Деление не возможно"); //division impossible
+            throw new CalcException(LocalMessages.DIVISION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get()); //division impossible
+
         } else if ((other instanceof Matrix)) {
-            throw new CalcException("Деление не возможно");
+            throw new CalcException(LocalMessages.DIVISION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get());//division impossible
         }
         return super.div(other);
     }

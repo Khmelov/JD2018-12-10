@@ -71,7 +71,8 @@ public class Matrix extends Var {
                 return new Matrix(resMatr);
             }
         } else if ((other instanceof Vector)) {
-            throw new CalcException("Сложение не возможно");
+            throw new CalcException(LocalMessages.ADDITION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get()); //addition impossible
+
         }
         return super.add(other);
     }
@@ -95,13 +96,15 @@ public class Matrix extends Var {
                             res[i][j] = res[i][j] - ((Matrix) other).value[i][j];
                         }
                     } else {
-                        throw new CalcException("Вычитание не возможно");
+                        throw new CalcException(LocalMessages.SUBTRACTION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get()); //subtraction impossible
+
                     }
                 }
                 return new Matrix(res);
             }
         } else if ((other instanceof Vector)) {
-            throw new CalcException("Вычитание не возможно");
+            throw new CalcException(LocalMessages.SUBTRACTION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get()); //subtraction impossible
+
         }
         return super.sub(other);
     }

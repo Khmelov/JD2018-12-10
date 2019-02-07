@@ -11,10 +11,9 @@ public class TaskC {
 
     private static String currentPath = getPath(TaskC.class, "");
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(currentPath);
-        StringBuilder sb = new StringBuilder();
         Pattern pattern = Pattern.compile("(cd) (\\w+)");
 
         while (true) {
@@ -46,13 +45,14 @@ public class TaskC {
         System.out.println(currentPath);
     }
 
-    private static void viewDirectory(String path) throws Exception {
+    private static void viewDirectory(String path) {
         File file = new File(path);
-        String lastModifiedDate = "";
-        String isDir = "";
-        String name = "";
+        String lastModifiedDate;
+        String isDir;
+        String name;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy     hh:mm");
         File[] files = file.listFiles();
+        if (files == null) throw new AssertionError();
         for (File f : files) {
             name = f.getName();
             Long l = f.lastModified();
@@ -61,12 +61,10 @@ public class TaskC {
             if (f.isDirectory())
                 isDir = "<DIR>";
             else {
-                Long length = f.length();
-                isDir = length.toString() + " byte";
+                long length = f.length();
+                isDir = length + " byte";
             }
             System.out.printf("%s    %10s          %s\n", lastModifiedDate, isDir, name);
-//            System.out.println(date);
-//            System.out.println(f.getName());
         }
 
     }

@@ -6,7 +6,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     protected static boolean pensioner = false;
     static ConcurrentHashMap <Buyer, Double> buyerTotalSum = new ConcurrentHashMap<>();
-    static long timeToQueue;
+//    private static long timeToQueue; //was used for comparator for PriorityBlockingQueue
 
     boolean iWait;
 
@@ -102,7 +102,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         try {
             Dispatcher.semaphoreQueue.acquire();
             System.out.printf(" %-48s   %-22s   %-22s   %-22s\n", this + " went to the queue", "", "", "");
-            timeToQueue = System.nanoTime();
+//            timeToQueue = System.nanoTime();
             synchronized (this) {
                 DequeBuyer.add(this, pensioner);
                 iWait = true;

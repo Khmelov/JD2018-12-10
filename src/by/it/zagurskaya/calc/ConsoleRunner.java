@@ -1,5 +1,6 @@
 package by.it.zagurskaya.calc;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -11,12 +12,22 @@ public class ConsoleRunner {
 
     public static void main(String[] args) throws CalcException {
 //        public static void main(String[] args) throws CalcException {
+//        if (args.length == 0) {
+//            Locale currentLocale = Locale.getDefault();
+//            args = new String[]{currentLocale.getLanguage(),currentLocale.getCountry() };
+//        }
+//        args = new String[]{"ru", "RU"};
+//        args = new String[]{"", ""};
         String expression;
         Scanner scanner = new Scanner(System.in);
         Parcer parcer = new Parcer();
         Printer printer = new Printer();
         while (!(expression = scanner.nextLine()).equals(END)) {
             try {
+                if (LocalMessages.getSupportedLanguages().contains(expression)) {
+                    LocalMessages.setLocale(expression);
+                    continue;// переходит исполнение кода на условие while. Начало следующего цикла итерации по циклу
+                }
 
                 if (expression.contains(PRINTVAR)) {
                     //набор соотношений
@@ -24,10 +35,11 @@ public class ConsoleRunner {
                     // итерирование по набору(коллекции) отношений(соотношение) клю-значение из Map
                     for (Map.Entry<String, Var> varEntry : varMap.entrySet()) {
                         System.out.print(varEntry.getKey() + "=");
-                        printer.print(varEntry.getValue());
+                        printer.print(varEntry.getValue().toString());
                     }
                 } else {
-                    Var result = parcer.calc(expression);
+                    String result = parcer.calc(expression);
+////                    Var result = parcer.calc(expression);
                     printer.print(result);
                 }
             } catch ( CalcException e) {

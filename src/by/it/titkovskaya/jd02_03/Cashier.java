@@ -1,13 +1,15 @@
 package by.it.titkovskaya.jd02_03;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
-public class Cashier implements Runnable {
+public class Cashier extends Thread {
 
     private String name;
-    static volatile AtomicBoolean goOnBreak = new AtomicBoolean(false);
-    static volatile AtomicBoolean continueWorking = new AtomicBoolean(false);
     static double totalRevenue = 0;
+
+    Object getMonitor() {
+        return this;
+    }
 
     Cashier(int number) {
         name = "Cashier №" + number;
@@ -18,14 +20,12 @@ public class Cashier implements Runnable {
     public void run() {
         cashierAction(" opened");
         while (!Dispatcher.planComplete()) {
-            if (goOnBreak.get()){
-                goOnBreak.compareAndSet(true,false);
-                this.cashierAction(" is on break");
-                Runner.cashDeskOpened--;
-                while (!continueWorking.get()){
-                    Util.sleep(100);
+            synchronized (this) {
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-                Runner.cashDeskOpened++;
             }
             cashierWorks();
         }
@@ -80,12 +80,12 @@ public class Cashier implements Runnable {
     }
 
     private String[] formBuyerCashVoucher(Buyer buyer) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("______________________").append(";");
-        sb.append("  CHECK of ").append(buyer.toString().replace(" (pensioner)", "")).append(";");
-        sb.append(Basket.buyersBaskets.get(buyer));
-        sb.append("TOTAL: ").append(String.format("%.1f", Buyer.buyerTotalSum.get(buyer))).append("$").append(";");
-        sb.append("______________________");
+        AtomicReference<StringBuilder> sb = new AtomicReference<>(new StringBuilder());
+        sb.get().append("______________________").append(";");
+        sb.get().append("  CHECK of ").append(buyer.toString().replace(" (pensioner)", "")).append(";");
+        sb.get().append(Basket.buyersBaskets.get(buyer));
+        sb.get().append("TOTAL: ").append(String.format("%.1f", Buyer.buyerTotalSum.get(buyer))).append("$").append(";");
+        sb.get().append("______________________");
         return sb.toString().split(";");
     }
 
@@ -93,50 +93,50 @@ public class Cashier implements Runnable {
         try {
             Dispatcher.semaphoreToPrint.acquire();
             if (this.name.contains("1")) {
-                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10.2f |\n" +
+                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-7.1f%s |\n" +
                                 "| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
-                        , this + " is serving ", "", "", "", "", DequeBuyer.getDequeSize()
-                        , totalRevenue
+                        , this + " is serving ", "", "", "", "", DequeBuyer.getDequeSize()+" queue"
+                        , totalRevenue, "rev"
                         , buyer, "", "", "", "", "", "");
                 for (String str : forCheck) {
                     System.out.printf("| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
                             , str, "", "", "", "", "", "");
                 }
             } else if (this.name.contains("2")) {
-                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10.2f |\n" +
+                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-7.1f%s |\n" +
                                 "| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
-                        , "", this + " is serving ", "", "", "", DequeBuyer.getDequeSize()
-                        , totalRevenue
+                        , "", this + " is serving ", "", "", "", DequeBuyer.getDequeSize()+" queue"
+                        , totalRevenue, "rev"
                         , "", buyer, "", "", "", "", "");
                 for (String str : forCheck) {
                     System.out.printf("| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
                             , "", str, "", "", "", "", "");
                 }
             } else if (this.name.contains("3")) {
-                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10.2f |\n" +
+                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-7.1f%s |\n" +
                                 "| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
-                        , "", "", this + " is serving ", "", "", DequeBuyer.getDequeSize()
-                        , totalRevenue
+                        , "", "", this + " is serving ", "", "", DequeBuyer.getDequeSize()+" queue"
+                        , totalRevenue, "rev"
                         , "", "", buyer, "", "", "", "");
                 for (String str : forCheck) {
                     System.out.printf("| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
                             , "", "", str, "", "", "", "");
                 }
             } else if (this.name.contains("4")) {
-                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10.2f |\n" +
+                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-7.1f%s |\n" +
                                 "| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
-                        , "", "", "", this + " is serving ", "", DequeBuyer.getDequeSize()
-                        , totalRevenue
+                        , "", "", "", this + " is serving ", "", DequeBuyer.getDequeSize()+" queue"
+                        , totalRevenue, "rev"
                         , "", "", "", buyer, "", "", "");
                 for (String str : forCheck) {
                     System.out.printf("| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
                             , "", "", "", str, "", "", "");
                 }
             } else if (this.name.contains("5")) {
-                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10.2f |\n" +
+                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-7.1f%s |\n" +
                                 "| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
-                        , "", "", "", "", this + " is serving ", DequeBuyer.getDequeSize()
-                        , totalRevenue
+                        , "", "", "", "", this + " is serving ", DequeBuyer.getDequeSize()+" queue"
+                        , totalRevenue, "rev"
                         , "", "", "", "", buyer, "", "");
                 for (String str : forCheck) {
                     System.out.printf("| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
