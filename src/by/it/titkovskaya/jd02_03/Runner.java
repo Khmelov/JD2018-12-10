@@ -7,11 +7,6 @@ public class Runner {
 
     static int time;
     private static int buyerNumber = 0;
-    private static int cashDeskNumber = 0;
-    static int cashDeskOpened = 0;
-
-    private static ExecutorService cashiers = Executors.newFixedThreadPool(5);
-
 
     public static void main(String[] args) {
         Goods.load();
@@ -40,14 +35,12 @@ public class Runner {
 
     private static void marketWorkingTime() {
 
-
         ExecutorService buyers = Executors.newFixedThreadPool(100);
 
-        int cashiersToStart = 2;
-        cashDeskOpen(cashiers, cashiersToStart);
+        CashDeskManager manager = new CashDeskManager();
+        manager.start();
 
         for (time = 1; Dispatcher.marketOpened(); time++) {
-            checkCashDeskRequired();
             int sec = time % 60;
             if (time <= 30 || time >= 61 && time <= 90) {
                 buyersTraffic(buyers, sec + 10 - Dispatcher.getCounterBuyerInShop().get());
@@ -58,19 +51,13 @@ public class Runner {
             }
         }
         buyers.shutdown();
-        cashiers.shutdown();
         while (!buyers.isTerminated())
             Util.sleep(1);
-        while (!cashiers.isTerminated())
-            Thread.yield();
-    }
 
-    private static void cashDeskOpen(ExecutorService cashiers, int cashDeskRequired) {
-        for (int i = cashDeskNumber + 1; i <= cashDeskRequired; i++) {
-            Cashier cashier = new Cashier(i);
-            cashiers.execute(cashier);
-            cashDeskOpened++;
-            cashDeskNumber++;
+        try {
+            manager.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -84,22 +71,8 @@ public class Runner {
         Util.sleep(1000);
     }
 
-    private static void checkCashDeskRequired() {
-        int cashDesksRequired = DequeBuyer.getDequeSize() / 5 + 1;
-        if (cashDesksRequired > 5) cashDesksRequired = 5;
-        if (cashDeskOpened < cashDesksRequired) {
-            if (cashDeskNumber < cashDesksRequired)
-                cashDeskOpen(cashiers, cashDesksRequired);
-            if (cashDeskOpened < cashDesksRequired) {
-                Cashier.continueWorking.compareAndSet(false,true);
-            }
-        }
-        if (cashDeskOpened > cashDesksRequired){
-            Cashier.goOnBreak.compareAndSet(false,true);
-        }
-    }
-
     private static void marketClosing() {
+        Util.sleep(10000);
         System.out.printf("\n%-85s\n" +
                         " %-23s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s \n" +
                         "%-85s\n" +

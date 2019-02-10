@@ -1,27 +1,12 @@
 package by.it.zagurskaya.calc;
 
-
 import java.util.Arrays;
 
 public class Vector extends Var {
+
     private double[] value;
 
-    public double[] getValue() {
-        //double[]value = Arrays.copyOf(this.value,this.value.length);
-//        return value;
-        return Arrays.copyOf(this.value, this.value.length);
-    }
-
-    public Vector(double[] value) {
-        this.value = Arrays.copyOf(value, value.length);
-//        System.arraycopy(value, 0, this.value, 0, value.length);
-    }
-
-    public Vector(Vector otherVector) {
-        this.value = new double[otherVector.value.length];
-        System.arraycopy(otherVector.value, 0, value, 0, value.length);
-    }
-
+    public static final VarCreator varCreator = VarCreator.getInstance();
 
     public Vector(String strVector) {
         String[] strings = strVector.replace("{", "").replace("}", "").split(",");
@@ -31,6 +16,14 @@ public class Vector extends Var {
         }
     }
 
+    public double[] getValue() {
+        return Arrays.copyOf(this.value, this.value.length);
+    }
+
+    public Integer getLenght() {
+        return this.value.length;
+    }
+
     @Override
     public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
@@ -38,7 +31,7 @@ public class Vector extends Var {
             for (int i = 0; i < res.length; i++) {
                 res[i] = ((Scalar) other).getValue() + res[i];
             }
-            return new Vector(res);
+            return varCreator.create(varCreator.toString(res));//new Vector(res);
         } else if (other instanceof Vector) {
             if (this.value.length == ((Vector) other).value.length) {
                 double[] res = Arrays.copyOf(this.value, this.value.length);
@@ -46,10 +39,11 @@ public class Vector extends Var {
                     // double b=res[i];
                     res[i] += ((Vector) other).value[i];
                 }
-                return new Vector(res);
+                return varCreator.create(varCreator.toString(res));//new Vector(res);
             }
         } else if ((other instanceof Matrix)) {
-            throw new CalcException("Сложение не возможно");
+            String message = LocalMessages.ADDITION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get();
+            throw new CalcException(message);//addition impossible
         }
         return super.add(other);
     }
@@ -61,18 +55,18 @@ public class Vector extends Var {
             for (int i = 0; i < res.length; i++) {
                 res[i] = res[i] - ((Scalar) other).getValue();
             }
-            return new Vector(res);
+            return varCreator.create(varCreator.toString(res));//new Vector(res);
         } else if (other instanceof Vector) {
             if (this.value.length == ((Vector) other).value.length) {
                 double[] res = Arrays.copyOf(this.value, this.value.length);
                 for (int i = 0; i < res.length; i++) {
-                    // double b=res[i];
                     res[i] -= ((Vector) other).value[i];
                 }
-                return new Vector(res);
+                return varCreator.create(varCreator.toString(res));//new Vector(res);
             }
         } else if ((other instanceof Matrix)) {
-            throw new CalcException("Вычитание не возможно");
+            String message = LocalMessages.SUBTRACTION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get();
+            throw new CalcException(message);//subtraction impossible
         }
         return super.sub(other);
     }
@@ -84,7 +78,7 @@ public class Vector extends Var {
             for (int i = 0; i < res.length; i++) {
                 res[i] = res[i] * ((Scalar) other).getValue();
             }
-            return new Vector(res);
+            return varCreator.create(varCreator.toString(res));//new Vector(res);
         } else if (other instanceof Vector) {
             if (this.value.length == ((Vector) other).value.length) {
                 double[] res = Arrays.copyOf(this.value, this.value.length);
@@ -92,10 +86,11 @@ public class Vector extends Var {
                 for (int i = 0; i < res.length; i++) {
                     vectorMultVector += ((Vector) other).value[i] * res[i];
                 }
-                return new Scalar(vectorMultVector);
-            }
+                return varCreator.create(String.valueOf(vectorMultVector));//new Vector(res);
+        }
         } else if ((other instanceof Matrix)) {
-            throw new CalcException("Умножение не возможно");
+            String message = LocalMessages.MULTIPLICATION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get();
+            throw new CalcException(message);//multiplication impossible
         }
         return super.mul(other);
     }
@@ -107,11 +102,14 @@ public class Vector extends Var {
             for (int i = 0; i < res.length; i++) {
                 res[i] = res[i] / ((Scalar) other).getValue();
             }
-            return new Vector(res);
+            return varCreator.create(varCreator.toString(res));//new Vector(res);
         } else if ((other instanceof Vector)) {
-            throw new CalcException("Деление не возможно");
+            String message = LocalMessages.DIVISION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get();
+            throw new CalcException(message); //division impossible
+
         } else if ((other instanceof Matrix)) {
-            throw new CalcException("Деление не возможно");
+            String message = LocalMessages.DIVISION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get();
+            throw new CalcException(message);//division impossible
         }
         return super.div(other);
     }

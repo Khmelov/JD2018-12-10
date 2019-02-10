@@ -62,7 +62,8 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         System.out.printf(whichCashier+"%-15s ------- %5d\n", "Total", sum);
         System.out.println(whichCashier+"=============================");
         System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+
-                "Market's proceeds: "+Util.getProceeds());
+                "Market's proceeds: "+Util.getProceeds()+"\t"+
+                "Buyers in queue: "+ DequeBuyers.getCountAllBuyer());
     }
 
     @Override

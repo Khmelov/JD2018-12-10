@@ -9,7 +9,7 @@ be delete
 
 public class TaskB {
 
-    static String getPath(Class<?> clazz, String filename) {
+    private static String getPath(Class<?> clazz, String filename) {
         String path = clazz.getName();
         String simpleName = clazz.getSimpleName();
         path = path.replace(simpleName, "");
@@ -18,19 +18,19 @@ public class TaskB {
         return path + filename;
     }
 
-
+    /**
+     *some
+     *Java
+     *Doc
+     *
+     *
+     */
     public static void main(String[] args) throws IOException {
 
         String path = getPath(TaskB.class, "TaskB.java");
         System.out.println(path);
         StringBuilder sb = new StringBuilder();
-/**
- *some
- *Java
- *Doc
- *
- *
- */
+
         try {
             BufferedReader reader = new BufferedReader(new FileReader(path));
             int c;

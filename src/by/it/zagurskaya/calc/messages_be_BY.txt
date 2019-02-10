@@ -1,0 +1,15 @@
+message.notDefined=Зменная не вызначана
+message.addition=Складанне
+message.subtraction=Адніманне
+message.division=Дзяленне
+message.multiplication=Mножанне
+message.action=Дзеянне
+message.impossible=немагчыма
+message.on=на
+message.notRealized=Дзеянне не рэалізавана!
+message.zeroDivide=Дзяленне на нуль!
+message.actionNotImpossible=Дзеянне не магчыма!
+message.unexpectedCompletionOfCalculations=Нечаканае завяршэнне вылічэнняў!
+
+
+

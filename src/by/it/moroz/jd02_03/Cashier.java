@@ -50,8 +50,6 @@ class Cashier implements Runnable {
         String whichCashier = whichCashier();
         try {
             printer.semaphore.acquire();
-            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
-                    "Buyers in queue: "+ DequeBuyers.getCountAllBuyer());
             System.out.println(whichCashier + this + " service " + buyer);
             buyer.takeCheck(whichCashier);
         }catch (InterruptedException e) {
@@ -70,26 +68,18 @@ class Cashier implements Runnable {
     }
 
     private String whichCashier() {
-        String console;
         switch (this.numCashier) {
             case 1:
-                console = "";
-                break;
+                return "";
             case 2:
-                console = "\t\t\t\t\t\t\t\t";
-                break;
+                return "\t\t\t\t\t\t\t\t";
             case 3:
-                console = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
-                break;
+                return "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
             case 4:
-                console = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
-                break;
+                return "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
             case 5:
-                console = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
-                break;
-            default:
-                console = "";
+                return "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
         }
-        return console;
+        return null;
     }
 }

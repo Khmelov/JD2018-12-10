@@ -1,0 +1,8 @@
+error.impossible = Аперацыя немагчыма
+error.unexpected = Нечаканае завяршэнне вылічэнняў
+error.byzero = Дзяленне на нуль
+error.undefined = Пераменная нявызначана:
+error.add = Складанне немагчыма
+error.subtraction = Адніманне немагчыма
+error.multiplication = Множанне немагчыма
+error.division = Дзяленне немагчыма

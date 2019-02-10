@@ -1,0 +1,3 @@
+message.welcome=привет
+message.question=Как дела?
+user.name=Евгения Мигунько

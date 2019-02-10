@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<users xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+        xmlns = "http://jd02.zagurskaya.by.it/somestring"
+        xsi:shemaLocation = "http://jd02.zagurskaya.by.it/somestring users.xsd">
+<users>
+    <user>
+        <login>vasyaP</login>
+        <email>vasya@mail.ru</email>
+        <passwort>qwerty</passwort>
+        <ads>
+            <ad>
+                <description>
+                    Good Appartmens
+                </description>
+                <addres>
+                    Minsk Lenina 25
+                </addres>
+                <floor>6</floor>
+                <floors> 10</floors>
+                <rooms>7</rooms>
+                <prisse>99999.0</prisse>
+                <area>59.9</area>
+            </ad>
+            <ad>
+                <description>
+                    Small Appartmens
+                </description>
+                <addres>
+                    Minsk Khalturino 25
+                </addres>
+                <floor>5</floor>
+                <floors> 3</floors>
+                <rooms>8</rooms>
+                <prisse>77777.0</prisse>
+                <area>80.9</area>
+            </ad>
+        </ads>
+    </user>
+    <user>
+        <login>petaV</login>
+        <email>peta@mail.ru</email>
+        <passwort>qazwsx</passwort>
+        <ads>
+            <ad>
+                <description>
+                    New Appartmens
+                </description>
+                <addres>
+                    Minsk Skriganova 3/125
+                </addres>
+                <floor>7</floor>
+                <floors> 25</floors>
+                <rooms>2</rooms>
+                <prisse>20000.0</prisse>
+                <area>60.9</area>
+            </ad>
+        </ads>
+    </user>
+</users>

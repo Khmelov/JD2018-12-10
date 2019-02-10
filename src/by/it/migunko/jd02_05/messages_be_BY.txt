@@ -1,0 +1,3 @@
+message.welcome=Прывiтанне
+message.question=як справы?
+user.name=Яугенiя Мiгунько

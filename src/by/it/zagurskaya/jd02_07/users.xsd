@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns = "http://www.w3.org/2001/XMLSchema"
+       targetNamespase = "http://jd02.zagurskaya.by.it/somestring"
+       xmlns:mytype = "http://jd02.zagurskaya.by.it/somestring">
+    <element name = "users">
+        <complexType>
+
+        </complexType>
+    </element>

@@ -8,9 +8,6 @@ public class Runner {
     private static List<Thread> threads = new LinkedList<>();
     static int time;
     private static int buyerNumber = 0;
-    private static int cashDeskNumber = 0;
-    private static int cashDeskOpened = 0;
-
 
     public static void main(String[] args) {
         Goods.load();
@@ -39,11 +36,11 @@ public class Runner {
 
     private static void marketWorkingTime() {
 
-        int cashiersToStart = 2;
-        cashDeskOpen(cashiersToStart);
+        CashDeskManager manager = new CashDeskManager();
+        threads.add(manager);
+        manager.start();
 
         for (time = 1; Dispatcher.marketOpened(); time++) {
-            checkCashDeskRequired();
             int sec = time % 60;
             if (time <= 30 || time >= 61 && time <= 90) {
                 buyersTraffic(sec + 10 - Dispatcher.getCounterBuyerInShop());
@@ -62,24 +59,6 @@ public class Runner {
         }
     }
 
-    private static void cashDeskOpen(int cashDesksRequired) {
-        for (int i = cashDeskNumber + 1; i <= cashDesksRequired; i++) {
-            Thread cashier = new Thread(new Cashier(i));
-            threads.add(cashier);
-            cashDeskNumber++;
-            cashDeskOpened++;
-            cashier.start();
-        }
-    }
-
-    private static void checkCashDeskRequired() {
-        int cashDesksRequired = DequeBuyer.getTotalDequeSize() / 5 + 1;
-        if (cashDesksRequired > 5) cashDesksRequired = 5;
-        if (cashDeskOpened < cashDesksRequired) {
-            cashDeskOpen(cashDesksRequired);
-        }
-    }
-
     private static void buyersTraffic(int count) {
         for (int i = 0; i < count; i++) {
             Buyer buyer = new Buyer(++buyerNumber);
@@ -90,6 +69,7 @@ public class Runner {
     }
 
     private static void marketClosing() {
+        Util.sleep(10000);
         System.out.printf("\n%-85s\n" +
                         " %-23s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s \n" +
                         "%-85s\n" +

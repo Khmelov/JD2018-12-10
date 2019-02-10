@@ -3,6 +3,7 @@ package by.it.titkovskaya.jd02_05;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+@SuppressWarnings("FieldCanBeLocal")
 public enum ResMan {
 
     INSTANCE;
@@ -12,12 +13,24 @@ public enum ResMan {
     private ResourceBundle resourceBundle;
 
     ResMan(){
-        locale=Locale.getDefault();
-        resourceBundle=ResourceBundle.getBundle(RESOURSE,locale);
+        setLocale(Locale.getDefault());
+    }
+
+    public Locale getLocale() {
+        return locale;
     }
 
     public void setLocale(Locale locale) {
         this.locale = locale;
+        resourceBundle=ResourceBundle.getBundle(RESOURSE,locale);
+    }
+
+    public void setLocale(String language) {
+        setLocale(new Locale(language));
+    }
+
+    public void setLocale(String language, String country) {
+        setLocale(new Locale(language,country));
     }
 
     public String get(String key){

@@ -1,0 +1,8 @@
+
+C:\Users\Airina\Documents\java development\JD2018-12-10\src\by\it\titkovskaya\jd02_05>native2ascii -encoding utf-8 messages.txt messages.properties
+
+C:\Users\Airina\Documents\java development\JD2018-12-10\src\by\it\titkovskaya\jd02_05>native2ascii -encoding utf-8 messages_be_BY.txt messages_be_BY.properties
+
+C:\Users\Airina\Documents\java development\JD2018-12-10\src\by\it\titkovskaya\jd02_05>native2ascii -encoding utf-8 messages_ru_RU.txt messages_ru_RU.properties
+
+C:\Users\Airina\Documents\java development\JD2018-12-10\src\by\it\titkovskaya\jd02_05>native2ascii -encoding utf-8 messages_en_US.txt messages_en_US.properties

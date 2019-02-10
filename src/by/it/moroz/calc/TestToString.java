@@ -10,13 +10,15 @@ public class TestToString {
 
     @Test
     public void testToString() throws Exception {
-        Constructor scalarConstructor = Scalar.class.getDeclaredConstructor(double.class);
+        //Constructor scalarConstructor = Scalar.class.getDeclaredConstructor(double.class);
         System.out.print("Создание Scalar на основе числа 2.8659");
-        Object scalar = scalarConstructor.newInstance(2.8659);
+        Scalar strScalar = new Scalar("2.8659");
+
+        //Object scalar = scalarConstructor.newInstance(2.8659);
         System.out.print(" - успешно.\nВывод через метод toString");
         System.out.flush();
-        assertEquals("Не было получено ожидаемое значение", "2.8659", scalar.toString());
-        System.out.println(" - успешно. Scalar = " + scalar);
+        assertEquals("Не было получено ожидаемое значение", "2.8659", strScalar.toString());
+        System.out.println(" - успешно. Scalar = " + strScalar);
 
         Constructor vectorConstructor = Vector.class.getDeclaredConstructor(double[].class);
         System.out.print("Создание Vector {2,4,16}");

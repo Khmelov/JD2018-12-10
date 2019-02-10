@@ -1,8 +1,12 @@
 package by.it.titkovskaya.jd02_02;
 
-public class Cashier implements Runnable {
+public class Cashier extends Thread {
 
     private String name;
+
+    Object getMonitor() {
+        return this;
+    }
 
     Cashier(int number) {
         name = "Cashier №" + number;
@@ -13,6 +17,13 @@ public class Cashier implements Runnable {
     public void run() {
         cashierAction(" opened");
         while (!Dispatcher.planComplete()) {
+            synchronized (this) {
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             cashierWorks();
         }
         cashierAction(" closed");
@@ -73,10 +84,10 @@ public class Cashier implements Runnable {
     private void servesBuyerAndPrintCashVoucher(Buyer buyer, String[] forCheck) {
         if (this.name.contains("1")) {
             synchronized (Dispatcher.CONSOLE_MON) {
-                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10.2f |\n" +
+                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-7.1f%s |\n" +
                                 "| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
-                        , this + " is serving ", "", "", "", "", DequeBuyer.getTotalDequeSize()
-                        , Dispatcher.getTotalRevenueCounter()
+                        , this + " is serving ", "", "", "", "", DequeBuyer.getTotalDequeSize()+" queue"
+                        , Dispatcher.getTotalRevenueCounter(), "rev"
                         , buyer, "", "", "", "", "", "");
                 for (String str : forCheck) {
                     System.out.printf("| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
@@ -85,10 +96,10 @@ public class Cashier implements Runnable {
             }
         } else if (this.name.contains("2")) {
             synchronized (Dispatcher.CONSOLE_MON) {
-                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10.2f |\n" +
+                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-7.1f%s |\n" +
                                 "| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
-                        , "", this + " is serving ", "", "", "", DequeBuyer.getTotalDequeSize()
-                        , Dispatcher.getTotalRevenueCounter()
+                        , "", this + " is serving ", "", "", "", DequeBuyer.getTotalDequeSize()+" queue"
+                        , Dispatcher.getTotalRevenueCounter(), "rev"
                         , "", buyer, "", "", "", "", "");
                 for (String str : forCheck) {
                     System.out.printf("| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
@@ -97,10 +108,10 @@ public class Cashier implements Runnable {
             }
         } else if (this.name.contains("3")) {
             synchronized (Dispatcher.CONSOLE_MON) {
-                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10.2f |\n" +
+                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-7.1f%s |\n" +
                                 "| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
-                        , "", "", this + " is serving ", "", "", DequeBuyer.getTotalDequeSize()
-                        , Dispatcher.getTotalRevenueCounter()
+                        , "", "", this + " is serving ", "", "", DequeBuyer.getTotalDequeSize()+" queue"
+                        , Dispatcher.getTotalRevenueCounter(), "rev"
                         , "", "", buyer, "", "", "", "");
                 for (String str : forCheck) {
                     System.out.printf("| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
@@ -109,10 +120,10 @@ public class Cashier implements Runnable {
             }
         } else if (this.name.contains("4")) {
             synchronized (Dispatcher.CONSOLE_MON) {
-                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10.2f |\n" +
+                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-7.1f%s |\n" +
                                 "| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
-                        , "", "", "", this + " is serving ", "", DequeBuyer.getTotalDequeSize()
-                        , Dispatcher.getTotalRevenueCounter()
+                        , "", "", "", this + " is serving ", "", DequeBuyer.getTotalDequeSize()+" queue"
+                        , Dispatcher.getTotalRevenueCounter(), "rev"
                         , "", "", "", buyer, "", "", "");
                 for (String str : forCheck) {
                     System.out.printf("| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
@@ -121,10 +132,10 @@ public class Cashier implements Runnable {
             }
         } else if (this.name.contains("5")) {
             synchronized (Dispatcher.CONSOLE_MON) {
-                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10.2f |\n" +
+                System.out.printf("\n| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-7.1f%s |\n" +
                                 "| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"
-                        , "", "", "", "", this + " is serving ", DequeBuyer.getTotalDequeSize()
-                        , Dispatcher.getTotalRevenueCounter()
+                        , "", "", "", "", this + " is serving ", DequeBuyer.getTotalDequeSize()+" queue"
+                        , Dispatcher.getTotalRevenueCounter(), "rev"
                         , "", "", "", "", buyer, "", "");
                 for (String str : forCheck) {
                     System.out.printf("| %-22s | %-22s | %-22s | %-22s | %-22s | %-10s | %-10s |\n"

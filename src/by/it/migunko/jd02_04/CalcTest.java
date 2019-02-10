@@ -4,7 +4,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 public class CalcTest {
 
-
     @Test
     public void testAdd() throws Exception {
 
@@ -15,6 +14,6 @@ public class CalcTest {
     }
     @Test
     public void testMul() throws Exception {
-   
+
     }
 }

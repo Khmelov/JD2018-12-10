@@ -1,0 +1,8 @@
+Terminal -> cd E:\it.academy\JD2018-12-10\src\by\it\moroz\jd02_05 ->
+-> native2ascii -encoding utf-8 date.txt date.properties
+
+Terminal -> cd E:\it.academy\JD2018-12-10\src\by\it\moroz\jd02_05 ->
+-> native2ascii -encoding utf-8 date_ru_RU.txt date_ru_RU.properties
+
+Terminal -> cd E:\it.academy\JD2018-12-10\src\by\it\moroz\jd02_05 ->
+-> native2ascii -encoding utf-8 date_be_BY.txt date_be_BY.properties

@@ -6,7 +6,7 @@ public class Basket {
 
     static HashMap<Buyer, String> buyersBaskets = new HashMap<>();
 
-    static void putToBasket (Buyer buyer,String goodsToBasket) {
+    static void putToBasket (Buyer buyer, String goodsToBasket) {
         buyersBaskets.put(buyer,goodsToBasket);
     }
 }

@@ -6,25 +6,7 @@ public class Matrix extends Var {
 
     private double[][] value;// поле объекта класса Matrix
 
-    public Matrix(double[][] value /* локальная переменная конструктора (метода) */) {
-        this.value = makeMatrixCopy(value);
-    }
-
-    public Matrix(Matrix matrix) {
-        this.value = matrix.value;
-    }
-
-    private double[][] makeMatrixCopy(double[][] inputMatrix) {
-        double[][] resultMatrix = new double[inputMatrix.length][];
-        for (int i = 0; i < inputMatrix.length; i++) {
-            resultMatrix[i] = Arrays.copyOf(inputMatrix[i], inputMatrix[i].length);
-        }
-        return resultMatrix;
-    }
-
-    public double[][] getValue() {
-        return makeMatrixCopy(value);
-    }
+    public static final VarCreator varCreator = VarCreator.getInstance();
 
     public Matrix(String strMatrix) {
         int k = 0;
@@ -47,6 +29,18 @@ public class Matrix extends Var {
         }
     }
 
+    private double[][] makeMatrixCopy(double[][] inputMatrix) {
+        double[][] resultMatrix = new double[inputMatrix.length][];
+        for (int i = 0; i < inputMatrix.length; i++) {
+            resultMatrix[i] = Arrays.copyOf(inputMatrix[i], inputMatrix[i].length);
+        }
+        return resultMatrix;
+    }
+
+    public double[][] getValue() {
+        return makeMatrixCopy(value);
+    }
+
     @Override
     public Var add(Var other)throws CalcException {
         if (other instanceof Scalar) {
@@ -56,7 +50,7 @@ public class Matrix extends Var {
                     resSkal[i][j] = ((Scalar) other).getValue() + resSkal[i][j];
                 }
             }
-            return new Matrix(resSkal);
+            return varCreator.create(varCreator.toString(resSkal));//new Matrix(resSkal);
         } else if (other instanceof Matrix) {
             if (this.value.length == ((Matrix) other).value.length) {
 
@@ -68,10 +62,12 @@ public class Matrix extends Var {
                         }
                     }
                 }
-                return new Matrix(resMatr);
+                return varCreator.create(varCreator.toString(resMatr));//new Matrix(resMatr);
             }
         } else if ((other instanceof Vector)) {
-            throw new CalcException("Сложение не возможно");
+            String message = LocalMessages.ADDITION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get();
+            throw new CalcException(message); //addition impossible
+
         }
         return super.add(other);
     }
@@ -85,7 +81,7 @@ public class Matrix extends Var {
                     res[i][j] = res[i][j] - ((Scalar) other).getValue();
                 }
             }
-            return new Matrix(res);
+            return varCreator.create(varCreator.toString(res));//new Matrix(res);
         } else if (other instanceof Matrix) {
             if ((this.value.length == ((Matrix) other).value.length)&(this.value[0].length == ((Matrix) other).value[0].length)) {
                 double[][] res = makeMatrixCopy(value);
@@ -95,13 +91,17 @@ public class Matrix extends Var {
                             res[i][j] = res[i][j] - ((Matrix) other).value[i][j];
                         }
                     } else {
-                        throw new CalcException("Вычитание не возможно");
+                        String message = LocalMessages.SUBTRACTION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get();
+                        throw new CalcException(message); //subtraction impossible
+
                     }
                 }
-                return new Matrix(res);
+                return varCreator.create(varCreator.toString(res));//new Matrix(res);
             }
         } else if ((other instanceof Vector)) {
-            throw new CalcException("Вычитание не возможно");
+            String message = LocalMessages.SUBTRACTION_SUPPLIER.get() + LocalMessages.IMPOSSIBLE_SUPPLIER.get();
+            throw new CalcException(message); //subtraction impossible
+
         }
         return super.sub(other);
     }
@@ -116,7 +116,7 @@ public class Matrix extends Var {
                     res[i][j] = res[i][j] * ((Scalar) other).getValue();
                 }
             }
-            return new Matrix(res);
+            return varCreator.create(varCreator.toString(res));//new Matrix(res);
         } else if (other instanceof Vector) {
             if (this.value[0].length == ((Vector) other).getValue().length) {
                 double[] rezMultMatrixVector = new double[this.value.length];
@@ -125,7 +125,7 @@ public class Matrix extends Var {
                         rezMultMatrixVector[i] = rezMultMatrixVector[i] + this.value[i][j] * ((Vector) other).getValue()[j];
                     }
                 }
-                return new Vector(rezMultMatrixVector);
+                return varCreator.create(varCreator.toString(rezMultMatrixVector));//new Vector(rezMultMatrixVector);
             }
         } else if (other instanceof Matrix) {
             if (this.value[0].length == ((Matrix) other).value.length) {
@@ -137,7 +137,7 @@ public class Matrix extends Var {
                         }
                     }
                 }
-                return new Matrix(rezMultMatrixMatrix);
+                return varCreator.create(varCreator.toString(rezMultMatrixMatrix));//new Matrix(rezMultMatrixMatrix);
             }
         }
         return super.mul(other);

@@ -43,17 +43,18 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     void takeCheck(String whichCashier) {
         int sum = 0;
-        System.out.println(whichCashier+"*****************************");
+        System.out.println(whichCashier + "*****************************");
         for (Map.Entry<String, Integer> pair : basket.basket.entrySet()) {
-            System.out.printf(whichCashier+"%-15s ------- %5d\n", pair.getKey(), pair.getValue());
+            System.out.printf(whichCashier + "%-15s ------- %5d\n", pair.getKey(), pair.getValue());
             sum += pair.getValue();
         }
         Util.moreProceeds(sum);
-        System.out.println(whichCashier+"=============================");
-        System.out.printf(whichCashier+"%-15s ------- %5d\n", "Total", sum);
-        System.out.println(whichCashier+"=============================");
-        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+
-                "Market's proceeds: "+Util.getProceeds());
+        System.out.println(whichCashier + "=============================");
+        System.out.printf(whichCashier + "%-15s ------- %5d\n", "Total", sum);
+        System.out.println(whichCashier + "=============================");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                "Buyers in queue: " + DequeBuyers.getCountAllBuyer() + "\t" +
+                "Market's proceeds: " + Util.getProceeds());
     }
 
     @Override

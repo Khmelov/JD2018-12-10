@@ -11,85 +11,89 @@ class Scalar extends Var {
 
     private double value;
 
-    public double getValue() {
-        return value;
-    }
-
-    Scalar(double value) {
-        this.value = value;
-    }
-
-    Scalar(Scalar otherScalar) {
-        value = otherScalar.value;
-    }
-
     Scalar(String strValue) {
         value = Double.parseDouble(strValue);
     }
 
+    public double getValue() {
+        return value;
+    }
     @Override
     public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double res = this.value + ((Scalar) other).value;
-            return new Scalar(res);
-        } else if ((other instanceof Vector)) {
-            throw new CalcException("Действие не реализовано");
-        } else if ((other instanceof Matrix)) {
-            throw new CalcException("Действие не реализовано");
+            return VarCreator.getInstance().create(Double.toString(res));//new Scalar(res);
+        } else if ((other instanceof Vector))
+        {
+            String message = LocalMessages.NOT_REALIZED_SUPPLIER.get();
+            throw new CalcException(message);//notRealized
+
+        }
+        else if ((other instanceof Matrix)) {
+            String massage = LocalMessages.NOT_REALIZED_SUPPLIER.get();
+            throw new CalcException(massage);//notRealized
+
         }
         return other.add(this);
-        // other Vector or Matrix;
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double res = this.value - ((Scalar) other).value;
-            return new Scalar(res);
+//            return new Scalar(res);
+            return VarCreator.getInstance().create(Double.toString(res));
         } else if ((other instanceof Vector)) {
-            throw new CalcException("Действие не реализовано");
+            String message = LocalMessages.NOT_REALIZED_SUPPLIER.get();
+            throw new CalcException(message);//notRealized
+
         } else if ((other instanceof Matrix)) {
-            throw new CalcException("Действие не реализовано");
+            String massage = LocalMessages.NOT_REALIZED_SUPPLIER.get();
+            throw new CalcException(massage);//notRealized
         }
-        Scalar minus = new Scalar(-1);
+        Var minus = VarCreator.getInstance().create(Double.toString(-1));
         return other.add(this.mul(minus));
-        // other Vector or Matrix;
     }
 
     @Override
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
-            if (((Scalar) other).value == 0)
-                throw new CalcException("Деление на ноль");
+            if (((Scalar) other).value == 0){
+                String message = LocalMessages.ZERO_DIVIDE_SUPPLIER.get();
+                throw new CalcException(message);//zeroDivide
+                }
             double res = this.value / ((Scalar) other).value;
-            return new Scalar(res);
+            return VarCreator.getInstance().create(Double.toString(res));//new Scalar(res);
         } else if ((other instanceof Vector)) {
-            throw new CalcException("Действие не возможно");
+            String message = LocalMessages.ACTION_NOT_IMPOSSIBLE_SUPPLIER.get();
+            throw new CalcException(message);//actionNotImpossible
+
         } else if ((other instanceof Matrix)) {
-            throw new CalcException("Действие не возможно");
+            String message = LocalMessages.ACTION_NOT_IMPOSSIBLE_SUPPLIER.get();
+            throw new CalcException(message);//actionNotImpossible
         }
         return super.div(other);
-        // other Vector or Matrix;
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double res = this.value * ((Scalar) other).value;
-            return new Scalar(res);
+            return VarCreator.getInstance().create(Double.toString(res));//new Scalar(res);
         } else if ((other instanceof Vector)) {
-            throw new CalcException("Действие не реализовано");
+            String message = LocalMessages.NOT_REALIZED_SUPPLIER.get();
+            throw new CalcException(message);//notRealized
+
         } else if ((other instanceof Matrix)) {
-            throw new CalcException("Действие не реализовано");
+            String message = LocalMessages.NOT_REALIZED_SUPPLIER.get();
+            throw new CalcException(message);//notRealized
+
         }
         return other.mul(this);
-        // other Vector or Matrix;
     }
 
     @Override
     public String toString() {
-        //return "какой-то скаляр";
-        //return Double.toString(value);
         return String.valueOf(value);
     }
 }

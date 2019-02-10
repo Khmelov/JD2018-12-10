@@ -1,0 +1,8 @@
+error.impossible = Operation is impossible!
+error.unexpected = Unexpected completion
+error.byzero = Division by zero
+error.undefined = Variable is undefined:
+error.add = Adding is not possible
+error.subtraction = Subtraction is not possible
+error.multiplication = Multiplication is not possible
+error.division = Division is not possible

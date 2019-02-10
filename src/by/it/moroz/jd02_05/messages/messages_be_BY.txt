@@ -1,0 +1,3 @@
+message.welcome = Прывітанне!
+message.question = Як справы?
+user.name = Алена Мароз.

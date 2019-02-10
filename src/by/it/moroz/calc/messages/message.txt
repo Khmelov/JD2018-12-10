@@ -1,0 +1,2 @@
+message.print = List of variables:
+message.sort = Sorted list of variables:

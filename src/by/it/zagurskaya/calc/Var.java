@@ -6,58 +6,41 @@ package by.it.zagurskaya.calc;
 //    }
 //}
 
-import java.util.HashMap;
-import java.util.Map;
-
 abstract class Var implements Operation {
-    private static Map<String, Var> vars = new HashMap<>();
 
-    public static Map<String, Var> getVars() {
-        return vars;
-    }
-
-    static Var saveVar(String name, Var var){
-        vars.put(name,var);
-        return var;
-    }
-
-    public static Var createVar(String operand) throws CalcException {
-        operand = operand.trim();
-        if (operand.matches(Patterns.SCALAR))
-            return new Scalar(operand);
-        if (operand.matches(Patterns.VECTOR))
-            return new Vector(operand);
-        if (operand.matches(Patterns.MATRIX))
-            return new Matrix(operand);
-        if (vars.containsKey(operand))
-                return vars.get(operand);
-        throw new CalcException("Переменная не определена" + operand);
-    }
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException("Сложение " + this + "на" + other + "невозможно");
+        String message = LocalMessages.ADDITION_SUPPLIER.get() + this + LocalMessages.ON_SUPPLIER.get() + other + LocalMessages.IMPOSSIBLE_SUPPLIER.get();
+        throw new CalcException(message);//addition on impossible
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException("Вычитание " + this + "на" + other + "невозможно");
+        String message = LocalMessages.SUBTRACTION_SUPPLIER.get() + this + LocalMessages.ON_SUPPLIER.get() + other + LocalMessages.IMPOSSIBLE_SUPPLIER.get();
+        throw new CalcException(message);//subtraction on impossible
+
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException("Деление " + this + "на" + other + "невозможно");
+        String message = LocalMessages.DIVISION_SUPPLIER.get() + this + LocalMessages.ON_SUPPLIER.get() + other + LocalMessages.IMPOSSIBLE_SUPPLIER.get();
+        throw new CalcException(message);//division on impossible
+
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException("Умножение " + this + "на" + other + "невозможно");
+        String message = LocalMessages.MULTIPLICATION_SUPPLIER.get() + this + LocalMessages.ON_SUPPLIER.get() + other + LocalMessages.IMPOSSIBLE_SUPPLIER.get();
+        throw new CalcException(message); //multiplication on impossible
+
     }
 
     @Override
     public String toString() {
-        return "непонятная переменная";
-    }
+
+        return LocalMessages.NOT_DEFINED_SUPPLIER.get();
+    }//notDefined
 
 
 }

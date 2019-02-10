@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://jd02.akhmelev.by.it/somestring+att"
+        xmlns:tag="http://jd02.akhmelev.by.it/somestring+att"
+        elementFormDefault="qualified"
+>
+<element name="users" >
+    <complexType>
+        <sequence>
+            <element
+                    name="user"
+                    type="tag:User"
+                    minOccurs="2"
+                    maxOccurs="unbounded" >
+            </element>
+        </sequence>
+    </complexType>
+</element>
+
+<complexType name="User">
+    <sequence>
+        <element name="login" type="ID" />
+        <element name="email" type="string" />
+        <element name="password" type="string" />
+        <element name="ads"  type="tag:Ads"/>
+    </sequence>
+    <attribute name="nickname" type="string" use="required"/>
+</complexType>
+
+<complexType name="Ads">
+    <sequence>
+        <element name="ad"
+                 minOccurs="0"
+                 maxOccurs="unbounded"
+                 type="tag:Ad"/>
+    </sequence>
+    <attribute name="maxcount" type="positiveInteger" use="required"/>
+</complexType>
+
+<complexType name="Ad">
+    <sequence>
+        <element name="description" type="string"/>
+        <element name="address" type="string"/>
+        <element name="floor" type="integer"/>
+        <element name="floors" type="positiveInteger"/>
+        <element name="rooms" type="positiveInteger"/>
+        <element name="price" type="tag:Price"/>
+        <element name="area" type="double"/>
+    </sequence>
+</complexType>
+
+<complexType name="Price">
+    <simpleContent>
+        <restriction base="double">
+            <attribute name="currency" type="string"/>
+        </restriction>
+    </simpleContent>
+</complexType>
+
+
+</schema>
