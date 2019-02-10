@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://jd02.yarmolenka.by.it/somestring"
+        xmlns:tag="http://jd02.yarmolenka.by.it/somestring"
+        elementFormDefault="qualified"
+>
+    <element name="users">
+        <complexType>
+            <sequence>
+                <element
+                        name="user"
+                        type="tag:User"
+                        minOccurs="2"
+                        maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="User">
+        <sequence>
+            <element name="login" type="ID"/>
+            <element name="email" type="string"/>
+            <element name="password" type="string"/>
+            <element name="bets" type="tag:Bets"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Bets">
+        <sequence>
+            <element name="bet"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="tag:Bet"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Bet">
+        <sequence>
+            <element name="description" type="string"/>
+            <element name="race" type="string"/>
+            <element name="totalHorses" type="positiveInteger"/>
+            <element name="horse" type="positiveInteger"/>
+            <element name="odds" type="double"/>
+            <element name="betAmount" type="double"/>
+            <element name="payout" type="double"/>
+        </sequence>
+    </complexType>
+</schema>

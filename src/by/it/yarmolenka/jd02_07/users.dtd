@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!ELEMENT users (user)+>
+<!ELEMENT user (login,email,password,bets)>
+<!ELEMENT login (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT password (#PCDATA)>
+<!ELEMENT bets (bet)+>
+<!ELEMENT bet (
+        description, race,
+        totalHorses, horse, odds,
+        betAmount,payout)>
+        <!ELEMENT description (#PCDATA)>
+        <!ELEMENT race (#PCDATA)>
+        <!ELEMENT totalHorses (#PCDATA)>
+        <!ELEMENT horse (#PCDATA)>
+        <!ELEMENT odds (#PCDATA)>
+        <!ELEMENT betAmount (#PCDATA)>
+        <!ELEMENT payout (#PCDATA)>
