@@ -1,10 +1,16 @@
 package by.it.yarmolenka.MathCalc.Variables;
 
+import by.it.yarmolenka.MathCalc.CalcException;
+import by.it.yarmolenka.MathCalc.Strings.MathError;
+import by.it.yarmolenka.MathCalc.Translator;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Matrix extends Var {
+
+    private static Translator translator = Translator.INSTANCE;
 
     public double[][] value;
 
@@ -42,6 +48,73 @@ public class Matrix extends Var {
                 this.value[i][j] = Double.parseDouble(str[j]);
             }
         }
+    }
+
+    @Override
+    public Var add(Var other) throws CalcException {
+        return other.add2(this);
+    }
+
+    @Override
+    public Var sub(Var other) throws CalcException {
+        return other.sub2(this);
+    }
+
+    @Override
+    public Var mul(Var other) throws CalcException {
+        return other.mul2(this);
+    }
+
+    @Override
+    public Var div(Var other) throws CalcException {
+        return other.div2(this);
+    }
+
+    public Var add2(Scalar scalar) throws CalcException {
+        return scalar.add2(this);
+    }
+
+    public Var add2(Matrix matrix) throws CalcException {
+        if (this.value.length != matrix.value.length ||
+                this.value[0].length != matrix.value[0].length)
+            throw new CalcException(translator.get(MathError.ADD), translator);
+        double[][] res = new double[this.value.length][this.value[0].length];
+        for (int i = 0; i < res.length; i++) {
+            for (int j = 0; j < res[0].length; j++)
+                res[i][j] = this.value[i][j] + matrix.value[i][j];
+        }
+        return new Matrix(res);
+    }
+
+    public Var sub2(Scalar scalar) throws CalcException {
+        return scalar.add2(this).mul(Scalar.MINUS);
+    }
+
+    public Var sub2(Matrix matrix) throws CalcException {
+        if (this.value.length != matrix.value.length ||
+                this.value[0].length != matrix.value[0].length)
+            throw new CalcException(translator.get(MathError.ADD), translator);
+        double[][] res = new double[this.value.length][this.value[0].length];
+        for (int i = 0; i < res.length; i++) {
+            for (int j = 0; j < res[0].length; j++)
+                res[i][j] = matrix.value[i][j] - this.value[i][j];
+        }
+        return new Matrix(res);
+    }
+
+    public Var mul2(Scalar scalar) {
+        return scalar.mul2(this);
+    }
+
+    public Var mul2(Matrix matrix) throws CalcException {
+        if (matrix.value[0].length != this.value.length)
+            throw new CalcException(translator.get(MathError.MUL), translator);
+        double[][] res = new double[matrix.value.length][this.value[0].length];
+        for (int i = 0; i < res.length; i++)
+            for (int j = 0; j < res[i].length; j++)
+                for (int k = 0; k < matrix.value[0].length; k++)
+                    res[i][j] += matrix.value[i][k] * this.value[k][j];
+        return new Matrix(res);
     }
 
     @Override

@@ -8,3 +8,7 @@ exception.div=Деление невозможно
 exception.divByZero=Деление на ноль невозможно
 exception.mul=Умножение невозможно
 message.language=Установлен русский язык
+report.headerShort=Короткий отчёт работы калькулятора
+report.headerFull=Полный отчёт работы калькулятора
+report.start=Начало
+report.finish=Конец

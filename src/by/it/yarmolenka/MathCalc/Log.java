@@ -3,11 +3,14 @@ package by.it.yarmolenka.MathCalc;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 class Log {
 
     private static volatile Log log;
     private static String pathToLogFile;
+    private static List<String> logList = new LinkedList<>();
 
     private Log() {
         pathToLogFile = GetPath.getPath(Log.class) + "log.txt";
@@ -21,7 +24,12 @@ class Log {
         return log;
     }
 
+    List<String> getLogList(){
+        return logList;
+    }
+
     synchronized void addToLog(String message) {
+        logList.add(message);
         if (new File(pathToLogFile).exists()) {
             reWriteLast49ToFile();
         }

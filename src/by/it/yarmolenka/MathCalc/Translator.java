@@ -3,16 +3,15 @@ package by.it.yarmolenka.MathCalc;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public enum ResMan {
+public enum Translator {
 
     INSTANCE;
 
-    private final String RESOURCE = ResMan.class.getName()
-            .replace(ResMan.class.getSimpleName(), "Strings.messages");
+    private final String RESOURCE = Translator.class.getName()
+            .replace(Translator.class.getSimpleName(), "Strings.messages");
     private ResourceBundle resourceBundle;
 
-
-    ResMan() {
+    Translator() {
         setLocale(Locale.getDefault());
     }
 

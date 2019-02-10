@@ -11,7 +11,6 @@ enum ResMan {
             .replace(ResMan.class.getSimpleName(), "messages");
     private ResourceBundle resourceBundle;
 
-
     ResMan() {
         setLocale("en", "US");
     }

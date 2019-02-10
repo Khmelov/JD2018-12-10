@@ -8,3 +8,7 @@ exception.div=Division is impossible
 exception.divByZero=Division by zero is impossible
 exception.mul=Multiplication is impossible
 message.language=English language is set
+report.headerShort=Calculator short report
+report.headerFull=Calculator full report
+report.start=Start
+report.finish=Finish

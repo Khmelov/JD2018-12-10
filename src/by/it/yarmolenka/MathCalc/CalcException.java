@@ -6,11 +6,11 @@ public class CalcException extends Exception {
     public CalcException() {
     }
 
-    public CalcException(String message, ResMan resMan) {
+    public CalcException(String message, Translator resMan) {
         super(resMan.get(MathError.ERROR) + message);
     }
 
-    public CalcException(String message, Throwable cause, ResMan resMan) {
+    public CalcException(String message, Throwable cause, Translator resMan) {
         super(resMan.get(MathError.ERROR) + message, cause);
     }
 
