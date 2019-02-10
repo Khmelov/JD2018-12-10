@@ -1,11 +1,6 @@
 package by.it.yarmolenka.MathCalc;
 
-import by.it.yarmolenka.jd02_04.MathCalc.CalcException;
-import by.it.yarmolenka.jd02_04.MathCalc.Parcer;
-import by.it.yarmolenka.jd02_04.MathCalc.Variables.Matrix;
-import by.it.yarmolenka.jd02_04.MathCalc.Variables.Scalar;
-import by.it.yarmolenka.jd02_04.MathCalc.Variables.Var;
-import by.it.yarmolenka.jd02_04.MathCalc.Variables.Vector;
+import by.it.yarmolenka.MathCalc.Variables.*;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -147,19 +142,22 @@ public class CalcTest {
 
     @Test
     public void testCreatingScalar() throws CalcException {
-        Scalar sc = (Scalar) Var.createVar("-5.3");
+        CreatorVar creator = new CreatorVar();
+        Scalar sc = (Scalar) creator.getVar("-5.3");
         assertEquals("-5.3", sc.toString());
     }
 
     @Test
     public void testCreatingVector() throws CalcException {
-        Vector vec = (Vector) Var.createVar("{4.8, -7.2, -5.2}");
+        CreatorVar creator = new CreatorVar();
+        Vector vec = (Vector) creator.getVar("{4.8, -7.2, -5.2}");
         assertEquals("{4.8, -7.2, -5.2}", vec.toString());
     }
 
     @Test
     public void testCreatingMatrix() throws CalcException {
-        Matrix m = (Matrix) Var.createVar("{{5.2, -8.1, 4.7}, {-2.2, -6.6, 8.3}}");
+        CreatorVar creator = new CreatorVar();
+        Matrix m = (Matrix) creator.getVar("{{5.2, -8.1, 4.7}, {-2.2, -6.6, 8.3}}");
         assertEquals("{{5.2, -8.1, 4.7}, {-2.2, -6.6, 8.3}}", m.toString());
     }
 }

@@ -10,6 +10,7 @@ class Printer {
 
     void showError(CalcException e) {
         System.err.println(e.getMessage());
-        Log.addToLog(e.getMessage());
+        Log log = Log.getLog();
+        log.addToLog(e.getMessage());
     }
 }

@@ -1,10 +1,9 @@
 package by.it.yarmolenka.jd02_05;
 
+import by.it.yarmolenka.MathCalc.GetPath;
 import by.it.yarmolenka.jd02_05.strings.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -39,6 +38,24 @@ class Runner {
         }
         Date date = new Date(System.currentTimeMillis());
         output(resMan, df, date);
+        createCommandsFile();
+    }
+
+    private static void createCommandsFile() {
+        String path = GetPath.getPath(Runner.class);
+        File f = new File(path);
+        File[] files = f.listFiles();
+        if (files != null)
+            try (PrintWriter writer = new PrintWriter(new FileWriter(path + "commands.txt"))) {
+                for (File file : files) {
+                    if (file.getName().contains(".txt")) {
+                        String name = file.getName().replace(".txt", ".properties");
+                        writer.printf("native2ascii -encoding utf-8 %s %s\n", file.getName(), name);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
     private static void output(ResMan resMan, DateFormat df, Date date) {

@@ -1,6 +1,5 @@
 package by.it.yarmolenka.MathCalc;
 
-import by.it.yarmolenka.MathCalc.Operations.*;
 import by.it.yarmolenka.MathCalc.Strings.MathError;
 import by.it.yarmolenka.MathCalc.Variables.*;
 import java.util.ArrayList;
@@ -10,7 +9,8 @@ import java.util.regex.Pattern;
 
 public class Parcer {
     public Var calc(String expression) throws CalcException {
-        ResMan resMan = ResMan.INSTANCE;
+        Translator resMan = Translator.INSTANCE;
+        CreatorVar creator = new CreatorVar();
 
         if (!expression.matches(Patterns.INPUT)) throw new CalcException(resMan.get(MathError.INPUT), resMan);
         if (expression.matches(Patterns.SCALAR)) return new Scalar(expression);
@@ -20,95 +20,94 @@ public class Parcer {
 
         expression = calcBrackets(expression);
 
-
         Pattern cal = Pattern.compile(Patterns.OPERATION);
         Matcher m = cal.matcher(expression);
-        List<String> list = new ArrayList<>();
-        while (m.find()) list.add(m.group());
+        List<String> operands = new ArrayList<>();
+        while (m.find()) operands.add(m.group());
         String[] split = expression.trim().split(Patterns.OPERATION);
 
         for (int i = 0; i < split.length; i++)
             split[i]=split[i].trim();
 
-        if (list.get(0).equals("=")) {
-            return identificationOfVariable(expression, split, resMan);
+        if (operands.get(0).equals("=")) {
+            return identificationOfVariable(expression, split, resMan, creator);
         }
 
-
-        for (int i = 0; i < list.size(); i++) {
-            mulDivActions(list, split, i);
+        for (int i = 0; i < operands.size(); i++) {
+            mulDivActions(operands, split, i, creator);
         }
 
-        for (int i = 0; i < list.size(); i++) {
-            addSubActions(list, split, i);
+        for (int i = 0; i < operands.size(); i++) {
+            addSubActions(operands, split, i, creator);
         }
 
-        Var res = Var.createVar(split[split.length - 1]);
-        Log.addToLog(expression + " = " + res);
+        Var res = creator.getVar(split[split.length - 1]);
+        Log log = Log.getLog();
+        log.addToLog(expression + " = " + res);
         return res;
     }
 
-    private void addSubActions(List<String> list, String[] split, int i) throws CalcException {
+    private void addSubActions(List<String> list, String[] split, int i, CreatorVar creator) throws CalcException {
         if (list.get(i) == null) return;
         if (list.get(i).equals("+")) {
-            Var one = Var.createVar(split[i]);
+            Var one = creator.getVar(split[i]);
             Var two = null;
             int k = 0;
             for (int j = i + 1; j < split.length; j++)
                 if (split[j] != null) {
-                    two = Var.createVar(split[j]);
+                    two = creator.getVar(split[j]);
                     k = j;
                     break;
                 }
-            Var res = Add.addVarVar(one, two);
+            Var res = one.add(two);
             split[k] = res.toString();
             split[i] = null;
             list.set(i, null);
             return;
         }
         if (list.get(i).equals("-")) {
-            Var one = Var.createVar(split[i]);
+            Var one = creator.getVar(split[i]);
             Var two = null;
             int k = 0;
             for (int j = i + 1; j < split.length; j++)
                 if (split[j] != null) {
-                    two = Var.createVar(split[j]);
+                    two = creator.getVar(split[j]);
                     k = j;
                     break;
                 }
-            Var res = Sub.subVarVar(one, two);
+            Var res = one.sub(two);
             split[k] = res.toString();
             split[i] = null;
             list.set(i, null);
         }
     }
 
-    private void mulDivActions(List<String> list, String[] split, int i) throws CalcException {
+    private void mulDivActions(List<String> list, String[] split, int i, CreatorVar creator) throws CalcException {
         if (list.get(i).equals("*")) {
-            Var one = Var.createVar(split[i]);
-            Var two = Var.createVar(split[i + 1]);
-            Var res = Mul.mulVarVar(one, two);
+            Var one = creator.getVar(split[i]);
+            Var two = creator.getVar(split[i + 1]);
+            Var res = one.mul(two);
             split[i + 1] = res.toString();
             split[i] = null;
             list.set(i, null);
             return;
         }
         if (list.get(i).equals("/")) {
-            Var one = Var.createVar(split[i]);
-            Var two = Var.createVar(split[i + 1]);
-            Var res = Div.divVarVar(one, two);
+            Var one = creator.getVar(split[i]);
+            Var two = creator.getVar(split[i + 1]);
+            Var res = one.div(two);
             split[i + 1] = res.toString();
             split[i] = null;
             list.set(i, null);
         }
     }
 
-    private Var identificationOfVariable(String expression, String[] split, ResMan resMan) throws CalcException {
+    private Var identificationOfVariable(String expression, String[] split, Translator resMan, CreatorVar creator) throws CalcException {
         if (!split[0].trim().matches(Patterns.VARIABLE))
             throw new CalcException(resMan.get(MathError.IN_VARIABLE), resMan);
         Var res;
         if (split.length == 2)
-            res = Var.createVar(split[1]);
+            res = creator.getVar(split[1]);
         else
             res = calc(expression.substring(expression.indexOf('=') + 1));
         Var.addVar(split[0], res);
