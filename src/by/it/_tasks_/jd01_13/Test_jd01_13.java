@@ -20,7 +20,7 @@ public class Test_jd01_13 {
             sb.append("run ").append(i).append(": ")
                     .append(run("")
                             .include("java.lang.")
-                            .include("Exception")
+                            .include("MathError")
                             .include("line:")
                             .include(".TaskA")
                             .strOut.toString());
@@ -37,7 +37,7 @@ public class Test_jd01_13 {
                 .include("1.41")
                 .include("2.23")
                 .include("8.0")
-                .exclude("Exception")
+                .exclude("MathError")
         ;
         run("foo\nEND\n")
                 .include("NumberFormatException")
@@ -148,11 +148,11 @@ public class Test_jd01_13 {
         do {
             element = trace[i++];
         }
-        while (!element.getMethodName().contains("test"));
+        while (!element.getMethodName().contains("Test"));
 
         String[] path = element.getClassName().split("\\.");
         String nameTestMethod = element.getMethodName();
-        String clName = nameTestMethod.replace("test", "");
+        String clName = nameTestMethod.replace("Test", "");
         clName = clName.replaceFirst(".+__", "");
         clName = element.getClassName().replace(path[path.length - 1], clName);
         System.out.println("\n---------------------------------------------");

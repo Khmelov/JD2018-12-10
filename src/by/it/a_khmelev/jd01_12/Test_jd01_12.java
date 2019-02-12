@@ -349,11 +349,11 @@ public class Test_jd01_12 {
         do {
             element = trace[i++];
         }
-        while (!element.getMethodName().contains("test"));
+        while (!element.getMethodName().contains("Test"));
 
         String[] path = element.getClassName().split("\\.");
         String nameTestMethod = element.getMethodName();
-        String clName = nameTestMethod.replace("test", "");
+        String clName = nameTestMethod.replace("Test", "");
         clName = clName.replaceFirst(".+__", "");
         clName = element.getClassName().replace(path[path.length - 1], clName);
         System.out.println("\n---------------------------------------------");

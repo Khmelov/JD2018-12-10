@@ -3,8 +3,8 @@ package by.it.kushnerov.jd01_04;
 public class InOut {
 
 //    public static void main(String[] args) {
-//        double[] test={1,2,3,4,5,6,7};
-//        printArray(test,"T",3);
+//        double[] Test={1,2,3,4,5,6,7};
+//        printArray(Test,"T",3);
 //    }
 
     static double[] getArray(String line){

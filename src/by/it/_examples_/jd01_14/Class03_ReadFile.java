@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Class03_ReadFile {
     public static void main(String[] args) {
-        //путь к файлу от корня проекта, здесь корень System.getProperty("user.dir")
+        //путь к файлу от корня проекта, здесь корень Systems.getProperty("user.dir")
         String src=System.getProperty("user.dir")+"/src/by/it/_examples_/jd01_14/";
         String filename = src+"text.txt";
 
