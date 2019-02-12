@@ -1,6 +1,6 @@
 //package by.it.zagurskaya.calc;
 //
-//public class Runner {
+//public class SAXParser {
 //    private static void print(Var var) {System.out.println(var);}
 //    public static void main(String[] args) {
 //        Var s = new Scalar(3.0);

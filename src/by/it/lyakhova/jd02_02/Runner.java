@@ -39,7 +39,7 @@ public class Runner {
                     threads.add(buyer);
                     buyer.start();
             }
-                                             //System.out.println(Dispatcher.getCounterBuyerInShop() + " in shop Runner");
+                                             //System.out.println(Dispatcher.getCounterBuyerInShop() + " in shop SAXParser");
             Util.sleep(1000);
             ++time;
                                              //System.out.println(time + " sec");

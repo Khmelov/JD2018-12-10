@@ -23,7 +23,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         chooseGoods();
         goToQueue();
         goOut();
-                                            //System.out.println(Dispatcher.getCounterBuyerInShop() + " in shop Runner");
+                                            //System.out.println(Dispatcher.getCounterBuyerInShop() + " in shop SAXParser");
         System.out.flush();
     }
 

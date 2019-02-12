@@ -17,7 +17,7 @@ public class _02_And_XSL_04 {
         try {
             TransformerFactory tf = TransformerFactory.newInstance();
             // установка используемого XSL-преобразования
-            Transformer transformer = tf.newTransformer(new StreamSource(root+"xpath.xsl"));
+            Transformer transformer = tf.newTransformer(new StreamSource(root+"users.xsl"));
             // установка исходного XML-документа и конечного XML-файла
             transformer.transform(new StreamSource(fileName),
                     new StreamResult(fileHTML));

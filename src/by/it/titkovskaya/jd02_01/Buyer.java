@@ -80,7 +80,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 }
 
 /*
-            System.out.println(this + " put to the basket " + Runner.entries.toArray()[Util.getRandom(0,
-                    Runner.entries.size() - 1)].toString().replace("=", " for ") + "$");
+            System.out.println(this + " put to the basket " + SAXParser.entries.toArray()[Util.getRandom(0,
+                    SAXParser.entries.size() - 1)].toString().replace("=", " for ") + "$");
 
  */
