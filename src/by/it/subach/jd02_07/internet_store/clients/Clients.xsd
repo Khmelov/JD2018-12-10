@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://it-academy.by/it/subach/jd02_07/clients"
+        xmlns:mytype="http://it-academy.by/it/subach/jd02_07/clients"
+        elementFormDefault="qualified"
+>
+    <element name="clients">
+        <complexType>
+            <sequence>
+                <element name="client"
+                         type="mytype:clienttype"
+                         minOccurs="1"
+                         maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="clienttype">
+        <sequence>
+            <element name="login" type="ID"/>
+            <element name="email" type="string"/>
+            <element name="password" type="string"/>
+            <element name="telnumber" type="string"/>
+            <element name="adress">
+                <complexType>
+                    <sequence>
+                        <element name="city" type="string"/>
+                        <element name="street" type="string"/>
+                        <element name="house" type="string"/>
+                        <element name="apart" type="string"/>
+                        <element name="postalindex" type="positiveInteger"/>
+                    </sequence>
+                </complexType>
+            </element>
+        </sequence>
+    </complexType>
+</schema>

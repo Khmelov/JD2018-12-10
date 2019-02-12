@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://jd02.lyakhova.by.it/somewords"
+        xmlns:mytype="http://jd02.lyakhova.by.it/somewords"
+        elementFormDefault="qualified">
+    <element name="cbu">
+        <complexType>
+            <sequence>
+                <element name="filial" type="mytype:Filial" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+
+
+    <complexType name="Filial">
+        <sequence>
+            <element name="title" type="string" />
+            <element name="address" type="string"/>
+            <element name="economist" type="mytype:Econom" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="cashier" type="mytype:Econom" maxOccurs="unbounded"/>
+        </sequence>
+        <attribute name="name" type="mytype:Name" use="required"/>
+    </complexType>
+
+    <simpleType name="Name">
+        <restriction base="ID">
+            <pattern value="(cbu[0-9]+)"/>
+        </restriction>
+    </simpleType>
+
+    <complexType name="Econom">
+        <sequence>
+            <element name="surname" type="string"/>
+            <element name="name" type="string"/>
+            <element name="category" type="positiveInteger"/>
+            <element name="functions" type="mytype:Funct"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Funct">
+        <sequence>
+            <element name="operation" type="string" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+</schema>

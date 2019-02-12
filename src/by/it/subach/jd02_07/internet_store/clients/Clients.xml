@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<clients>
+    <client>
+        <login>CarlCracker</login>
+        <email>carlcracker@gmail.com</email>
+        <password>12345</password>
+        <telnumber>375291112233</telnumber>
+        <adress>
+            <sity>Minsk</sity>
+            <street>Lenina</street>
+            <house>1</house>
+            <apart>18</apart>
+            <postalindex>220011</postalindex>
+        </adress>
+    </client>
+    <client>
+        <login>ClintEastwood</login>
+        <email>eastwood@gmail.com</email>
+        <password>qwerty</password>
+        <telnumber>375292223344</telnumber>
+        <adress>
+            <sity>Babruisk</sity>
+            <street>Marksa</street>
+            <house>6A</house>
+            <apart>28</apart>
+            <postalindex>281263</postalindex>
+        </adress>
+    </client>
+    <client>
+        <login>AngelinaJolie</login>
+        <email>angela@gmail.com</email>
+        <password>asdfg</password>
+        <telnumber>375296662255</telnumber>
+        <adress>
+            <sity>Orsha</sity>
+            <street>Engelsa</street>
+            <house>12</house>
+            <apart>6</apart>
+            <postalindex>294518</postalindex>
+        </adress>
+    </client>
+</clients>

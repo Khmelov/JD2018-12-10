@@ -1,0 +1,3 @@
+message.welcome=Welcome!
+message.question=How do You do?
+user.name=Alexey Kushnerov

@@ -14,8 +14,8 @@ import java.io.IOException;
 public class UsersValidator {
     public static void main(String[ ] args) {
         String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
-        String fileName =   "src/by/it/_examples_/jd02_07/04+XSD.xml";
-        String schemaName = "src/by/it/_examples_/jd02_07/04.xsd";
+        String fileName =   "src/by/it/zagurskaya/jd02_07/users+xsd.xml";
+        String schemaName = "src/by/it/zagurskaya/jd02_07/users.xsd";
         SchemaFactory factory = SchemaFactory.newInstance(language);
         File schemaLocation = new File(schemaName);
         try {

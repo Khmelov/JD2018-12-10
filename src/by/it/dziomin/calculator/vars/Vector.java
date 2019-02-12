@@ -2,6 +2,8 @@ package by.it.dziomin.calculator.vars;
 
 
 import by.it.dziomin.calculator.CalcException;
+import by.it.dziomin.calculator.Localization;
+import by.it.dziomin.calculator.Localizer;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -74,7 +76,7 @@ public class Vector extends Var {
         }
 
         if (other.isVector() && this.getValue().length != ((Vector) other).getValue().length){
-            throw new CalcException("Вектора сложить невозможно");
+            throw new CalcException(Localizer.getBundle().getString(Localization.ADD_ERROR));
         }
 
         if (other.isScalar()) {
@@ -99,7 +101,7 @@ public class Vector extends Var {
         }
 
         if (other.isVector() && this.getValue().length != ((Vector) other).getValue().length){
-            throw new CalcException("Вектора вычесть невозможно");
+            throw new CalcException(Localizer.getBundle().getString(Localization.SUB_ERROR));
         }
 
         if (other.isScalar()) {
@@ -143,5 +145,18 @@ public class Vector extends Var {
         }
 
         return super.div(other);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vector vector = (Vector) o;
+        return Arrays.equals(getValue(), vector.getValue());
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(getValue());
     }
 }

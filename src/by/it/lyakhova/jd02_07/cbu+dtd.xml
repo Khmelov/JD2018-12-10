@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE cbu SYSTEM "cbu.dtd">
+
+<cbu>
+    <filial>
+        <title>cbu-1</title>
+        <address>Minsk Nezavisimosty 5</address>
+        <economist>
+            <surname>Petrov</surname>
+            <name>Anton</name>
+            <category>2</category>
+            <functions>
+                <operation>credit</operation>
+                <operation>holdings</operation>
+            </functions>
+        </economist>
+        <economist>
+            <surname>Sidorova</surname>
+            <name>Alena</name>
+            <category>1</category>
+            <functions>
+                <operation>crediting</operation>
+                <operation>holdings</operation>
+                <operation>reports</operation>
+            </functions>
+        </economist>
+        <cashier>
+            <surname>Sorokina</surname>
+            <name>Marina</name>
+            <category>1</category>
+            <functions>
+                <operation>currency exchange</operation>
+                <operation>payment of biils</operation>
+                <operation>revenue receipt</operation>
+                <operation>reports</operation>
+            </functions>
+        </cashier>
+    </filial>
+    <filial>
+        <title>cbu-2</title>
+        <address>Minsk Lenina 21a</address>
+        <cashier>
+            <surname>Aliaksanrov</surname>
+            <name>Pavel</name>
+            <category>2</category>
+            <functions>
+                <operation>currency exchange</operation>
+                <operation>payment of biils</operation>
+                <operation>revenue receipt</operation>
+                <operation>reports</operation>
+            </functions>
+        </cashier>
+    </filial>
+</cbu>

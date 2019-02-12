@@ -1,7 +1,5 @@
 package by.it.kushnerov.jd01_09;
 
-import by.it.kushnerov.calc.CalcExeption;
-
 import java.util.Scanner;
 
 public class ConsoleRunner {

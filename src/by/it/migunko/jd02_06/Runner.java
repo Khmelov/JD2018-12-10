@@ -8,5 +8,5 @@ public class Runner {
         logger.log("message 3");
         logger.log("message 4");
     }
-    
+
 }

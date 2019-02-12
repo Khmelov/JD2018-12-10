@@ -2,6 +2,7 @@ package by.it.dziomin.calculator.vars;
 
 import by.it.dziomin.calculator.CalcException;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,7 +26,7 @@ public class Matrix extends Var {
 
     public Matrix(String strMatrix) {
         Pattern patternRows = Pattern.compile("\\{(.*?)}");
-        Pattern patternColumns = Pattern.compile("[0-9.]{1,}");
+        Pattern patternColumns = Pattern.compile("-?[0-9.]{1,}");
         Matcher matcherRows = patternRows.matcher(strMatrix);
 
         // считаем количество строк в матрице и заполняем массив строк
@@ -208,5 +209,30 @@ public class Matrix extends Var {
             return new Matrix(result);
         }
         return super.div(other);
+    }
+
+//    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Matrix matrix = (Matrix) o;
+//        for (double[] doubles : getValue()) {
+//            for (double aDouble : doubles) {
+//                System.out.println(aDouble);
+//            }
+//        }
+
+//        for (double[] doubles : matrix.getValue()) {
+////            for (double aDouble : doubles) {
+////                System.out.println(aDouble);
+////            }
+////        }
+
+        return Arrays.deepEquals(getValue(), matrix.getValue());
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(getValue());
     }
 }

@@ -1,6 +1,8 @@
 package by.it.dziomin.calculator.vars;
 
 import by.it.dziomin.calculator.CalcException;
+import by.it.dziomin.calculator.Localization;
+import by.it.dziomin.calculator.Localizer;
 import by.it.dziomin.calculator.Patterns;
 import by.it.dziomin.calculator.interfaces.*;
 
@@ -44,22 +46,28 @@ public abstract class Var implements IVar, IAdd, IDiv, IMul, ISub {
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException("Сложение невозможно");
+        throw new CalcException(Localizer.getBundle().getString(Localization.ADD_ERROR));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException("Вычитание невозможно");
+        throw new CalcException(Localizer.getBundle().getString(Localization.SUB_ERROR));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException("Умножение невозможно");
+        throw new CalcException(Localizer.getBundle().getString(Localization.MUL_ERROR));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException("Деление невозможно");
+        throw new CalcException(Localizer.getBundle().getString(Localization.DIV_ERROR));
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
 
 }

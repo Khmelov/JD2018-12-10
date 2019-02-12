@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<users>
+    <user>
+        <login>VasyaP</login>
+        <email>VasyaP@mail.ru</email>
+        <password>qwerty</password>
+        <ads>
+            <ad>
+                <description>
+                    Good apartments
+                </description>
+                <adress>
+                    Lenina, 1
+                </adress>
+                <floor>2</floor>
+                <rooms>3</rooms>
+                <price>9999.0</price>
+                <area>69.9</area>
+            </ad>
+            <ad>
+                <description>
+                    Small apartments
+                </description>
+                <adress>
+                    Khalturina, 15
+                </adress>
+                <floor>1</floor>
+                <rooms>1</rooms>
+                <price>5555.0</price>
+                <area>29.5</area>
+            </ad>
+        </ads>
+    </user>
+    <user>
+        <login>PetyaV</login>
+        <email>PetyaV@mail.ru</email>
+        <password>asdfgh</password>
+        <ads>
+            <ad>
+                <description>
+                    New apartments
+                </description>
+                <adress>
+                    Kirova, 3
+                </adress>
+                <floor>10</floor>
+                <rooms>5</rooms>
+                <price>1200000.0</price>
+                <area>150.5</area>
+            </ad>
+        </ads>
+    </user>
+
+</users>

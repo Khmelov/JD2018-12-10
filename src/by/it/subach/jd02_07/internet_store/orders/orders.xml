@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<orders>
+    <order>
+        <number>1</number>
+        <date>10.02.2019</date>
+        <client>CarlCracker</client>
+        <goods>
+            <good>
+                <name>PlayStation5</name>
+                <quantity>2</quantity>
+            </good>
+            <good>
+                <name>FUFA2020</name>
+                <quantity>1</quantity>
+            </good>
+        </goods>
+        <paymentstatus>not paid</paymentstatus>
+    </order>
+    <order>
+        <number>2</number>
+        <date>11.02.2019</date>
+        <login>ClintEastwood</login>
+        <goods>
+            <good>
+                <name>XboxTWO</name>
+                <quantity>1</quantity>
+            </good>
+            <good>
+                <name>Call of Booty</name>
+                <quantity>1</quantity>
+            </good>
+        </goods>
+        <paymentstatus>paid</paymentstatus>
+    </order>
+    <order>
+        <number>2</number>
+        <date>11.02.2019</date>
+        <login>AngelinaJolie</login>
+        <goods>
+            <good>
+                <name>Mass Affect</name>
+                <quantity>1</quantity>
+            </good>
+        </goods>
+        <paymentstatus>paid</paymentstatus>
+    </order>
+</orders>

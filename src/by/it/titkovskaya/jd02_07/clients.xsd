@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://jd02.titkovskaya.by.it/someplace"
+        xmlns:tag="http://jd02.titkovskaya.by.it/someplace"
+        elementFormDefault="qualified"
+>
+    <element name="clients">
+        <complexType>
+            <sequence>
+                <element name="client"
+                         type="tag:Client"
+                         maxOccurs="unbounded">
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="Client">
+        <sequence>
+            <element name="client_ID" type="string"/>
+            <element name="name" type="string"/>
+            <element name="passport" type="string"/>
+            <element name="login" type="ID"/>
+            <element name="password" type="string"/>
+            <element name="accounts" type="tag:Accounts"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Accounts">
+        <sequence>
+            <element name="account"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="tag:Account"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Account">
+        <sequence>
+            <element name="account_ID" type="string"/>
+            <element name="authorization_code" type="string"/>
+            <element name="account_balance" type="double"/>
+            <element name="currency" type="string"/>
+            <element name="last_replenishment" type="tag:Replenishment"/>
+            <element name="last_payment" type="tag:Payment"/>
+            <element name="status" type="string"/>
+            <element name="lock_date" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Replenishment">
+        <sequence>
+            <element name="replenishment_amount" type="double"/>
+            <element name="replenishment_date" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Payment">
+        <sequence>
+            <element name="payment_amount" type="double"/>
+            <element name="payment_date" type="string"/>
+        </sequence>
+    </complexType>
+
+</schema>

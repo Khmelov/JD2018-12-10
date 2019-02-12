@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE catalog SYSTEM "Catalog.dtd">
+<catalog>
+    <consoles>
+        <console>
+            <model>PlayStation5</model>
+            <discription>Number one in the world</discription>
+            <price>500.00</price>
+            <weight>3</weight>
+            <quantity>10</quantity>
+            <manufacturer>Sony</manufacturer>
+        </console>
+        <console>
+            <model>XboxTWO</model>
+            <discription>Number two in the world</discription>
+            <price>600.00</price>
+            <weight>4</weight>
+            <quantity>5</quantity>
+            <manufacturer>Microsoft</manufacturer>
+        </console>
+        <console>
+            <model>NintendoWoo</model>
+            <discription>Number three in the world</discription>
+            <price>400.00</price>
+            <weight>2</weight>
+            <quantity>7</quantity>
+            <manufacturer>Nintendo</manufacturer>
+        </console>
+    </consoles>
+</catalog>

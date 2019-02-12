@@ -6,12 +6,12 @@ import java.util.Random;
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
-    boolean pensioneer = false;
+    private boolean pensioner = false;
 
     Buyer(int number) {
         super("Buyer №"+number);
         if (number % 4 == 0){
-           pensioneer = true;
+           pensioner = true;
            this.setName(this.getName() + " pensioner");
         }
     }
@@ -36,7 +36,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     public void takeBasket(){
         int timeout = Util.getRandom(100,200);
         System.out.println(this+" take basket "+timeout);
-        Util.sleep((pensioneer) ? (int)(timeout*1.5) : timeout);
+        Util.sleep((pensioner) ? (int)(timeout*1.5) : timeout);
         System.out.println(this+"took basket");
     }
 
@@ -44,7 +44,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     public void chooseGoods() {
         int timeout = Util.getRandom(500, 2000);
         System.out.println(this+" choose goods "+timeout);
-        Util.sleep((pensioneer) ? (int)(timeout*1.5) : timeout);
+        Util.sleep((pensioner) ? (int)(timeout*1.5) : timeout);
         System.out.println(this+" chose goods");
     }
 
@@ -55,13 +55,13 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         Random random = new Random();
         List<String> keys = new ArrayList<>(Goods.goods.keySet());
         String randomKey;
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
         System.out.println(this+" puts goods to the basket "+timeout);
         for (int i = 0; i < amount; i++) {
             randomKey = keys.get(random.nextInt(keys.size()));
             sb.append(randomKey).append(" ");
         }
-        Util.sleep((pensioneer) ? (int)(timeout*1.5) : timeout);
+        Util.sleep((pensioner) ? (int)(timeout*1.5) : timeout);
         System.out.println(this+" put "+sb.toString()+" to the basket");
     }
 

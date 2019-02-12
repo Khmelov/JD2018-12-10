@@ -1,23 +1,19 @@
 package by.it.kushnerov.jd02_02;
 
+
+
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class DequeBuyer {
-
-    private static final Object MONITOR = new Object();
+class DequeBuyer {
 
     private static Deque<Buyer> q = new LinkedList<>();
 
-    static void add(Buyer buyer){
-        synchronized (MONITOR){
-        q.addLast(buyer);
-        }
+    static synchronized void add(Buyer buyer) {
+            q.addLast(buyer);
     }
 
-    static Buyer poll(){
-        synchronized (MONITOR){
-        return q.pollFirst();
-        }
+    static synchronized Buyer poll() {
+            return q.pollFirst();
     }
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://it-academy.by/it/subach/jd02_07/orders"
+        elementFormDefault="qualified"
+>
+    <element name="orders">
+        <complexType>
+            <sequence>
+                <element name="order"
+                         minOccurs="1"
+                         maxOccurs="unbounded">
+                    <complexType>
+                        <sequence>
+                            <element name="number" type="string"/>
+                            <element name="date" type="string"/>
+                            <element name="client" type="string"/>
+                            <element name="goods">
+                                <complexType>
+                                    <sequence>
+                                        <element name="good">
+                                            <complexType>
+                                                <sequence>
+                                                    <element name="name" type="string"/>
+                                                    <element name="quantity" type="positiveInteger"/>
+                                                </sequence>
+                                            </complexType>
+                                        </element>
+                                    </sequence>
+                                </complexType>
+                            </element>
+                            <element name="paymentstatus" type="string"/>
+                        </sequence>
+                    </complexType>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+</schema>

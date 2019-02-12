@@ -1,6 +1,10 @@
 package by.it.dziomin.calculator.vars;
 
 import by.it.dziomin.calculator.CalcException;
+import by.it.dziomin.calculator.Localization;
+import by.it.dziomin.calculator.Localizer;
+
+import java.util.Objects;
 
 public class Scalar extends Var {
 
@@ -67,15 +71,28 @@ public class Scalar extends Var {
     public Var div(Var other) throws CalcException {
         if (other.isScalar()) {
             if (((Scalar) other).value==0){
-                throw new CalcException("Деление на ноль невозможно!");
+                throw new CalcException(Localizer.getBundle().getString(Localization.DIVZERO_ERROR));
             }
             double result = this.value / ((Scalar) other).value;
             return new Scalar(result);
-        }
+    }
         if (other.isVector()) {
-            throw new CalcException("Скаляр разделить на вектор невозможно!");
+            throw new CalcException(Localizer.getBundle().getString(Localization.DIV_ERROR));
         }
         return other.add(this);
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Scalar scalar = (Scalar) o;
+        return Double.compare(scalar.getValue(), getValue()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getValue());
     }
 }

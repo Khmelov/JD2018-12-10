@@ -11,6 +11,7 @@ class Dispatcher {
     private static final Object MON = new Object();
     private static final int plan = 100;
     static volatile int cashiersOnDuty = 0;
+    static final Object CASHIERS = new Object();
 
     static Deque<Cashier> workingCashiers = new ArrayDeque<>();
     static Deque<Cashier> waitingCashiers = new ArrayDeque<>();

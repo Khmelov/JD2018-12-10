@@ -26,9 +26,9 @@ public enum TranslateManager implements Message{
         setLocale(new Locale(language, country));
     }
 
-    public void setLocale(String language){
-        setLocale(new Locale(language));
-    }
+//    public void setLocale(String language){
+//        setLocale(new Locale(language));
+//    }
 
     public String get(String key){
         return resourceBundle.getString(key);

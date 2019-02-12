@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://jd02.subach.it/somestring"
+        xmlns:mytype="http://jd02.subach.it/somestring"
+        elementFormDefault="qualified"
+        >
+    <element name="users">
+        <complexType>
+            <sequence>
+                <element
+                    name="user"
+                    type="mytype:typeforuser"
+                    minOccurs="1"
+                    maxOccurs="unbounded"   />
+
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="typeforuser">
+        <sequence>
+            <element name="login" type="ID" />
+            <element name="email" type="string" />
+            <element name="password" type="string" />
+            <element name="ads" type="mytype:typeads" />
+        </sequence>
+    </complexType>
+
+    <complexType name="typeads">
+        <sequence>
+            <element name="ad"
+                     minOccurs="1"
+                     maxOccurs="unbounded"
+                     type="mytype:typead"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="typead">
+        <all>
+            <element name="description" type="string" />
+            <element name="adress" type="string" />
+            <element name="floor" type="positiveInteger" />
+            <element name="rooms" type="positiveInteger" />
+            <element name="price" type="positiveInteger" />
+            <element name="area" type="positiveInteger" />
+        </all>
+    </complexType>
+</schema>

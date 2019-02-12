@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!ELEMENT cbu (filial)+>
+<!ELEMENT filial (title, address, economist, cashier)>
+        <!ELEMENT title (#PCDATA)>
+        <!ELEMENT address (#PCDATA)>
+        <!ELEMENT economist (surname, name, category, functions)*>
+        <!ELEMENT cashier (surname, name, category, functions)+>
+<!ELEMENT surname (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT functions (operation)+>
+<!ELEMENT operation (#PCDATA)+>
+
+
+
+
