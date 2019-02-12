@@ -46,7 +46,7 @@ public class Demo {
             return value;
         }
         static void use() {
-            System.out.print(id);
+            Systems.out.print(id);
         }
     }
 */

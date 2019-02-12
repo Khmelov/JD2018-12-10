@@ -8,7 +8,7 @@ public class Test {
         String messages = "by.it.zagurskaya.jd02_05.messeges";
         Locale local = new Locale("ru","RU");
 //        ResourceBundle rb = new ResourceBundle.getBundle(messages, local);
-//        String test = rb.getString(Massage.WELCOME);
-//        System.out.println(test);
+//        String Test = rb.getString(Massage.WELCOME);
+//        System.out.println(Test);
         }
     }

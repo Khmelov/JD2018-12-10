@@ -12,7 +12,7 @@ public class TaskA1 {
 
         while (matcher.find()){
             /*String word = matcher.group();
-            System.out.println(word);*/
+            Systems.out.println(word);*/
             int start = matcher.start();
             sb.setCharAt(start+3, '#');
             if ((matcher.end()-matcher.start())>=7) sb.setCharAt(start+6, '#');

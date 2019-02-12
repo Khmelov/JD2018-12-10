@@ -25,7 +25,7 @@ public class TaskC2 {
 
         int count = 0; //how many are words in the poem
         while (matcher.find()) count++;
-        //System.out.println(count);
+        //Systems.out.println(count);
 
         String[] arrSentence = new String[count];
         matcher.reset();

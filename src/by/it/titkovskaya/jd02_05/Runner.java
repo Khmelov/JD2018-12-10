@@ -77,6 +77,6 @@ Date date = new Date();
 String messages = "by.it.titkovskaya.jd02_05.messages";
         Locale locale = new Locale("be","BY");
         ResourceBundle rb = ResourceBundle.getBundle(messages,locale);
-        String test = rb.getString(Message.WELCOME);
-        System.out.println(test);
+        String Test = rb.getString(Message.WELCOME);
+        System.out.println(Test);
  */

@@ -11,7 +11,7 @@ public class TaskC1 {
         for (String el :
                 strings) {
             el.trim();
-           // System.out.println(el);
+           // Systems.out.println(el);
         }
 
         for (int i = 0; i < strings.length; i++) {
@@ -31,7 +31,7 @@ public class TaskC1 {
                     sb.append(el);
                 }
                 strings[i]=sb.toString();
-               // System.out.println(strings[i].length());
+               // Systems.out.println(strings[i].length());
 
             }
             System.out.println(strings[i]);

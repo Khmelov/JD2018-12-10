@@ -9,7 +9,7 @@ public class Class05_Crawler {
     public static void main(String[] args) {
         BufferedReader reader = null;
         try {
-            URL site = new URL("http://test.by/");
+            URL site = new URL("http://Test.by/");
             reader = new BufferedReader(new InputStreamReader(site.openStream()));
             String line;
             while ((line = reader.readLine()) != null) {
