@@ -11,9 +11,9 @@
 
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="e-mail">Email</label>
+                <label class="col-md-4 control-label" for="email">Email</label>
                 <div class="col-md-4">
-                    <input id="e-mail" name="e-mail" value="test@email.com" type="text" placeholder="" class="form-control input-md" required="">
+                    <input id="email" name="email" value="test@email.com" type="text" placeholder="" class="form-control input-md" required="">
 
                 </div>
             </div>

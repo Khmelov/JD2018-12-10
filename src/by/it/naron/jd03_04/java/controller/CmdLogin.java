@@ -5,6 +5,7 @@ import by.it.naron.jd03_04.java.dao.Dao;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Locale;
 
 public class CmdLogin implements Cmd {
     @Override
@@ -13,7 +14,7 @@ public class CmdLogin implements Cmd {
             String login = Form.getString(req, "login", "[a-zA-Z0-9_-]{5,}");
             String password = Form.getString(req, "password","[a-zA-Z0-9_-]{5,}");
             Dao dao = Dao.getDao();
-            String where = String.format(
+            String where = String.format(Locale.ENGLISH,
                     " WHERE `login`='%s' AND `password`='%s'",
                     login, password);
             List<Users> users = dao.users.getAll(where);
