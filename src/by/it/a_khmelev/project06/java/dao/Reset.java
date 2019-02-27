@@ -1,4 +1,4 @@
-package by.it.a_khmelev.project05.java.dao;
+package by.it.a_khmelev.project06.java.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
