@@ -1,6 +1,6 @@
 package by.it.skosirskiy.jd03_02;
 
-import by.it.skosirskiy.jd03_02.Beans.User;
+import by.it.skosirskiy.jd03_02.beans.User;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

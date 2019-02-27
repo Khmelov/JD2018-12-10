@@ -1,5 +1,6 @@
 package by.it.moroz.jd03.jd03_02;
 
+import by.it.moroz.jd03.jd03_02.beans.Order;
 import by.it.moroz.jd03.jd03_02.beans.Role;
 import by.it.moroz.jd03.jd03_02.beans.User;
 
@@ -36,6 +37,20 @@ public class Runner {
             System.out.println("READ OK: " + role);
         if (roleCRUD.deleteRole(role))
             System.out.println("DELETE OK: " + role);
+
+        OrderCRUD orderCRUD = new OrderCRUD();
+
+        Order order = new Order(0, "TestName", 2, 35.5, 71, 2);
+        if(orderCRUD.createOrder(order))
+            System.out.println("CREATE OK: " + order);
+        order.setCount(1);
+        if(orderCRUD.updateOrder(order))
+            System.out.println("UPDATE OK: " + order);
+        order = orderCRUD.readOrder(order.getId());
+        if(order!=null)
+            System.out.println("READ OK: " + order);
+        if(orderCRUD.deleteOrder(order))
+            System.out.println("DELETE OK: " + order);
 
 
     }

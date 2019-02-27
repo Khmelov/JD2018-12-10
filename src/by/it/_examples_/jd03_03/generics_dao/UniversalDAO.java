@@ -21,21 +21,21 @@ import java.util.List;
 
 public class UniversalDAO<TypeBean> implements InterfaceDAO<TypeBean> {
 
-    private Class<TypeBean> aClass; //это некий неизвестный bean
+    private TypeBean bean; //это некий неизвестный bean
     private String table; //это его таблица в базе
     private Field[] fields; //это поля bean
 
-    //конструктор Dao
-    public UniversalDAO(Class<TypeBean> aClass, String sqlTableName) {
-        this.aClass = aClass;
+    //конструктор DAO
+    public UniversalDAO(TypeBean bean, String sqlTableName) {
+        this.bean = bean;
         this.table = sqlTableName;
-        this.fields = aClass.getDeclaredFields();
+        this.fields = bean.getClass().getDeclaredFields();
     }
 
     //=======================================================================================================
     public List<TypeBean> getAll(String WHERE) throws SQLException {
         List<TypeBean> beans = new ArrayList<>();
-        String sql = String.format("SELECT * FROM %s %s ;", table, WHERE);
+        String sql = "SELECT * FROM " + table + " " + WHERE + " ;";
         try (
                 Connection connection = ConnectionCreator.getConnection();
                 Statement statement = connection.createStatement()
@@ -102,7 +102,7 @@ public class UniversalDAO<TypeBean> implements InterfaceDAO<TypeBean> {
         // "UPDATE `users` SET
         // `Login` = '%s', `Password` = '%s', `Email` = '%s', `FK_Role` = '%d'
         // WHERE `users`.`ID` = %d",
-        String sql = String.format("UPDATE `%s` SET ", table);
+        String sql = "UPDATE `" + table + "` SET ";
         String delimiter = "";
         try {
             for (int i = 1; i < fields.length; i++) { //начинаем со второго поля
@@ -167,9 +167,10 @@ public class UniversalDAO<TypeBean> implements InterfaceDAO<TypeBean> {
     //=======================================================================================================
     //т.к. в Generics невозможно сделать new TypeBean(), а новые объекты нужны,
     //создадим объект и приведем его тип к TypeBean "вручную"
+    @SuppressWarnings("unchecked") //подавление warning-а
     private TypeBean newBean() {
         try {
-            return aClass.getConstructor().newInstance();
+            return (TypeBean) bean.getClass().getConstructor().newInstance();
         } catch (InstantiationException |
                 IllegalAccessException |
                 NoSuchMethodException |

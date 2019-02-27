@@ -11,12 +11,12 @@ public class RentsCRUD {
     public boolean create(Rents rent) {
         try {
             String sql = String.format(
-                    "INSERT INTO `dziomin`.`rents` (`id`, `date`, `price`, `isopen`, `users_id`, `cars_id`) " +
+                    "INSERT INTO `dziomin`.`rent` (`id`, `date`, `price`, `isopen`, `user_id`, `car_id`) " +
                             "VALUES ('%d', '%d', '%f', '%d', '%d', '%d');",
                     rent.getId(),
                     rent.getDate(),
                     rent.getPrice(),
-                    rent.isOpen(),
+                    rent.getIsOpen(),
                     rent.getUsersId(),
                     rent.getCarsId());
             int count = DBConnector.getStatement().executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
@@ -36,11 +36,11 @@ public class RentsCRUD {
     public boolean update(Rents rent) {
         try {
             String sql = String.format(
-                    "UPDATE `rents` SET `date`='%d'," + "`price`='%f'," + "`isopen`='%d'," + "`users_id`='%d'," + "`cars_id`='%d'" +
+                    "UPDATE `rent` SET `date`='%d'," + "`price`='%f'," + "`isopen`='%d'," + "`user_id`='%d'," + "`car_id`='%d'" +
                             "WHERE `id`='%d' ",
                     rent.getDate(),
                     rent.getPrice(),
-                    rent.isOpen(),
+                    rent.getIsOpen(),
                     rent.getUsersId(),
                     rent.getCarsId(),
                     rent.getId());
@@ -54,7 +54,7 @@ public class RentsCRUD {
     public boolean delete(Rents rent) {
         try {
             String sql = String.format(
-                    "DELETE FROM `rents` WHERE `id`='%d'",
+                    "DELETE FROM `rent` WHERE `id`='%d'",
                     rent.getId());
 
             return 1 == DBConnector.getStatement().executeUpdate(sql);
@@ -68,7 +68,7 @@ public class RentsCRUD {
     public Rents read(long id) {
         try {
             String sql = String.format(
-                    "SELECT * FROM `rents` WHERE `id`='%d'",
+                    "SELECT * FROM `rent` WHERE `id`='%d'",
                     id);
             ResultSet resultSet = DBConnector.getStatement().executeQuery(sql);
             if (resultSet.next()) {
@@ -76,9 +76,9 @@ public class RentsCRUD {
                 rent.setId(resultSet.getLong("id"));
                 rent.setDate(resultSet.getLong("date"));
                 rent.setPrice(resultSet.getDouble("price"));
-                rent.setOpen(resultSet.getInt("isopen"));
-                rent.setUsersId(resultSet.getLong("users_id"));
-                rent.setCarsId(resultSet.getLong("cars_id"));
+                rent.setIsOpen(resultSet.getInt("isopen"));
+                rent.setUsersId(resultSet.getLong("user_id"));
+                rent.setCarsId(resultSet.getLong("car_id"));
                 return rent;
             }
         } catch (SQLException e) {

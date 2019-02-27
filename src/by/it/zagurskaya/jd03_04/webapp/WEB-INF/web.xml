@@ -4,6 +4,7 @@
                       http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0"
          metadata-complete="true">
+    <display-name>Сервлеты zagurskaya</display-name>
     <servlet>
         <servlet-name>FrontController</servlet-name>
         <servlet-class>by.it.zagurskaya.jd03_04.java.FrontController</servlet-class>

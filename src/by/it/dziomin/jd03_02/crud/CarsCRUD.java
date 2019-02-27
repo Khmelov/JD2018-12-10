@@ -12,7 +12,7 @@ public class CarsCRUD {
     public boolean create(Cars car) {
         try {
             String sql = String.format(
-                    "INSERT INTO `dziomin`.`cars` (`id`, `name`, `number`, `engine`, `transmission`) " +
+                    "INSERT INTO `dziomin`.`car` (`id`, `name`, `number`, `engine`, `transmission`) " +
                             "VALUES ('%d', '%s', '%s', '%s', '%s');",
                     car.getId(),
                     car.getName(),
@@ -36,7 +36,7 @@ public class CarsCRUD {
     public boolean update(Cars car) {
         try {
             String sql = String.format(
-                    "UPDATE `cars` SET `name`='%s'," + "`number`='%s'," + "`engine`='%s'," + "`transmission`='%s'" +
+                    "UPDATE `car` SET `name`='%s'," + "`number`='%s'," + "`engine`='%s'," + "`transmission`='%s'" +
                             "WHERE `id`='%d'",
                     car.getName(),
                     car.getNumber(),
@@ -53,7 +53,7 @@ public class CarsCRUD {
     public boolean delete(Cars car) {
         try {
             String sql = String.format(
-                    "DELETE FROM `cars` WHERE `id`='%d'",
+                    "DELETE FROM `car` WHERE `id`='%d'",
                     car.getId());
 
             return 1 == DBConnector.getStatement().executeUpdate(sql);
@@ -67,7 +67,7 @@ public class CarsCRUD {
     public Cars read(long id) {
         try {
             String sql = String.format(
-                    "SELECT * FROM `cars` WHERE `id`='%d'",
+                    "SELECT * FROM `car` WHERE `id`='%d'",
                     id);
             ResultSet resultSet = DBConnector.getStatement().executeQuery(sql);
             if (resultSet.next()) {

@@ -17,7 +17,7 @@ public class C_Init {
 
     public static void initDB() {
         try(Connection connection =
-                    DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/" +
+                    DriverManager.getConnection("jdbc:mysql://127.0.0.1:2016/" +
                             "?useUnicode=true&characterEncoding=UTF-8",
                             "root",
                             "");

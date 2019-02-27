@@ -50,13 +50,18 @@ public class RoleDAO extends AbstractDAO implements InterfaceDAO<Role> {
     public List<Role> getAll(String WHERE) throws SQLException {
         List<Role> result = new ArrayList<>();
             String sql = "SELECT * FROM `roles` "+WHERE;
-            ResultSet resultSet = executeQuery(sql);
+        try (
+                Connection connection = ConnCreator.getConnection();
+                Statement statement = connection.createStatement()
+        ) {
+            ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
                 Role role = new Role();
                 role.setId(resultSet.getLong("id"));
                 role.setRole(resultSet.getString("role"));
                 result.add(role);
             }
+        }
         return result;
     }
 }

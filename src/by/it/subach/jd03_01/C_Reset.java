@@ -16,7 +16,7 @@ public class C_Reset {
 
     public static void resetDB() {
         try (Connection connection =
-                     DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/" +
+                     DriverManager.getConnection("jdbc:mysql://127.0.0.1:2016/" +
                                      "?useUnicode=true&characterEncoding=UTF-8",
                              "root",
                              "");

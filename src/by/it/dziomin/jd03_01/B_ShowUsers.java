@@ -10,7 +10,7 @@ class B_ShowUsers {
         try {
             ResultSet resultset = DBConnector.getStatement().executeQuery(SHOW_USERS);
             while (resultset.next()) {
-                System.out.println(resultset.getString("name")+", "+resultset.getString("role"));
+                System.out.println(resultset.getString("name")+", "+resultset.getString("name"));
             }
         } catch (SQLException e) {
             System.out.println("Ошибка заполнения таблиц данными");

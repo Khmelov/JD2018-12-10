@@ -77,7 +77,7 @@ public class Users {
 
     @Override
     public String toString() {
-        return "Users{" +
+        return "User{" +
                 "user=" + user +
                 "}\n";
     }

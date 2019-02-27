@@ -73,7 +73,7 @@ public class Rents {
 
     @Override
     public String toString() {
-        return "Rents{" +
+        return "Rent{" +
                 "rent=" + rent +
                 '}'+"\n";
     }

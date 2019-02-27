@@ -1,6 +1,5 @@
 package by.it.subach.jd03_03;
 
-import by.it.subach.jd03_02.CN;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,7 +1,7 @@
 package by.it.zagurskaya.jd03_04.java;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
-public class Cmd {
-//    Action execute(HttpServletResponse req) throws Exception;
+public interface Cmd {
+    Action execute(HttpServletRequest req) throws Exception;
 }

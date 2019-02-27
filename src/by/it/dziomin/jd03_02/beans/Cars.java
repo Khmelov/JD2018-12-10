@@ -60,7 +60,7 @@ public class Cars {
 
     @Override
     public String toString() {
-        return "Cars{" +
+        return "Car{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", number='" + number + '\'' +

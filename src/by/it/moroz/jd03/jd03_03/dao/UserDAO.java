@@ -61,7 +61,11 @@ public class UserDAO extends AbstractDAO implements InterfaceDAO<User> {
             String sql = String.format(
                     "SELECT * FROM `users` " + WHERE,
                     WHERE);
-            ResultSet resultSet = executeQuery(sql);
+        try (
+                Connection connection = ConnCreator.getConnection();
+                Statement statement = connection.createStatement()
+        ) {
+            ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getLong("id"));
@@ -75,6 +79,7 @@ public class UserDAO extends AbstractDAO implements InterfaceDAO<User> {
                 user.setRoles_id(resultSet.getLong("roles_id"));
                 result.add(user);
             }
+        }
         return result;
     }
 }

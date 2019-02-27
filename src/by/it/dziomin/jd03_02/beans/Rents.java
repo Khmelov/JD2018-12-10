@@ -12,7 +12,6 @@ public class Rents {
         this.id = id;
         this.date = date;
         this.price = price;
-        this.isOpen = isOpen;
         this.usersId = usersId;
         this.carsId = carsId;
     }
@@ -44,12 +43,12 @@ public class Rents {
         this.price = price;
     }
 
-    public int isOpen() {
+    public int getIsOpen() {
         return isOpen;
     }
 
-    public void setOpen(int open) {
-        isOpen = open;
+    public void setIsOpen(int isOpen) {
+        this.isOpen = isOpen;
     }
 
     public long getUsersId() {
@@ -70,7 +69,7 @@ public class Rents {
 
     @Override
     public String toString() {
-        return "Rents{" +
+        return "Rent{" +
                 "id=" + id +
                 ", date=" + date +
                 ", price=" + price +

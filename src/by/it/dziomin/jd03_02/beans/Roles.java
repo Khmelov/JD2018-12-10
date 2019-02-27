@@ -2,11 +2,11 @@ package by.it.dziomin.jd03_02.beans;
 
 public class Roles {
     private long id;
-    private String role;
+    private String name;
 
-    public Roles(int id, String role) {
+    public Roles(int id, String name) {
         this.id = id;
-        this.role = role;
+        this.name = name;
     }
 
     public Roles() {
@@ -20,19 +20,19 @@ public class Roles {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getName() {
+        return name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Roles{" +
+        return "Role{" +
                 "id=" + id +
-                ", role='" + role + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

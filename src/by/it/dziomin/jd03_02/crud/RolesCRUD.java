@@ -13,8 +13,8 @@ public class RolesCRUD {
     public boolean create(Roles role) {
         try {
             String sql = String.format(
-                    "INSERT INTO `roles`(`role`) VALUES ('%s')",
-                    role.getRole());
+                    "INSERT INTO `role`(`name`) VALUES ('%s')",
+                    role.getName());
             int count = DBConnector.getStatement().executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             if (count == 1) {
                 ResultSet generatedKeys = DBConnector.getStatement().getGeneratedKeys();
@@ -32,9 +32,9 @@ public class RolesCRUD {
     public boolean update(Roles role) {
         try {
             String sql = String.format(
-                    "UPDATE `roles` SET `role`='%s' " +
+                    "UPDATE `role` SET `name`='%s' " +
                             "WHERE `id`='%d'",
-                    role.getRole(),
+                    role.getName(),
                     role.getId());
             return 1 == DBConnector.getStatement().executeUpdate(sql);
         } catch (SQLException e) {
@@ -46,7 +46,7 @@ public class RolesCRUD {
     public boolean delete(Roles role) {
         try {
             String sql = String.format(
-                    "DELETE FROM `roles` WHERE `id`='%d'",
+                    "DELETE FROM `role` WHERE `id`='%d'",
                     role.getId());
 
             return 1 == DBConnector.getStatement().executeUpdate(sql);
@@ -60,13 +60,13 @@ public class RolesCRUD {
     public Roles read(long id) {
         try {
             String sql = String.format(
-                    "SELECT * FROM `roles` WHERE `id`='%d'",
+                    "SELECT * FROM `role` WHERE `id`='%d'",
                     id);
             ResultSet resultSet = DBConnector.getStatement().executeQuery(sql);
             if (resultSet.next()) {
                 Roles role = new Roles();
                 role.setId(resultSet.getLong("id"));
-                role.setRole(resultSet.getString("role"));
+                role.setName(resultSet.getString("name"));
                 return role;
             }
         } catch (SQLException e) {

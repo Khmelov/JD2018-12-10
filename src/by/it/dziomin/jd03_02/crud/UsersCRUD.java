@@ -14,7 +14,7 @@ public class UsersCRUD {
     public boolean create(Users user) {
         try {
             String sql = String.format(
-                    "INSERT INTO `dziomin`.`users` (`id`, `name`, `passport`, `phone`, `roles_id`) " +
+                    "INSERT INTO `dziomin`.`user` (`id`, `name`, `passport`, `phone`, `role_id`) " +
                             "VALUES ('%d', '%s', '%s', '%s', %d);",
                     user.getId(),
                     user.getName(),
@@ -38,7 +38,7 @@ public class UsersCRUD {
     public boolean update(Users user) {
         try {
             String sql = String.format(
-                    "UPDATE `users` SET `name`='%s'," + "`passport`='%s'," + "`phone`='%s'," + "`roles_id`='%d'" +
+                    "UPDATE `user` SET `name`='%s'," + "`passport`='%s'," + "`phone`='%s'," + "`role_id`='%d'" +
                             "WHERE `id`='%d'",
                     user.getName(),
                     user.getPassport(),
@@ -55,7 +55,7 @@ public class UsersCRUD {
     public boolean delete(Users user) {
         try {
             String sql = String.format(
-                    "DELETE FROM `users` WHERE `id`='%d'",
+                    "DELETE FROM `user` WHERE `id`='%d'",
                     user.getId());
 
             return 1 == DBConnector.getStatement().executeUpdate(sql);
@@ -69,7 +69,7 @@ public class UsersCRUD {
     public Users read(long id) {
         try {
             String sql = String.format(
-                    "SELECT * FROM `users` WHERE `id`='%d'",
+                    "SELECT * FROM `user` WHERE `id`='%d'",
                     id);
             ResultSet resultSet = DBConnector.getStatement().executeQuery(sql);
             if (resultSet.next()) {
@@ -78,7 +78,7 @@ public class UsersCRUD {
                 user.setName(resultSet.getString("name"));
                 user.setPassport(resultSet.getString("passport"));
                 user.setPhone(resultSet.getString("phone"));
-                user.setRoleId(resultSet.getLong("roles_id"));
+                user.setRoleId(resultSet.getLong("role_id"));
                 return user;
             }
         } catch (SQLException e) {
