@@ -17,7 +17,8 @@ public class Reset {
         ) {
 
             statement.executeUpdate("DROP SCHEMA IF EXISTS `naron` ;");
-            statement.executeUpdate("CREATE SCHEMA IF NOT EXISTS `naron` DEFAULT CHARACTER SET utf8 ;");
+            statement.executeUpdate("CREATE SCHEMA IF NOT EXISTS `naron` " +
+                                        "DEFAULT CHARACTER SET utf8 ;");
 //            statement.executeUpdate("DROP TABLE IF EXISTS `naron`.`roles` ;");
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS `naron`.`roles` (\n" +
                     "  `id` INT NOT NULL AUTO_INCREMENT,\n" +

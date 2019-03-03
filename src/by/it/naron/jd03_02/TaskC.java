@@ -10,12 +10,12 @@ import java.util.Scanner;
 public class TaskC {
     private static void deleteTables() {
         try (Statement statement = Connect.getConnection().createStatement()) {
-            statement.executeUpdate("DROP SCHEMA IF EXISTS `naron` ;");
+            statement.executeUpdate("DROP DATABASE IF EXISTS `naron` ;");
 
-            statement.executeUpdate("DROP TABLE IF EXISTS `naron`.`orders`;");
-            statement.executeUpdate("DROP TABLE IF EXISTS `naron`.`goods_flower`;");
-            statement.executeUpdate("DROP TABLE IF EXISTS `naron`.`users`;");
-            statement.executeUpdate("DROP TABLE IF EXISTS `naron`.`roles` ;");
+//            statement.executeUpdate("DROP TABLE IF EXISTS `naron`.`orders`;");
+//            statement.executeUpdate("DROP TABLE IF EXISTS `naron`.`goods_flower`;");
+//            statement.executeUpdate("DROP TABLE IF EXISTS `naron`.`users`;");
+//            statement.executeUpdate("DROP TABLE IF EXISTS `naron`.`roles` ;");
             System.out.println("tables deleted");
         } catch (SQLException e) {
             e.printStackTrace();
