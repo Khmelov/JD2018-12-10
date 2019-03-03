@@ -1,7 +1,7 @@
 .idea
 
 *.class
-*.jar
+*.jar1
 *.war
 *.ear
 *.iml

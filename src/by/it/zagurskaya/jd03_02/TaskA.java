@@ -14,7 +14,7 @@ public class TaskA {
 
     public static void main(String[] args) throws SQLException {
 //        ВАЖНО! В случае наличия \src\by\it\zagurskaya\jd03_02\Runner.java НЕ ЗАПУСКАТЬ!!!//
-//        ВАЖНО! для инициализации БД вызвать \src\by\it\zagurskaya\jd03_01\Runner.java
+//        ВАЖНО! для инициализации БД вызвать \src\by\it\zagurskaya\jd03_01\Runner.java (2 РАЗА!!!!!!!!!!)
 //        ВАЖНО! Далее поочередно \src\by\it\zagurskaya\jd03_02\TaskA.java -> TaskB.java -> TaskC.java
 
 

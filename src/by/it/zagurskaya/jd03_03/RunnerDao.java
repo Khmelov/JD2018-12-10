@@ -14,6 +14,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class RunnerDao {
+//    ВАЖНО!!!! перед запуском запустить InitDataBase.java
 
     static Map<Class, Dao> daoMap = new HashMap<>();
 
