@@ -14,8 +14,8 @@ public class SprEntriesDao extends AbstractDao implements Dao<SprEntries> {
     @Override
     public boolean create(SprEntries sprEntries) throws SQLException {
         String sql = String.format(
-                "INSERT INTO `sprEntries`(`id`, `name`, `currencyId`, `accountDebit`, `accountCredit`, `isSpending`, `rate`) VALUES ('%s','%s','%s','%s','%s','%s','%s')",
-                sprEntries.getId(), sprEntries.getName(), sprEntries.getCurrencyId(), sprEntries.getAccountDebit(), sprEntries.getAccountCredit(), sprEntries.getIsSpending() ? 1 : 0, sprEntries.getRate());
+                "INSERT INTO `sprEntries`(`id`, `name`, `currencyId`, `sprOperationsId`, `accountDebit`, `accountCredit`, `isSpending`, `rate`) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s')",
+                sprEntries.getId(), sprEntries.getName(), sprEntries.getCurrencyId(), sprEntries.getSprOperationsId() ,sprEntries.getAccountDebit(), sprEntries.getAccountCredit(), sprEntries.getIsSpending() ? 1 : 0, sprEntries.getRate());
 //        System.out.println(sql);
         long result = executeCreate(sql);
         return result == 0;
@@ -30,8 +30,8 @@ public class SprEntriesDao extends AbstractDao implements Dao<SprEntries> {
     @Override
     public boolean update(SprEntries sprEntries) throws SQLException {
           String sql = String.format(
-                  "UPDATE `sprEntries` SET `name`='%s', `currencyId`='%s',`accountDebit`='%s' ,`accountCredit`='%s', `isSpending`='%s',`rate`='%s',`id`='%d'  WHERE `id`='%d'",
-                  sprEntries.getName(), sprEntries.getCurrencyId(), sprEntries.getAccountDebit(), sprEntries.getAccountCredit(), sprEntries.getIsSpending()? 1 : 0, sprEntries.getRate(), sprEntries.getId(), sprEntries.getId());
+                  "UPDATE `sprEntries` SET `name`='%s', `currencyId`='%s', `sprOperationsId`='%s' ,`accountDebit`='%s' ,`accountCredit`='%s', `isSpending`='%s',`rate`='%s',`id`='%d'  WHERE `id`='%d'",
+                  sprEntries.getName(), sprEntries.getCurrencyId(), sprEntries.getSprOperationsId(), sprEntries.getAccountDebit(), sprEntries.getAccountCredit(), sprEntries.getIsSpending()? 1 : 0, sprEntries.getRate(), sprEntries.getId(), sprEntries.getId());
         return executeUpdate(sql);
     }
 
@@ -62,6 +62,7 @@ public class SprEntriesDao extends AbstractDao implements Dao<SprEntries> {
                 sprEntries.setId(resultSet.getLong("id"));
                 sprEntries.setName(resultSet.getString("name"));
                 sprEntries.setCurrencyId(resultSet.getLong("currencyId"));
+                sprEntries.setSprOperationsId(resultSet.getLong("sprOperationsId"));
                 sprEntries.setAccountDebit(resultSet.getString("accountDebit"));
                 sprEntries.setAccountCredit(resultSet.getString("accountCredit"));
                 sprEntries.setIsSpending(resultSet.getBoolean("isSpending"));

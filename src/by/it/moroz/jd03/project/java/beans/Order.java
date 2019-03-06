@@ -3,20 +3,18 @@ package by.it.moroz.jd03.project.java.beans;
 public class Order {
     
     private long id;
-    private String name;
+    private long menu_id;
     private int count;
-    private double price;
     private double check;
     private long users_id;
 
     public Order() {
     }
 
-    public Order(long id, String name, int count, double price, double check, long users_id) {
+    public Order(long id, long menu_id, int count, double check, long users_id) {
         this.id = id;
-        this.name = name;
+        this.menu_id = menu_id;
         this.count = count;
-        this.price = price;
         this.check = check;
         this.users_id = users_id;
     }
@@ -25,17 +23,13 @@ public class Order {
 
     public void setId(long id) { this.id = id; }
 
-    public String getName() { return name; }
+    public long getMenu_id() { return menu_id; }
 
-    public void setName(String name) { this.name = name; }
+    public void setMenu_id(long menu_id) { this.menu_id = menu_id; }
 
     public int getCount() { return count; }
 
     public void setCount(int count) { this.count = count; }
-
-    public double getPrice() { return price; }
-
-    public void setPrice(double price) { this.price = price; }
 
     public double getCheck() { return check; }
 
@@ -49,9 +43,8 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", menu_id='" + menu_id + '\'' +
                 ", count=" + count +
-                ", price=" + price +
                 ", check=" + check +
                 ", users_id=" + users_id +
                 '}';

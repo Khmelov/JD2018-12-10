@@ -33,10 +33,10 @@ CREATE TABLE IF NOT EXISTS `moroz`.`users` (
   `login` VARCHAR(100) NULL,
   `password` VARCHAR(100) NULL,
   `email` VARCHAR(100) NULL,
-  `adress` VARCHAR(100) NULL,
+  `address` VARCHAR(100) NULL,
   `name` VARCHAR(100) NULL,
   `surname` VARCHAR(100) NULL,
-  `numberphone` INT NULL,
+  `numberphone` INT(12) NULL,
   `roles_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_users_roles_idx` (`roles_id` ASC),
@@ -49,22 +49,38 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `moroz`.`menu`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `moroz`.`menu` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NULL,
+  `price` DOUBLE NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `moroz`.`orders`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `moroz`.`orders` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NULL,
+  `menu_id` INT NOT NULL,
   `count` INT NULL,
-  `price` DOUBLE NULL,
   `chek` DOUBLE NULL,
-  `user_id` INT NOT NULL,
+  `users_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_orders_users1_idx` (`user_id` ASC),
+  INDEX `fk_orders_users1_idx` (`users_id` ASC),
+  INDEX `fk_orders_Menu1_idx` (`menu_id` ASC),
   CONSTRAINT `fk_orders_users1`
-    FOREIGN KEY (`user_id`)
+    FOREIGN KEY (`users_id`)
     REFERENCES `moroz`.`users` (`id`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_orders_Menu1`
+    FOREIGN KEY (`menu_id`)
+    REFERENCES `moroz`.`menu` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -89,9 +105,23 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `moroz`;
-INSERT INTO `moroz`.`users` (`id`, `login`, `password`, `email`, `adress`, `name`, `surname`, `numberphone`, `roles_id`) VALUES (DEFAULT, 'TrinzoA', 'qwerty123', 'trizzzno@gmail.com', 'Nezavisimosti, 54-84', 'Andrei', 'Trizno', 375298564237, 2);
-INSERT INTO `moroz`.`users` (`id`, `login`, `password`, `email`, `adress`, `name`, `surname`, `numberphone`, `roles_id`) VALUES (DEFAULT, 'BorokhaM', 'borokha', NULL, NULL, 'Maria', 'Borokha', NULL, 1);
-INSERT INTO `moroz`.`users` (`id`, `login`, `password`, `email`, `adress`, `name`, `surname`, `numberphone`, `roles_id`) VALUES (DEFAULT, NULL, NULL, NULL, 'Kedishko, 3-1', 'Vladislau', 'Makarevich', 375447568394, 3);
+INSERT INTO `moroz`.`users` (`id`, `login`, `password`, `email`, `address`, `name`, `surname`, `numberphone`, `roles_id`) VALUES (DEFAULT, 'TrinzoA', 'qwerty123', 'trizzzno@gmail.com', 'Nezavisimosti, 54-84', 'Andrei', 'Trizno', 298563456, 2);
+INSERT INTO `moroz`.`users` (`id`, `login`, `password`, `email`, `address`, `name`, `surname`, `numberphone`, `roles_id`) VALUES (DEFAULT, 'BorokhaM', 'borokha', NULL, NULL, 'Maria', 'Borokha', NULL, 1);
+INSERT INTO `moroz`.`users` (`id`, `login`, `password`, `email`, `address`, `name`, `surname`, `numberphone`, `roles_id`) VALUES (DEFAULT, NULL, NULL, NULL, 'Kedishko, 3-1', 'Vladislau', 'Makarevich', 447568394, 3);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `moroz`.`menu`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `moroz`;
+INSERT INTO `moroz`.`menu` (`id`, `name`, `price`) VALUES (DEFAULT, 'steak', 29.6);
+INSERT INTO `moroz`.`menu` (`id`, `name`, `price`) VALUES (DEFAULT, 'pizza', 13.4);
+INSERT INTO `moroz`.`menu` (`id`, `name`, `price`) VALUES (DEFAULT, 'spaghetti', 11.6);
+INSERT INTO `moroz`.`menu` (`id`, `name`, `price`) VALUES (DEFAULT, 'salad', 9.3);
+INSERT INTO `moroz`.`menu` (`id`, `name`, `price`) VALUES (DEFAULT, 'coffe', 5.0);
 
 COMMIT;
 
@@ -101,11 +131,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `moroz`;
-INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `user_id`) VALUES (DEFAULT, 'Pizza', 2, 28.35, 56.7, 1);
-INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `user_id`) VALUES (DEFAULT, 'Spaghetti pepperoni', 1, 18.26, 18.26, 1);
-INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `user_id`) VALUES (DEFAULT, 'Coffee', 2, 5.00, 5.00, 1);
-INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `user_id`) VALUES (DEFAULT, 'Steak', 1, 35.85, 35.85, 3);
-INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `user_id`) VALUES (DEFAULT, 'Salad', 1, 13.25, 13.25, 3);
+INSERT INTO `moroz`.`orders` (`id`, `menu_id`, `count`, `chek`, `users_id`) VALUES (DEFAULT, 1, 2, 59.2, 1);
+INSERT INTO `moroz`.`orders` (`id`, `menu_id`, `count`, `chek`, `users_id`) VALUES (DEFAULT, 2, 1, 13.4, 1);
+INSERT INTO `moroz`.`orders` (`id`, `menu_id`, `count`, `chek`, `users_id`) VALUES (DEFAULT, 3, 2, 23.2, 1);
+INSERT INTO `moroz`.`orders` (`id`, `menu_id`, `count`, `chek`, `users_id`) VALUES (DEFAULT, 4, 1, 9.3, 3);
+INSERT INTO `moroz`.`orders` (`id`, `menu_id`, `count`, `chek`, `users_id`) VALUES (DEFAULT, 5, 1, 5.0, 3);
 
 COMMIT;
 

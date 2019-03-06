@@ -7,7 +7,10 @@ public enum Action {
     INDEX(new CmdIndex()),
     ERROR(new CmdError()),
     SIGNUP(new CmdSighUp()),
-    LOGIN(new CmdLogin());
+    LOGIN(new CmdLogin()),
+    ORDER(new CmdOrder()),
+    PROFILE(new CmdProfile()),
+    RESET(new CmdReset());
 
     Action(Cmd command) {
         this.command = command;

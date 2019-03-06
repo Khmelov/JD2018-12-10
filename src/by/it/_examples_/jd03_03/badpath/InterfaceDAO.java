@@ -7,7 +7,7 @@ interface InterfaceDAO<TYPE> {
     //READ чтение отдельной сущности
     TYPE read(int id) throws SQLException;
 
-    //CREATEGOODSFLOWER,UPDATE,DELETE обновление сущности
+    //CREATE,UPDATE,DELETE обновление сущности
     boolean create(TYPE entity) throws SQLException;
 
     boolean update(TYPE entity) throws SQLException;

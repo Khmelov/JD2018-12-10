@@ -9,7 +9,7 @@ public class Duties implements Entity {
     private int number;
     private boolean isClose;
 
-    public Duties () {
+    public Duties() {
     }
 
     public Duties(long id, long userId, Timestamp timestamp, int number, boolean isClose) {

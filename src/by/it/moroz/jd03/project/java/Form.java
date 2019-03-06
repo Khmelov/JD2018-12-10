@@ -16,10 +16,6 @@ public class Form {
             throw new SiteException("Value "+value+" incorrect");
     }
 
-    static String getString(HttpServletRequest req, String name) throws SiteException {
-        return getString(req, name, ".*");
-    }
-
     public static int getInt(HttpServletRequest req, String numberphone, String pattern) throws SiteException {
         String number = req.getParameter(numberphone);
         if(number.matches(pattern))
@@ -30,5 +26,16 @@ public class Form {
 
     public static int getInt(HttpServletRequest req, String numberphone) throws SiteException {
         return getInt(req, numberphone, ".*");
+    }
+
+    public static long getLong(HttpServletRequest req, String num) {
+        String number = req.getParameter(num);
+        //DAO.getDao().menu.read()
+        return Long.parseLong(number);
+    }
+
+    public static double getDouble(HttpServletRequest req, String price) {
+        String str = req.getParameter(price);
+        return Double.parseDouble(str);
     }
 }

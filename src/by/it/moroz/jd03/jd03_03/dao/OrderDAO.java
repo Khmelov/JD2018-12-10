@@ -2,14 +2,17 @@ package by.it.moroz.jd03.jd03_03.dao;
 
 import by.it.moroz.jd03.jd03_03.beans.Order;
 
- public class OrderDAO extends UniversalDAO<Order> {
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-      OrderDAO() {
-        super(Order.class, "orders");
-    }
+class OrderDAO extends AbstractDAO implements InterfaceDAO<Order> {
 
 
-    /*@Override
+    @Override
     public Order read(long id) throws SQLException {
         List<Order> orders = getAll("WHERE `id`=" + id);
         return orders.size()==0?null:orders.get(0);
@@ -17,18 +20,18 @@ import by.it.moroz.jd03.jd03_03.beans.Order;
 
     @Override
     public boolean create(Order order) throws SQLException {
-        String sql = String.format("INSERT INTO `orders` (`name`, `count`, `price`, `check`, `users_id`)"+
-                "VALUES ('%s','%d','%f','%f','%d')", order.getName(),order.getCount(),order.getPrice(),
-                order.getCheck(),order.getUser_id());
+        String sql = String.format("INSERT INTO `orders` (`menu_id`, `count`, `check`, `users_id`)"+
+                "VALUES ('%d','%d','%f','%d')", order.getMenu_id(),order.getCount(),
+                order.getCheck(),order.getUsers_id());
         order.setId(executeCreate(sql));
         return order.getId()>0;
     }
 
     @Override
     public boolean update(Order order) throws SQLException {
-        String sql = String.format("UPDATE `orders` SET `name`='%s', `count`='%d', `price`='%f', " +
+        String sql = String.format("UPDATE `orders` SET `menu_id`='%d', `count`='%d', " +
                         "`check`='%f', `user_id`='%d' WHERE `id`='%d'",
-                order.getName(), order.getCount(), order.getPrice(), order.getCheck(), order.getUser_id(),
+                order.getMenu_id(), order.getCount(), order.getCheck(), order.getUsers_id(),
                 order.getId());
         return executeUpdate(sql);
     }
@@ -50,17 +53,19 @@ import by.it.moroz.jd03.jd03_03.beans.Order;
     public List<Order> getAll(String WHERE) throws SQLException {
         List<Order> result = new ArrayList<>();
             String sql = "SELECT * FROM `orders` "+WHERE;
-            ResultSet resultSet = executeQuery(sql);
+        try (Connection connection = ConnCreator.getConnection();
+             Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 Order order = new Order();
                 order.setId(resultSet.getLong("id"));
-                order.setName(resultSet.getString("name"));
+                order.setMenu_id(resultSet.getLong("menu_id"));
                 order.setCount(resultSet.getInt("count"));
-                order.setPrice(resultSet.getDouble("price"));
                 order.setCheck(resultSet.getDouble("check"));
-                order.setUser_id(resultSet.getLong("users_id"));
+                order.setUsers_id(resultSet.getLong("users_id"));
                 result.add(order);
             }
+        }
         return result;
-    }*/
+    }
 }

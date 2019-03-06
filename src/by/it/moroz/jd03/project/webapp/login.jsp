@@ -1,11 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <%@ include file="include/head.jsp" %>
 <body>
 <div class="container">
     <%@ include file="include/menu.jsp" %>
-
-    User: ${user}
-    <br>
 
     <form class="form-horizontal" action="do?command=Login" method="post">
         <fieldset>
@@ -17,7 +15,7 @@
             <div class="form-group">
                  <label class="col-md-4 control-label" for="email">Email</label>
                  <div class="col-md-4">
-                     <input id="email" name="email" type="text" placeholder="" class="form-control input-md">
+                     <input id="email" name="email" value="testEmail@gmail.com" type="text" placeholder="" class="form-control input-md">
 
                  </div>
             </div>
@@ -26,7 +24,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="password">Password</label>
                 <div class="col-md-4">
-                    <input id="password" name="password" type="password" placeholder="" class="form-control input-md">
+                    <input id="password" name="password" value="testPassword" type="password" placeholder="" class="form-control input-md">
 
                 </div>
             </div>

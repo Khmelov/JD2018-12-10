@@ -15,7 +15,7 @@ public class DutiesDao extends AbstractDao implements Dao<Duties> {
     public boolean create(Duties duties) throws SQLException {
         String sql = String.format(
                 "INSERT INTO `duties`(`userId`, `timestamp`, `number`, `isClose`) VALUES ('%s','%s','%s','%s')",
-                duties.getNumber(), duties.getTimestamp(), duties.getNumber(), duties.getIsClose() ? 1 : 0);
+                duties.getUserId(), duties.getTimestamp(), duties.getNumber(), duties.getIsClose() ? 1 : 0);
 //        System.out.println(sql);
         duties.setId(executeCreate(sql));
         return duties.getId() > 0;

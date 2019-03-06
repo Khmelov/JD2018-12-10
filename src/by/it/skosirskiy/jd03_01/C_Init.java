@@ -7,25 +7,25 @@ import java.sql.Statement;
 
 public class C_Init {
 
-
-
-
-
-
+    static {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error loading driver: " + e);
+        }
+    }
     void loadTables() {
         try (Connection connection =
                      DriverManager.getConnection(
-                             "jdbc:mysql://127.0.0.1:2016/skosirskiy"+
-                             "?useUnicode=true&characterEncoding=UTF-8",
+                             "jdbc:mysql://127.0.0.1:2016/"+
+                                     "?useUnicode=true&characterEncoding=UTF-8",
                              "root",
                              "");
              Statement statement = connection.createStatement()
         ) {
-//            statement.executeUpdate("DROP SCHEMA IF EXISTS `skosirskiy` ;");
-//            statement.executeUpdate(
-//                    "CREATEGOODSFLOWER SCHEMA IF NOT EXISTS `skosirskiy` DEFAULT CHARACTER SET utf8 ;\n" +
-//                            "USE `skosirskiy` ;"
-//                    );
+            statement.executeUpdate("DROP SCHEMA IF EXISTS `skosirskiy` ;");
+
+            statement.executeUpdate("CREATE SCHEMA IF NOT EXISTS `skosirskiy` DEFAULT CHARACTER SET utf8 ;");
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS `skosirskiy`.`address` (\n" +
                     "  `id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
                     "  `city` VARCHAR(45) NULL DEFAULT NULL,\n" +
@@ -88,11 +88,11 @@ public class C_Init {
                     "ENGINE = InnoDB\n" +
                     "AUTO_INCREMENT = 8\n" +
                     "DEFAULT CHARACTER SET = utf8");
-            statement.executeUpdate("INSERT INTO `address` (`id`, `city`, `street`, `house`, `flat`) VALUES\n" +
+            statement.executeUpdate("INSERT INTO `skosirskiy`.`address` (`id`, `city`, `street`, `house`, `flat`) VALUES\n" +
                     "(2, 'minsk', 'lenina', '11', 5),\n" +
                     "(3, 'minsk', 'marksa', '15', 13);");
 
-            statement.executeUpdate("INSERT INTO `roles` (`id`, `role`) VALUES\n" +
+            statement.executeUpdate("INSERT INTO `skosirskiy`.`roles` (`id`, `role`) VALUES\n" +
                     "(1, 'admin'),\n" +
                     "(2, 'user'),\n" +
                     "(3, 'dispatcher'),\n" +
@@ -101,11 +101,11 @@ public class C_Init {
                     "(6, 'dispatcher'),\n" +
                     "(7, 'worker'),\n" +
                     "(8, 'brigadier');\n");
-            statement.executeUpdate("INSERT INTO `statuses` (`id`, `status`) VALUES\n" +
+            statement.executeUpdate("INSERT INTO `skosirskiy`.`statuses` (`id`, `status`) VALUES\n" +
                     "(1, 'in_work'),\n" +
                     "(2, 'canceled'),\n" +
                     "(3, 'complete');");
-            statement.executeUpdate("INSERT INTO `users` (`id`, `login`, `password`, `email`, `roles_id`) VALUES\n" +
+            statement.executeUpdate("INSERT INTO `skosirskiy`.`users` (`id`, `login`, `password`, `email`, `roles_id`) VALUES\n" +
                     "(1, 'sidorov', 'sidorov', 'sidorov@mail.ru', 1),\n" +
                     "(2, 'petrov', 'petrov', 'petrov@mail.ru', 2),\n" +
                     "(3, 'ivanov1', 'ivanov1', 'ivanov1@mail.ru', 2),\n" +
@@ -113,7 +113,7 @@ public class C_Init {
                     "(5, 'sergei', 'sergei', 'sergei@mail.ru', 3),\n" +
                     "(6, 'alex', 'alex', 'alex@mail.ru', 4),\n" +
                     "(7, 'iliya', 'iliya', 'iliya@mail.ru', 5);");
-            statement.executeUpdate("INSERT INTO `requests` (`id`, `type`, `date_create`, `date_complete`, `user_id`, `status_id`, `address_id`) VALUES\n" +
+            statement.executeUpdate("INSERT INTO `skosirskiy`.`requests` (`id`, `type`, `date_create`, `date_complete`, `user_id`, `status_id`, `address_id`) VALUES\n" +
                     "(4, 'no water', '2019-02-01', '2019-02-07', 2, 3, 2),\n" +
                     "(5, 'no water', '2019-02-02', '2019-02-08', 4, 3, 3),\n" +
                     "(6, 'fix the door', '2019-02-08', '2019-02-28', 4, 1, 3),\n" +

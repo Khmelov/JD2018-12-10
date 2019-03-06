@@ -12,8 +12,8 @@ class OrderCRUD {
     boolean createOrder(Order order) throws SQLException {
         try (Connection connection = ConnCreator.getConnection();
              Statement statement = connection.createStatement()) {
-            String create = String.format("INSERT INTO `moroz`.`orders` (`name`, `count`, `price`, `check`, `users_id`)" +
-                    " VALUES ('%s', '%d', '%f', '%f', '%d')", order.getName(), order.getCount(), order.getPrice(),
+            String create = String.format("INSERT INTO `moroz`.`orders` (`menu_id`, `count`, `check`, `users_id`)" +
+                    " VALUES ('%d', '%d', '%f', '%d')", order.getMenu_id(), order.getCount(),
                     order.getCheck(), order.getUsers_id());
             int i = statement.executeUpdate(create, Statement.RETURN_GENERATED_KEYS);
             if (i == 1) {
@@ -35,9 +35,8 @@ class OrderCRUD {
             if (resultSet.next()) {
                 Order order = new Order();
                 order.setId(resultSet.getLong("id"));
-                order.setName(resultSet.getString("name"));
+                order.setMenu_id(resultSet.getLong("menu_id"));
                 order.setCount(resultSet.getInt("count"));
-                order.setPrice(resultSet.getDouble("price"));
                 order.setCheck(resultSet.getDouble("check"));
                 order.setUsers_id(resultSet.getLong("users_id"));
                 return order;
@@ -49,9 +48,9 @@ class OrderCRUD {
     boolean updateOrder(Order order) throws SQLException {
         try (Connection connection = ConnCreator.getConnection();
              Statement statement = connection.createStatement()) {
-            String update = String.format("UPDATE `orders` SET `name`='%s', `count`='%d', `price`='%f', " +
+            String update = String.format("UPDATE `orders` SET `menu_id`='%d', `count`='%d', " +
                             "`check`='%f', `users_id`='%d' WHERE `id`='%d'",
-                    order.getName(), order.getCount(), order.getPrice(), order.getCheck(), order.getUsers_id(),
+                    order.getMenu_id(), order.getCount(), order.getCheck(), order.getUsers_id(),
                     order.getId());
             return 1==statement.executeUpdate(update);
         }

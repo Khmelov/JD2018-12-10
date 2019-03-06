@@ -1,5 +1,6 @@
 <html>
 <%@ include file="/../include/head.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <body>
 <div class="container">
     <%@ include file="/../include/menucash.jsp" %>

@@ -1,5 +1,6 @@
 package by.it.moroz.jd03.project.java.dao;
 
+import by.it.moroz.jd03.project.java.MD5;
 import by.it.moroz.jd03.project.java.beans.User;
 
 import java.sql.Connection;
@@ -23,7 +24,7 @@ public class UserDAO extends AbstractDAO implements InterfaceDAO<User> {
                     "INSERT INTO `users`(`login`, `password`, `email`, `address`, `name`, `surname`, " +
                             "`numberphone`, `roles_id`) " +
                             "VALUES ('%s','%s','%s','%s','%s','%s','%d','%d')",
-                    user.getLogin(), user.getPassword(), user.getEmail(), user.getAddress(),
+                    user.getLogin(), MD5.getHash(user.getPassword()), user.getEmail(), user.getAddress(),
                     user.getName(), user.getSurname(),user.getNumberphone(), user.getRoles_id());
             user.setId(executeCreate(sql));
         return user.getId()>0;

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class C_CreateTable {
     public void readСommands(Connection connection) throws SQLException {
-
+//public static void main(String[] args) {
         String filePath = getPath(C_CreateTable.class, "cash_zagurskaya.sql");
         StringBuilder textFromFile = new StringBuilder();
         textFromFile = readTextFile(filePath, textFromFile);
@@ -24,13 +25,20 @@ public class C_CreateTable {
     }
 
     private static String getPath(Class<?> clazz, String filename) {
-        String path = clazz.getName();
-        path = path.replace(clazz.getSimpleName(), "");
-        path = path.replace(".", File.separator);
-        path = System.getProperty("user.dir")
-                + File.separator + "src" + File.separator + path;
+        String path = clazz.getResource("").toString()
+                .replaceAll("/WEB-INF/.*", "/")
+                .replace("file:/", "") + "sql/";
+
         return path + filename;
     }
+//    private static String getPath(Class<?> clazz, String filename) {
+//        String path = clazz.getName();
+//        path = path.replace(clazz.getSimpleName(), "");
+//        path = path.replace(".", File.separator);
+//        path = System.getProperty("user.dir")
+//                + File.separator + "src" + File.separator + path;
+//        return path + filename;
+//    }
 
     private static StringBuilder readTextFile(String path, StringBuilder textFromFile) {
 

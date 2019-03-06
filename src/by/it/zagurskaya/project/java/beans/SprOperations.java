@@ -3,18 +3,14 @@ package by.it.zagurskaya.project.java.beans;
 public class SprOperations implements Entity {
     private long id;
     private String name;
-    private String printForm;
-    private String screenForm;
     private String specification;
 
     public SprOperations() {
     }
 
-    public SprOperations(long id, String name, String printForm, String screenForm, String specification) {
+    public SprOperations(long id, String name, String specification) {
         this.id = id;
         this.name = name;
-        this.printForm = printForm;
-        this.screenForm = screenForm;
         this.specification = specification;
     }
 
@@ -35,22 +31,6 @@ public class SprOperations implements Entity {
         this.name = name;
     }
 
-    public String getPrintForm() {
-        return printForm;
-    }
-
-    public void setPrintForm(String printForm) {
-        this.printForm = printForm;
-    }
-
-    public String getScreenForm() {
-        return screenForm;
-    }
-
-    public void setScreenForm(String screenForm) {
-        this.screenForm = screenForm;
-    }
-
     public String getSpecification() {
         return specification;
     }
@@ -64,8 +44,6 @@ public class SprOperations implements Entity {
         return "SprOperations{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", printForm='" + printForm + '\'' +
-                ", screenForm='" + screenForm + '\'' +
                 ", specification='" + specification + '\'' +
                 '}';
     }

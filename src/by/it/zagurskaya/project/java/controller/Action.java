@@ -1,9 +1,10 @@
 package by.it.zagurskaya.project.java.controller;
 
 import javax.servlet.http.HttpServletRequest;
-
 import by.it.zagurskaya.project.java.controller.cash.*;
 import by.it.zagurskaya.project.java.controller.cash.cmdcurrency.*;
+import by.it.zagurskaya.project.java.controller.cash.cmdmain.CmdCloseDuties;
+import by.it.zagurskaya.project.java.controller.cash.cmdmain.CmdOpenDuties;
 import by.it.zagurskaya.project.java.controller.cash.cmdoperation.*;
 import by.it.zagurskaya.project.java.controller.cash.cmdoperation.cmdpayment.*;
 import by.it.zagurskaya.project.java.controller.cash.cmdreport.*;
@@ -14,6 +15,8 @@ public enum Action {
     ERROR(new CmdError()),
     LOGIN(new CmdLogin()),
     RESETDB(new CmdResetDB()),
+    LOGOUT(new CmdLogout()),
+    PROFILE(new CmdProfile()),
     SIGNUP(new CmdSignup()),
 
     //    CASH
@@ -22,6 +25,10 @@ public enum Action {
     OPERATION(new CmdOperation()),
     REPORT(new CmdReport()),
     EXIT(new CmdExit()),
+
+    //    CASH/CMDMAIN
+    CLOSEDUTIES(new CmdCloseDuties()),
+    OPENDUTIES(new CmdOpenDuties()),
 
     //    CASH / CMDCURRENCY
     ALLCURRENCY(new CmdAllCurrency()),

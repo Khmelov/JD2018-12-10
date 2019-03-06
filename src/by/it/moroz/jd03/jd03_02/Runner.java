@@ -1,5 +1,6 @@
 package by.it.moroz.jd03.jd03_02;
 
+import by.it.moroz.jd03.jd03_02.beans.Menu;
 import by.it.moroz.jd03.jd03_02.beans.Order;
 import by.it.moroz.jd03.jd03_02.beans.Role;
 import by.it.moroz.jd03.jd03_02.beans.User;
@@ -40,9 +41,9 @@ public class Runner {
 
         OrderCRUD orderCRUD = new OrderCRUD();
 
-        Order order = new Order(0, "TestName", 2, 35.5, 71, 2);
+        Order order = new Order(0, 2, 2, 26.8, 2);
         if(orderCRUD.createOrder(order))
-            System.out.println("CREATE OK: " + order);
+           System.out.println("CREATE OK: " + order);
         order.setCount(1);
         if(orderCRUD.updateOrder(order))
             System.out.println("UPDATE OK: " + order);
@@ -52,6 +53,18 @@ public class Runner {
         if(orderCRUD.deleteOrder(order))
             System.out.println("DELETE OK: " + order);
 
+        MenuCRUD menuCRUD = new MenuCRUD();
 
+        Menu menu = new Menu(0, "Tea", 3.6);
+        if(menuCRUD.createMenu(menu))
+            System.out.println("CREATE OK: " + menu);
+        menu.setPrice(2.5);
+        if(menuCRUD.updateMenu(menu))
+            System.out.println("UPDATE OK: " + menu);
+        menu = menuCRUD.readMenu(menu.getId());
+        if(menu!=null)
+            System.out.println("READ OK: " + menu);
+        if(menuCRUD.deleteMenu(menu))
+            System.out.println("DELETE OK: " + menu);
     }
 }

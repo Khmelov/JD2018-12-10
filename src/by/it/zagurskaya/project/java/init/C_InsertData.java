@@ -24,13 +24,20 @@ public class C_InsertData {
     }
 
     private static String getPath(Class<?> clazz, String filename) {
-        String path = clazz.getName();
-        path = path.replace(clazz.getSimpleName(), "");
-        path = path.replace(".", File.separator);
-        path = System.getProperty("user.dir")
-                + File.separator + "src" + File.separator + path;
+        String path = clazz.getResource("").toString()
+                .replaceAll("/WEB-INF/.*", "/")
+                .replace("file:/", "") + "sql/";
+
         return path + filename;
     }
+//    private static String getPath(Class<?> clazz, String filename) {
+//        String path = clazz.getName();
+//        path = path.replace(clazz.getSimpleName(), "");
+//        path = path.replace(".", File.separator);
+//        path = System.getProperty("user.dir")
+//                + File.separator + "src" + File.separator + path;
+//        return path + filename;
+//    }
 
     private static StringBuilder readTextFile(String path, StringBuilder textFromFile) {
 

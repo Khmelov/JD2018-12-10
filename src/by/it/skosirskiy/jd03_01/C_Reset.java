@@ -21,6 +21,7 @@ public class C_Reset {
             statement.executeUpdate("DROP TABLE `skosirskiy`.`roles`;");
             statement.executeUpdate("DROP TABLE `skosirskiy`.`statuses`;");
             statement.executeUpdate("DROP TABLE `skosirskiy`.`address`;");
+            statement.executeUpdate("DROP DATABASE IF EXISTS `skosirskiy`;");
 
 
         }

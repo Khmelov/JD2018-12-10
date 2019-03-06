@@ -22,11 +22,12 @@ public Address read(int id) {
 @Override
 public boolean create(Address address) {
         String sql = String.format(
-        "insert INTO Address(address)" +
-        " values('%s', '%s', '%s','%d');",
+        "insert INTO `address`" +
+        " values(0, '%s', '%s', '%s','%d');",
         address.getCity(), address.getStreet(), address.getHouse(), address.getFlat()
         );
         address.setId(executeUpdate(sql));
+        System.out.println(sql);
         return (address.getId()>0);
         }
 
@@ -50,7 +51,8 @@ public boolean delete(Address address) {
 @Override
 public List<Address> getAll(String WHERE) {
         List<Address> Addresses = new ArrayList<>();
-        String sql = "SELECT * FROM address " + WHERE + " ;";
+        String sql = "SELECT * FROM `address` " + WHERE + ";";
+        System.out.println("sql  "+sql);
         try (Connection connection = ConnCreator.getConnection();
              Statement statement = connection.createStatement()
         ) {

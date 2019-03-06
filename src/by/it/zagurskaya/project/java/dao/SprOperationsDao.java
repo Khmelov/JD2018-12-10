@@ -14,8 +14,8 @@ public class SprOperationsDao extends AbstractDao implements Dao<SprOperations> 
     @Override
     public boolean create(SprOperations sprOperations) throws SQLException {
         String sql = String.format(
-                "INSERT INTO `sprOperations`(`id`, `name`, `printForm`, `screenForm`, `specification`) VALUES ('%s','%s','%s','%s','%s')",
-                sprOperations.getId(), sprOperations.getName(), sprOperations.getPrintForm(), sprOperations.getScreenForm(), sprOperations.getSpecification());
+                "INSERT INTO `sprOperations`(`id`, `name`, `specification`) VALUES ('%s','%s','%s')",
+                sprOperations.getId(), sprOperations.getName(),  sprOperations.getSpecification());
 //        System.out.println(sql);
         long result = executeCreate(sql);
         return result == 0;
@@ -30,8 +30,8 @@ public class SprOperationsDao extends AbstractDao implements Dao<SprOperations> 
     @Override
     public boolean update(SprOperations sprOperations) throws SQLException {
           String sql = String.format(
-                  "UPDATE `sprOperations` SET `name`='%s', `printForm`='%s',`screenForm`='%s' ,`specification`='%s',`id`='%d'  WHERE `id`='%d'",
-                  sprOperations.getName(), sprOperations.getPrintForm(), sprOperations.getScreenForm(), sprOperations.getSpecification(), sprOperations.getId(), sprOperations.getId());
+                  "UPDATE `sprOperations` SET `name`='%s', `specification`='%s',`id`='%d'  WHERE `id`='%d'",
+                  sprOperations.getName(), sprOperations.getSpecification(), sprOperations.getId(), sprOperations.getId());
         return executeUpdate(sql);
     }
 
@@ -61,9 +61,6 @@ public class SprOperationsDao extends AbstractDao implements Dao<SprOperations> 
                 SprOperations sprOperations = new SprOperations();
                 sprOperations.setId(resultSet.getLong("id"));
                 sprOperations.setName(resultSet.getString("name"));
-                sprOperations.setPrintForm(resultSet.getString("printForm"));
-                sprOperations.setScreenForm(resultSet.getString("screenForm"));
-                sprOperations.setSpecification(resultSet.getString("specification"));
                 result.add(sprOperations);
             }
         }

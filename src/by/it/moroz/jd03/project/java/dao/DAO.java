@@ -8,11 +8,13 @@ public class DAO {
     public RoleDAO role;
     public UserDAO user;
     public OrderDAO order;
+    public MenuDAO menu;
 
     public DAO() {
         role = new RoleDAO();
         user = new UserDAO();
         order = new OrderDAO();
+        menu = new MenuDAO();
     }
 
     public static DAO getDao() {

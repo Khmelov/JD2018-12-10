@@ -1,7 +1,8 @@
 package by.it.zagurskaya.project.java.controller;
 
-//import by.it.zagurskaya.project.java.beans.Ad;
-//import by.it.zagurskaya.project.java.dao.Dao;
+//import by.it.a_khmelev.project06.java.beans.Ad;
+//import by.it.a_khmelev.project06.java.beans.User;
+//import by.it.a_khmelev.project06.java.dao.Dao;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
@@ -17,23 +18,26 @@ public class CmdCreateAd implements Cmd {
 
     @Override
     public Action execute(HttpServletRequest req) throws Exception {
-//        if (Form.isPost(req)) {
-//            Ad Gds = new Ad();
-//            Gds.setDescription(Form.getString(req, "description"));
-//            Gds.setAddress(Form.getString(req, "address"));
-//            Gds.setFloor(Form.getInt(req, "floor"));
-//            Gds.setFloors(Form.getInt(req, "floors"));
-//            Gds.setRooms(Form.getInt(req, "rooms"));
-//            Gds.setPrice(Form.getDouble(req, "price"));
-//            Gds.setArea(Form.getInt(req, "area"));
+//        User user = Util.findUser(req);
+//        if (user==null)
+//            return Action.LOGIN;
+//        if (Form.isPost(req) ) {
+//            Ad ad = new Ad();
+//            ad.setDescription(Form.getString(req, "description"));
+//            ad.setAddress(Form.getString(req, "address"));
+//            ad.setFloor(Form.getInt(req, "floor"));
+//            ad.setFloors(Form.getInt(req, "floors"));
+//            ad.setRooms(Form.getInt(req, "rooms"));
+//            ad.setPrice(Form.getDouble(req, "price"));
+//            ad.setArea(Form.getInt(req, "area"));
 //            Timestamp date = Timestamp.valueOf(LocalDateTime.now());
-//            Gds.setData(date);
-//            Gds.setUser_id(3);
-//            if (Dao.getDao().Gds.create(Gds))
-//                return Action.INDEX;
+//            ad.setData(date);
+//            ad.setUsers_id(user.getId());
+//            if (Dao.getDao().ad.create(ad))
+//                return Action.PROFILE;
 //
 //        }
-//        return Action.CREATEGDS;
-        return Action.INDEX;
+//        return Action.CREATEAD;
+        return null;
     }
 }

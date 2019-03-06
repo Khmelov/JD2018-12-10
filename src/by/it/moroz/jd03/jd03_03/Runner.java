@@ -1,6 +1,5 @@
 package by.it.moroz.jd03.jd03_03;
 
-import by.it.moroz.jd03.jd03_03.beans.Order;
 import by.it.moroz.jd03.jd03_03.beans.User;
 import by.it.moroz.jd03.jd03_03.dao.DAO;
 

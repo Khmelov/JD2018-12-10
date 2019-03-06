@@ -4,6 +4,7 @@ public class SprEntries implements Entity {
     private long id;
     private String name;
     private long currencyId;
+    private long sprOperationsId;
     private String accountDebit;
     private String accountCredit;
     private boolean isSpending;
@@ -12,10 +13,11 @@ public class SprEntries implements Entity {
     public SprEntries() {
     }
 
-    public SprEntries(long id, String name, long currencyId, String accountDebit, String accountCredit, boolean isSpending, double rate) {
+    public SprEntries(long id, String name, long currencyId, long sprOperationsId, String accountDebit, String accountCredit, boolean isSpending, double rate) {
         this.id = id;
         this.name = name;
         this.currencyId = currencyId;
+        this.sprOperationsId = sprOperationsId;
         this.accountDebit = accountDebit;
         this.accountCredit = accountCredit;
         this.isSpending = isSpending;
@@ -45,6 +47,14 @@ public class SprEntries implements Entity {
 
     public void setCurrencyId(long currencyId) {
         this.currencyId = currencyId;
+    }
+
+    public long getSprOperationsId() {
+        return sprOperationsId;
+    }
+
+    public void setSprOperationsId(long sprOperationsId) {
+        this.sprOperationsId = sprOperationsId;
     }
 
     public String getAccountDebit() {
@@ -85,6 +95,7 @@ public class SprEntries implements Entity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", currencyId=" + currencyId +
+                ", sprOperationsId=" + sprOperationsId +
                 ", accountDebit='" + accountDebit + '\'' +
                 ", accountCredit='" + accountCredit + '\'' +
                 ", isSpending=" + isSpending +

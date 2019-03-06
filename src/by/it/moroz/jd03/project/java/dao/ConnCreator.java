@@ -6,11 +6,6 @@ import java.sql.SQLException;
 
 public class ConnCreator {
 
-    private static final String URL = "jdbc:mysql://127.0.0.1:2016/moroz" +
-            "?useUnicode=true&characterEncoding=UTF-8";
-    private static final String USER = "root";
-    private static final String PASSWORD = "";
-
     static {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -25,9 +20,7 @@ public class ConnCreator {
             if (connection == null || connection.isClosed()) {
                 synchronized (ConnCreator.class) {
                     if (connection == null || connection.isClosed()) {
-                        connection = DriverManager.getConnection(
-                                URL, USER, PASSWORD
-                        );
+                        connection = DriverManager.getConnection(CN.URL, CN.USER, CN.PASSWORD);
                     }
                 }
 
