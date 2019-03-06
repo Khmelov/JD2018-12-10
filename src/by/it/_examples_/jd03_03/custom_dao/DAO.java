@@ -18,7 +18,7 @@ public class DAO {
                     dao.role = new RoleDAO();
                     dao.ad = new AdDAO();
                     //новые куски dao добавляются аналогично при расширении dao
-                    //dao.ad = new AdDAO();
+                    //dao.Gds = new AdDAO();
                     //...
                 }
             }

@@ -10,7 +10,7 @@ public class CmdIndex implements Cmd {
     @Override
     public Action execute(HttpServletRequest req) throws Exception {
         List<Goods_flower> goodsFlowerList = Dao.getDao().goodsFlower.getAll();
-     //   List<Ad> ads = Dao.getDao().ad.getAll();
+     //   List<Ad> ads = Dao.getDao().Gds.getAll();
         req.setAttribute("goods_flower",goodsFlowerList);
         return Action.INDEX;
     }

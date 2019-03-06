@@ -26,7 +26,7 @@ public class AdCRUD {
  */
     public Ad create(Ad ad) throws SQLException {
         ad.setId(0);
-        //формирование строки createAdSQL по данным bean ad
+        //формирование строки createAdSQL по данным bean Gds
         String createAdSQL = String.format(Locale.ENGLISH,
                 "insert into ads(" +
                         "Description," +

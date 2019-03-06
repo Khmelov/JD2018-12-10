@@ -11,11 +11,11 @@ public class TestRolesDao {
 
     public static void main(String[] args) throws SQLException {
         Dao dao=Dao.getDao();
-        //    Ad ad = new Ad();
+        //    Ad Gds = new Ad();
         Roles roles = new Roles(12,"testRole");
-        //    ad.setUsers_id(3);
+        //    Gds.setUser_id(3);
         //    Timestamp timestamp=Timestamp.valueOf("2019-02-20 11:45:00");
-        //    ad.setData(timestamp);
+        //    Gds.setData(timestamp);
         //   users.setId(3);
         if (dao.roles.create( roles ))
             System.out.println("CREATEGOODSFLOWER OK: " + roles);

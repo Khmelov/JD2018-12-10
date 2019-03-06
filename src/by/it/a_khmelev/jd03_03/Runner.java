@@ -21,8 +21,8 @@ public class Runner {
         ad = dao.ad.read(ad.getId());
         if (ad != null)
             System.out.println("READ OK: " + ad);
-//        if (dao.ad.delete(ad))
-//            System.out.println("DELETE OK: " + ad);
+//        if (dao.Gds.delete(Gds))
+//            System.out.println("DELETE OK: " + Gds);
 
     }
 }

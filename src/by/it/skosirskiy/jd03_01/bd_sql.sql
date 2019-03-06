@@ -86,11 +86,11 @@ CREATE TABLE IF NOT EXISTS `skosirskiy`.`requests` (
   `type_request` VARCHAR(100) NULL,
   `adress_id` INT NOT NULL,
   `status_id` INT NOT NULL,
-  `users_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
   PRIMARY KEY (`id_request`),
   INDEX `fk_requests_adress1_idx` (`adress_id` ASC),
   INDEX `fk_requests_status1_idx` (`status_id` ASC),
-  INDEX `fk_requests_users1_idx` (`users_id` ASC),
+  INDEX `fk_requests_users1_idx` (`user_id` ASC),
   CONSTRAINT `fk_requests_adress1`
     FOREIGN KEY (`adress_id`)
     REFERENCES `skosirskiy`.`adress` (`id`)
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `skosirskiy`.`requests` (
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_requests_users1`
-    FOREIGN KEY (`users_id`)
+    FOREIGN KEY (`user_id`)
     REFERENCES `skosirskiy`.`users` (`id`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
@@ -161,7 +161,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `skosirskiy`;
-INSERT INTO `skosirskiy`.`requests` (`id_request`, `data_create`, `data_complete`, `type_request`, `adress_id`, `status_id`, `users_id`) VALUES (1, '2018.02.02', '2018.02.07', 'no water', 1, 1, 1);
+INSERT INTO `skosirskiy`.`requests` (`id_request`, `data_create`, `data_complete`, `type_request`, `adress_id`, `status_id`, `user_id`) VALUES (1, '2018.02.02', '2018.02.07', 'no water', 1, 1, 1);
 
 COMMIT;
 

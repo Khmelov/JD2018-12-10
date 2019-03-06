@@ -9,7 +9,7 @@ import java.util.List;
 public class CmdIndex implements Cmd {
     @Override
     public Action execute(HttpServletRequest req) throws Exception {
-//        List<Ad> ads = Dao.getDao().ad.getAll();
+//        List<Ad> ads = Dao.getDao().Gds.getAll();
 //        req.setAttribute("ads",ads);
         Action.INDEX.setPATH("/");
         return Action.INDEX;

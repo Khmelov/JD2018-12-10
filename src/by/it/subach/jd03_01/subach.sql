@@ -61,10 +61,10 @@ CREATE TABLE IF NOT EXISTS `subach`.`ads` (
   `area` DOUBLE NULL,
   `description` VARCHAR(200) NULL,
   `address` VARCHAR(200) NULL,
-  `users_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_ads_users1`
-    FOREIGN KEY (`users_id`)
+    FOREIGN KEY (`user_id`)
     REFERENCES `subach`.`users` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
@@ -103,8 +103,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `subach`;
-INSERT INTO `subach`.`ads` (`id`, `rooms`, `floors`, `floor`, `price`, `area`, `description`, `address`, `users_id`) VALUES (DEFAULT, 2, 2, 5, 50000.00, 60.2, 'Good apartments', 'Lenina, 1', 2);
-INSERT INTO `subach`.`ads` (`id`, `rooms`, `floors`, `floor`, `price`, `area`, `description`, `address`, `users_id`) VALUES (DEFAULT, 5, 16, 8, 130000.00, 98.5, 'Big apartments', 'Knorina, 6', 2);
+INSERT INTO `subach`.`ads` (`id`, `rooms`, `floors`, `floor`, `price`, `area`, `description`, `address`, `user_id`) VALUES (DEFAULT, 2, 2, 5, 50000.00, 60.2, 'Good apartments', 'Lenina, 1', 2);
+INSERT INTO `subach`.`ads` (`id`, `rooms`, `floors`, `floor`, `price`, `area`, `description`, `address`, `user_id`) VALUES (DEFAULT, 5, 16, 8, 130000.00, 98.5, 'Big apartments', 'Knorina, 6', 2);
 
 COMMIT;
 

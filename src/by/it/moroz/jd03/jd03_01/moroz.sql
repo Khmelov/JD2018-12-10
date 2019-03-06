@@ -57,11 +57,11 @@ CREATE TABLE IF NOT EXISTS `moroz`.`orders` (
   `count` INT NULL,
   `price` DOUBLE NULL,
   `chek` DOUBLE NULL,
-  `users_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_orders_users1_idx` (`users_id` ASC),
+  INDEX `fk_orders_users1_idx` (`user_id` ASC),
   CONSTRAINT `fk_orders_users1`
-    FOREIGN KEY (`users_id`)
+    FOREIGN KEY (`user_id`)
     REFERENCES `moroz`.`users` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
@@ -101,11 +101,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `moroz`;
-INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `users_id`) VALUES (DEFAULT, 'Pizza', 2, 28.35, 56.7, 1);
-INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `users_id`) VALUES (DEFAULT, 'Spaghetti pepperoni', 1, 18.26, 18.26, 1);
-INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `users_id`) VALUES (DEFAULT, 'Coffee', 2, 5.00, 5.00, 1);
-INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `users_id`) VALUES (DEFAULT, 'Steak', 1, 35.85, 35.85, 3);
-INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `users_id`) VALUES (DEFAULT, 'Salad', 1, 13.25, 13.25, 3);
+INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `user_id`) VALUES (DEFAULT, 'Pizza', 2, 28.35, 56.7, 1);
+INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `user_id`) VALUES (DEFAULT, 'Spaghetti pepperoni', 1, 18.26, 18.26, 1);
+INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `user_id`) VALUES (DEFAULT, 'Coffee', 2, 5.00, 5.00, 1);
+INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `user_id`) VALUES (DEFAULT, 'Steak', 1, 35.85, 35.85, 3);
+INSERT INTO `moroz`.`orders` (`id`, `name`, `count`, `price`, `chek`, `user_id`) VALUES (DEFAULT, 'Salad', 1, 13.25, 13.25, 3);
 
 COMMIT;
 

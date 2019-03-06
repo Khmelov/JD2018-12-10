@@ -19,7 +19,7 @@ import by.it.moroz.jd03.jd03_03.beans.Order;
     public boolean create(Order order) throws SQLException {
         String sql = String.format("INSERT INTO `orders` (`name`, `count`, `price`, `check`, `users_id`)"+
                 "VALUES ('%s','%d','%f','%f','%d')", order.getName(),order.getCount(),order.getPrice(),
-                order.getCheck(),order.getUsers_id());
+                order.getCheck(),order.getUser_id());
         order.setId(executeCreate(sql));
         return order.getId()>0;
     }
@@ -28,7 +28,7 @@ import by.it.moroz.jd03.jd03_03.beans.Order;
     public boolean update(Order order) throws SQLException {
         String sql = String.format("UPDATE `orders` SET `name`='%s', `count`='%d', `price`='%f', " +
                         "`check`='%f', `user_id`='%d' WHERE `id`='%d'",
-                order.getName(), order.getCount(), order.getPrice(), order.getCheck(), order.getUsers_id(),
+                order.getName(), order.getCount(), order.getPrice(), order.getCheck(), order.getUser_id(),
                 order.getId());
         return executeUpdate(sql);
     }
@@ -58,7 +58,7 @@ import by.it.moroz.jd03.jd03_03.beans.Order;
                 order.setCount(resultSet.getInt("count"));
                 order.setPrice(resultSet.getDouble("price"));
                 order.setCheck(resultSet.getDouble("check"));
-                order.setUsers_id(resultSet.getLong("users_id"));
+                order.setUser_id(resultSet.getLong("users_id"));
                 result.add(order);
             }
         return result;

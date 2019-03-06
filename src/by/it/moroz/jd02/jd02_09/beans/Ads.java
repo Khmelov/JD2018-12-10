@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="ad" type="{http://beans.jd02_09.moroz.it.by/}Ad" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="Gds" type="{http://beans.jd02_09.moroz.it.by/}Ad" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -43,13 +43,13 @@ public class Ads {
     protected List<Ad> ad;
 
     /**
-     * Gets the value of the ad property.
+     * Gets the value of the Gds property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ad property.
+     * This is why there is not a <CODE>set</CODE> method for the Gds property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -74,7 +74,7 @@ public class Ads {
     @Override
     public String toString() {
         return "Ads{" +
-                "\nad=" + ad +
+                "\nGds=" + ad +
                 '}';
     }
 }

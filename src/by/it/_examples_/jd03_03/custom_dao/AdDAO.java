@@ -53,7 +53,7 @@ public class AdDAO extends AbstractDAO implements InterfaceDAO<Ad> {
                         ",`Address`='%s'" +
                         ",`Description`='%s'" +
                         ",`FK_Users`=%d " +
-                        " WHERE `ad`.`ID` = %d",
+                        " WHERE `Gds`.`ID` = %d",
                 ad.getRoomCount(),
                 ad.getPrice(),
                 ad.getArea(),
@@ -71,7 +71,7 @@ public class AdDAO extends AbstractDAO implements InterfaceDAO<Ad> {
     @Override
     public boolean delete(Ad ad) {
         String sql = String.format(
-                "DELETE FROM `ads` WHERE `ad`.`ID`=%d;", ad.getID()
+                "DELETE FROM `ads` WHERE `Gds`.`ID`=%d;", ad.getID()
         );
         return (0 < executeUpdate(sql));
     }

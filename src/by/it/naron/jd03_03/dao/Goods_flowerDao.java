@@ -38,7 +38,7 @@ public class Goods_flowerDao extends AbstractDao implements InterfaceDao<Goods_f
     @Override
     public boolean delete(Goods_flower goodsFlower) throws SQLException {
         String sql = String.format(Locale.ENGLISH,
-                "DELETE FROM `Goods_flower` WHERE `id`='%d'",
+                "DELETE FROM `Gds` WHERE `id`='%d'",
                 goodsFlower.getId());
         return executeUpdate(sql);
     }
@@ -60,7 +60,7 @@ public class Goods_flowerDao extends AbstractDao implements InterfaceDao<Goods_f
         try (Connection connection = Connect.getConnection();
              Statement statement = connection.createStatement()) {
             String sql = String.format(Locale.ENGLISH,
-                    "SELECT * FROM `Goods_flower` " + where);
+                    "SELECT * FROM `Gds` " + where);
 //            System.out.println(sql);
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {

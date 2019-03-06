@@ -26,7 +26,7 @@ public class CmdCreateGoodsflower implements Cmd {
          //   Timestamp date = Timestamp.valueOf(LocalDateTime.now());
          //   goodsFlower.setDate_orders(date);
             //todo userid
-         //   goodsFlower.setUsers_id(2);
+         //   goodsFlower.setUser_id(2);
             if (Dao.getDao().goodsFlower.create(goodsFlower))
                 return Action.INDEX;
         }

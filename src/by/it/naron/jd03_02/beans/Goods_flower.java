@@ -80,7 +80,7 @@ public class Goods_flower {
 
     @Override
     public String toString() {
-        return "Goods_flower{" +
+        return "Gds{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", colour='" + colour + '\'' +

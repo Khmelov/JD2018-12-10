@@ -12,7 +12,7 @@ public class Goods_flowerTest {
 //        String s = String.format("sdsdsd %s,+ %d,+ %10.3f","строка",20,3.2);
 //        System.out.println(s);
 
-//        Goods_flower goods_flower = new Goods_flower(3,"somename",
+//        Gds goods_flower = new Gds(3,"somename",
 //                "somecolour",5.0);
 //
 //        try {

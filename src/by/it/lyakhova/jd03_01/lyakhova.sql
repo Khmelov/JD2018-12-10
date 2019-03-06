@@ -147,15 +147,15 @@ DROP TABLE IF EXISTS `lyakhova`.`tours_has_users` ;
 CREATE TABLE IF NOT EXISTS `lyakhova`.`tours_has_users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `tours_id` INT NOT NULL,
-  `users_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `tours_id`, `users_id`),
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `tours_id`, `user_id`),
   CONSTRAINT `fk_tours_has_users_tours1`
     FOREIGN KEY (`tours_id`)
     REFERENCES `lyakhova`.`tours` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tours_has_users_users1`
-    FOREIGN KEY (`users_id`)
+    FOREIGN KEY (`user_id`)
     REFERENCES `lyakhova`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -265,9 +265,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lyakhova`;
-INSERT INTO `lyakhova`.`tours_has_users` (`id`, `tours_id`, `users_id`) VALUES (DEFAULT, 1, 1);
-INSERT INTO `lyakhova`.`tours_has_users` (`id`, `tours_id`, `users_id`) VALUES (DEFAULT, 1, 2);
-INSERT INTO `lyakhova`.`tours_has_users` (`id`, `tours_id`, `users_id`) VALUES (DEFAULT, 3, 1);
+INSERT INTO `lyakhova`.`tours_has_users` (`id`, `tours_id`, `user_id`) VALUES (DEFAULT, 1, 1);
+INSERT INTO `lyakhova`.`tours_has_users` (`id`, `tours_id`, `user_id`) VALUES (DEFAULT, 1, 2);
+INSERT INTO `lyakhova`.`tours_has_users` (`id`, `tours_id`, `user_id`) VALUES (DEFAULT, 3, 1);
 
 COMMIT;
 
