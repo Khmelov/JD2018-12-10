@@ -2,7 +2,6 @@ package by.it.a_khmelev.project08.java.controller;
 
 import by.it.a_khmelev.project08.java.beans.User;
 import by.it.a_khmelev.project08.java.dao.Dao;
-import org.apache.commons.codec.digest.Md5Crypt;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
