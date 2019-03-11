@@ -74,7 +74,6 @@
                 </div>
             </div>
 
-
             <!-- File Button -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="fileimg">File Button</label>
@@ -82,7 +81,6 @@
                     <input id="fileimg" name="fileimg" class="input-file" type="file">
                 </div>
             </div>
-
 
             <!-- Button -->
             <div class="form-group">
