@@ -1,6 +1,0 @@
-message.welcome=Welcome!
-message.question=How do you do?
-user.name=Irina Titkovskaya
-message.to.start=Please, choose the language: be, ru, en
-message.incorrect.input=This language is not supported.
-message.to.finish=Enter the word "end" to finish.

@@ -1,3 +1,0 @@
-message.welcome = Welcome!
-message.question = How do you do?
-user.name = Aleksandr Subach

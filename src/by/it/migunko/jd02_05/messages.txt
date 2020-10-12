@@ -1,3 +1,0 @@
-message.welcome=Welcome
-message.question=how do you do?
-user.name=Evgeniya Migunko

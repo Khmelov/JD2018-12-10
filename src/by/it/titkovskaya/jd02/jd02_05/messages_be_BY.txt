@@ -1,6 +1,0 @@
-message.welcome=Прывiтанне!
-message.question=Як справы?
-user.name=Iрына Цiткоуская
-message.to.start=Калі ласка, абярыце мову: be, ru, en
-message.incorrect.input=Дадзеная мова не падтрымлiваецца.
-message.to.finish=Увядзiце слова "end" для спынення.

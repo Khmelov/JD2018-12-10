@@ -1,6 +1,0 @@
-message.welcome=Привет!
-message.question=Как дела?
-user.name=Ирина Титковская
-message.to.start=Пожалуйста, выберите язык: be, ru, en
-message.incorrect.input=Данный язык не поддерживается.
-message.to.finish=Введите слово "end" для завершения.

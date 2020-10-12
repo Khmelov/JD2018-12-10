@@ -1,3 +1,0 @@
-welcome=Hello! How are you?
-introduce=My name is
-name=Artem Narondate=Now is:
